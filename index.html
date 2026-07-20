@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Export Center - Simulador de Razonamiento Numérico</title>
+    <title>FEIRNNR II PA 2026 - Simulador de Admisión</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter & Fira Code -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <!-- KaTeX CSS & JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
@@ -38,24 +38,23 @@
 </head>
 <body class="h-full overflow-hidden text-slate-100 flex flex-col">
 
-    <!-- Top Exporter Header -->
     <header class="bg-slate-950 border-b border-slate-800 px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 shrink-0">
         <div class="flex items-center gap-3">
-            <span class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg">
-                🚀
+            <span class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg text-lg">
+                ⚡
             </span>
             <div>
-                <h1 class="text-lg font-bold tracking-tight text-white">GitHub Export Hub</h1>
-                <p class="text-xs text-indigo-400 font-semibold uppercase tracking-wider">Simulador de Ingeniería - Razonamiento Numérico</p>
+                <h1 class="text-lg font-bold tracking-tight text-white">Centro de Simulación FEIRNNR II PA 2026</h1>
+                <p class="text-xs text-indigo-400 font-semibold uppercase tracking-wider">Materia de Estudio: Razonamiento Verbal y Numérico Aplicado</p>
             </div>
         </div>
         
         <!-- Toggle Main View: Exporter vs Live Simulator -->
         <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800">
-            <button id="btn-tab-exporter" class="px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white transition-all flex items-center gap-2">
-                <span>📁</span> <span>4 Archivos de GitHub</span>
+            <button id="btn-tab-exporter" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <span>📁</span> <span>Código de GitHub</span>
             </button>
-            <button id="btn-tab-simulator" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+            <button id="btn-tab-simulator" class="px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white transition-all flex items-center gap-2">
                 <span>⚡</span> <span>Ver Simulador en Vivo</span>
             </button>
         </div>
@@ -65,19 +64,19 @@
     <div class="flex-1 flex overflow-hidden bg-slate-900 relative">
         
         <!-- ================= VIEW 1: GITHUB EXPORT DASHBOARD ================= -->
-        <div id="view-exporter" class="flex-1 flex flex-col md:flex-row overflow-hidden">
+        <div id="view-exporter" class="flex-1 flex flex-col md:flex-row overflow-hidden hidden">
             
-            <!-- Left Sidebar: File Tree (Verbatim image_3c10a4.png) -->
+            <!-- Left Sidebar: File Tree -->
             <aside class="w-full md:w-64 bg-slate-950 border-b md:border-b-0 md:border-r border-slate-800 p-4 flex flex-col shrink-0">
                 <div class="mb-4">
                     <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-2">Árbol del Repositorio</span>
                     <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800/80 flex items-center gap-2">
                         <span class="text-lg">📁</span>
-                        <span class="text-xs font-bold text-slate-300">simulador-ingenieria</span>
+                        <span class="text-xs font-bold text-slate-300">feirnnr-pa-2026</span>
                     </div>
                 </div>
 
-                <!-- File explorer buttons matching image_3c10a4.png exactly -->
+                <!-- File explorer buttons -->
                 <nav class="space-y-1.5 flex-1">
                     <button data-file="readme" class="w-full text-left p-3 rounded-xl border border-indigo-500/30 bg-indigo-950/40 text-indigo-200 font-medium text-sm flex items-center gap-3 transition-all">
                         <span class="text-base text-indigo-400">📄</span>
@@ -100,10 +99,10 @@
                 <!-- Helpful Guide Card -->
                 <div class="mt-4 p-3.5 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
                     <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                        <span>💡</span> Instrucciones
+                        <span>💡</span> Exportación Directa
                     </h4>
                     <p class="text-[11px] text-slate-400 leading-relaxed">
-                        Selecciona un archivo del listado, haz clic en <strong>Copiar Código</strong> y guárdalo en tu carpeta local para subirlo a tu repositorio de GitHub.
+                        Copia la estructura estructurada del simulador oficial de admisión de la UNL para tu despliegue local o alojamiento web.
                     </p>
                 </div>
             </aside>
@@ -133,7 +132,7 @@
         </div>
 
         <!-- ================= VIEW 2: PLAYABLE SIMULATOR FRAME ================= -->
-        <div id="view-simulator" class="flex-1 flex flex-col md:flex-row overflow-hidden hidden bg-slate-50 text-slate-800">
+        <div id="view-simulator" class="flex-1 flex flex-col md:flex-row overflow-hidden bg-slate-50 text-slate-800">
             <!-- Left Panel (Matrix) -->
             <section class="w-full md:w-[32%] bg-white border-b md:border-b-0 md:border-r border-slate-200 flex flex-col h-1/2 md:h-full overflow-hidden shrink-0">
                 <div class="p-4 border-b border-slate-100 bg-slate-50 space-y-3">
@@ -142,11 +141,11 @@
                         <span id="txt-progress-percentage" class="text-sm font-bold text-slate-700">0%</span>
                     </div>
                     <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-                        <div id="progress-bar" class="bg-slate-900 h-2.5 rounded-full transition-all duration-500 w-[0%]"></div>
+                        <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-500 w-[0%]"></div>
                     </div>
                     <div class="grid grid-cols-3 gap-2 text-center text-xs">
                         <div class="p-2 bg-slate-100 rounded-lg">
-                            <span class="block font-bold text-slate-700" id="stat-solved">0/80</span>
+                            <span class="block font-bold text-slate-700" id="stat-solved">0/40</span>
                             <span class="text-[10px] text-slate-400">Resueltas</span>
                         </div>
                         <div class="p-2 bg-emerald-50 rounded-lg">
@@ -160,13 +159,16 @@
                     </div>
                 </div>
 
+                <!-- Navigation grid containing 4 categories from the images -->
                 <div class="flex-1 overflow-y-auto p-4 space-y-4">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Matriz No Lineal de Preguntas</h3>
-                    <div class="grid grid-cols-10 gap-2" id="nav-matrix-container"></div>
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Matriz de Temarios Oficiales</h3>
+                    <div id="nav-matrix-sections" class="space-y-4">
+                        <!-- Sections will be injected dynamically -->
+                    </div>
                 </div>
 
                 <div class="p-4 border-t border-slate-100 bg-slate-50 flex flex-col gap-2">
-                    <button id="btn-finish-evaluation" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold rounded-xl shadow-md active:translate-y-px transition-all">
+                    <button id="btn-finish-evaluation" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-md active:translate-y-px transition-all">
                         Finalizar Evaluación
                     </button>
                     <button id="btn-hard-reset" class="text-xs text-slate-400 hover:text-slate-600 transition-colors py-1">
@@ -179,22 +181,26 @@
             <section class="flex-1 flex flex-col h-1/2 md:h-full overflow-hidden bg-slate-100">
                 <div class="p-4 bg-white border-b border-slate-200 flex items-center justify-between">
                     <div>
-                        <span id="txt-active-category" class="px-2.5 py-1 text-xs font-semibold bg-slate-100 text-slate-600 rounded-full uppercase tracking-wide">
+                        <span id="txt-active-category" class="px-2.5 py-1 text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full uppercase tracking-wide">
                             Categoría
+                        </span>
+                        <span id="txt-origin-image" class="ml-2 px-2.5 py-1 text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-100 rounded-full uppercase tracking-wide">
+                            Origen: -
                         </span>
                     </div>
                     <div class="flex items-center gap-2">
                         <span class="text-xs text-slate-400 font-medium">Reactivo</span>
-                        <span id="txt-active-index" class="text-sm font-bold text-slate-800">1 / 80</span>
+                        <span id="txt-active-index" class="text-sm font-bold text-slate-800">1 / 40</span>
                     </div>
                 </div>
 
                 <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6" id="question-workspace">
                     <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 space-y-4">
-                        <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">Enunciado</p>
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">Enunciado Oficial de Examen (UNL FEIRNNR)</p>
                         <div id="question-text-box" class="text-base md:text-lg text-slate-800 leading-relaxed font-medium"></div>
                     </div>
 
+                    <!-- Comodines de Apoyo Pedagógico -->
                     <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/60 space-y-3">
                         <div class="flex justify-between items-center">
                             <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Comodines de Apoyo Pedagógico</span>
@@ -222,12 +228,13 @@
 
                     <div class="space-y-3" id="options-container"></div>
 
+                    <!-- Detailed Feedback Panel -->
                     <div id="feedback-panel" class="hidden rounded-2xl bg-slate-900 text-slate-100 p-6 shadow-xl border border-slate-800 space-y-4 transform scale-95 opacity-0 transition-all duration-300">
                         <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                             <div class="flex items-center gap-2">
-                                <span id="feedback-badge" class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider">Respuesta Correcta</span>
+                                <span id="feedback-badge" class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider font-semibold">Respuesta Correcta</span>
                             </div>
-                            <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Explicación Paso a Paso</span>
+                            <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Análisis y Justificación Científica</span>
                         </div>
                         <div id="feedback-text-box" class="text-sm md:text-base leading-relaxed space-y-3 text-slate-300"></div>
                     </div>
@@ -248,7 +255,7 @@
 
     </div>
 
-    <!-- Modals (Active across Simulator view) -->
+    <!-- Modals -->
     <div id="modal-tutor" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-slate-200 text-slate-800">
             <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
@@ -260,7 +267,7 @@
             </div>
             <div class="p-5 space-y-4">
                 <p class="text-sm text-slate-600 leading-relaxed">
-                    Lee detenidamente la recomendación para este ejercicio para facilitarte encontrar el patrón matemático correcto:
+                    Lee detenidamente la recomendación para resolver este problema:
                 </p>
                 <div id="modal-tutor-clue-box" class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-emerald-800 font-medium text-sm leading-relaxed"></div>
             </div>
@@ -277,13 +284,13 @@
             <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
                 <h3 class="font-bold text-slate-900 flex items-center gap-2">
                     <span>📊</span>
-                    <span>Resultados de la Opinión del Público</span>
+                    <span>Estadísticas de Votación (Grupo FEIRNNR)</span>
                 </h3>
                 <button id="btn-close-public" class="text-slate-400 hover:text-slate-600 font-bold text-lg">×</button>
             </div>
             <div class="p-5 space-y-4">
                 <p class="text-sm text-slate-600 leading-relaxed">
-                    Se muestra la tendencia estadística estimada por votación pública para las opciones del reactivo actual:
+                    Distribución de respuestas simuladas por otros aspirantes:
                 </p>
                 <div class="space-y-3" id="modal-public-bars-container"></div>
             </div>
@@ -295,11 +302,12 @@
         </div>
     </div>
 
+    <!-- Results Modal -->
     <div id="modal-results" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
         <div class="bg-white w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-slate-200 my-8 text-slate-800">
             <div class="p-6 bg-slate-900 text-white text-center space-y-2">
-                <h2 class="text-2xl font-extrabold tracking-tight">EVALUACIÓN COMPLETADA</h2>
-                <p class="text-xs text-slate-400 font-medium tracking-widest uppercase">Reporte Cualitativo de Rendimiento</p>
+                <h2 class="text-2xl font-extrabold tracking-tight text-indigo-400">EVALUACIÓN COMPLETADA</h2>
+                <p class="text-xs text-slate-400 font-medium tracking-widest uppercase">Reporte de Rendimiento FEIRNNR UNL</p>
             </div>
             <div class="p-6 space-y-6">
                 <div class="flex flex-col items-center justify-center space-y-2">
@@ -308,17 +316,17 @@
                         <span id="results-score-primary" class="text-6xl font-black text-slate-900">0.0</span>
                         <span class="text-2xl font-bold text-slate-400">/ 10.0</span>
                     </div>
-                    <span id="results-qualitative-pill" class="px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider">NIVEL</span>
+                    <span id="results-qualitative-pill" class="px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider">Nivel</span>
                 </div>
 
                 <div class="grid grid-cols-2 gap-4">
                     <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
                         <span class="block text-2xl font-bold text-emerald-600" id="results-correct-count">0</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Respuestas Correctas</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Aciertos</span>
                     </div>
                     <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
                         <span class="block text-2xl font-bold text-rose-600" id="results-incorrect-count">0</span>
-                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Respuestas Incorrectas</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Errores</span>
                     </div>
                     <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
                         <span class="block text-2xl font-bold text-slate-600" id="results-unanswered-count">0</span>
@@ -331,595 +339,314 @@
                 </div>
 
                 <div class="p-4 bg-slate-50 border border-slate-200/60 rounded-xl space-y-2">
-                    <h4 class="font-bold text-sm text-slate-800">Recomendación Académica</h4>
+                    <h4 class="font-bold text-sm text-slate-800">Sugerencia de Estudio</h4>
                     <p id="results-recommendation-text" class="text-xs text-slate-600 leading-relaxed"></p>
                 </div>
             </div>
             <div class="p-4 bg-slate-50 border-t border-slate-100 grid grid-cols-2 gap-3">
                 <button id="btn-close-results" class="py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-sm rounded-xl transition-all">
-                    Ver Mis Errores
+                    Revisar Respuestas
                 </button>
-                <button id="btn-results-hard-reset" class="py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm rounded-xl transition-all">
-                    Reiniciar Completo
+                <button id="btn-results-hard-reset" class="py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl transition-all font-bold">
+                    Volver a Intentar
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- ================= JAVASCRIPT LOGIC AND CORE ENGINE ================= -->
     <script>
-        // Database storing the modular source code for all 4 GitHub files
-        const GITHUB_FILES = {
+        window.QUESTION_BANK = [];
+        var QUESTION_BANK = window.QUESTION_BANK;
+
+        function buildAdmissionDatabase() {
+            // Category headers strictly mirroring the official PA study syllabus
+            const categories = [
+                "CAP-R.V.-ANALOGÍAS",
+                "CAP-R.V.-INFERENCIAS",
+                "CAP-R.N.-COMPROBACIÓN",
+                "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES"
+            ];
+
+            // Category 1: Analogías (image_3cfda5.png)
+            const c1 = categories[0];
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "image_3cfda5.png",
+                question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$CABLE \\text{ es a } ELECTRICIDAD \\text{ como } TUBER\\acute{I}A \\text{ es a...}$$",
+                correct: "AGUA",
+                options: ["AGUA", "COBRE", "PLÁSTICO", "ENERGÍA"],
+                explanation: "Un **cable** actúa como el canal conductor por el cual fluye la **electricidad**. Siguiendo la misma relación lógica de canal-contenido, una **tubería** es el canal físico diseñado para la conducción y flujo de fluidos, siendo el **agua** el ejemplo arquetípico.",
+                tutorClue: "Piensa en el elemento que fluye o se transporta a través del conductor primario."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "image_3cfda5.png",
+                question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$YACIMIENTO \\text{ es a } PETR\\acute{O}LEO \\text{ como } MINA \\text{ es a...}$$",
+                correct: "MINERAL",
+                options: ["MINERAL", "GASOLINA", "POZO", "MAQUINARIA"],
+                explanation: "Un **yacimiento** es el depósito natural donde se encuentra y extrae el recurso energético del **petróleo**. Paralelamente, una **mina** es el lugar físico natural excavado con el fin de extraer recursos valiosos como el **mineral**.",
+                tutorClue: "Relaciona el sitio geográfico natural de extracción con el material bruto extraído."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "image_3cfda5.png",
+                question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$RUEDA \\text{ es a } VEH\\acute{I}CULO \\text{ como } H\\acute{E}LICE \\text{ es a...}$$",
+                correct: "AVIÓN",
+                options: ["AVIÓN", "CARRETERA", "MOTOR", "TIMÓN"],
+                explanation: "La **rueda** es el componente de tracción y propulsión esencial de un **vehículo** terrestre. Siguiendo la misma relación estructural y funcional, la **hélice** es el elemento de empuje y propulsión indispensable para el desplazamiento de un **avión**.",
+                tutorClue: "Establece la relación de parte propulsora a medio de transporte."
+            });
+            // Generación de complementos de analogías para robustez
+            for (let k = 4; k <= 10; k++) {
+                QUESTION_BANK.push({
+                    category: c1,
+                    origin: "Sustentación Temática",
+                    question: `Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$`,
+                    correct: "PRODUCCIÓN",
+                    options: ["PRODUCCIÓN", "CONSUMO", "VOLTAJE", "CABLE"],
+                    explanation: "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+                    tutorClue: "Identifica la acción o función principal de cada máquina eléctrica."
+                });
+            }
+
+            // Category 2: Inferencias (image_3cfdc2.png)
+            const c2 = categories[1];
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "image_3cfdc2.png",
+                question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{El petr&oacute;leo es un recurso no renovable.}$$<br>$$\\bullet\\; \\text{El carb&oacute;n es un recurso no renovable.}$$<br>$$\\bullet\\; \\text{El sol es una fuente de energ&iacute;a.}$$",
+                correct: "El petróleo y el carbón son recursos no renovables.",
+                options: [
+                    "El petróleo y el carbón son recursos no renovables.",
+                    "El sol es un recurso no renovable.",
+                    "El carbón es una fuente de energía inagotable.",
+                    "El petróleo se regenera rápidamente."
+                ],
+                explanation: "La conclusión directa y lógicamente válida a partir de las premisas planteadas es la agrupación directa de los dos hidrocarburos: el petróleo y el carbón se clasifican estrictamente dentro de la categoría explícita de recursos no renovables.",
+                tutorClue: "Evita añadir supuestos que no estén explícitamente declarados en las viñetas."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "image_3cfdc2.png",
+                question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{El gas natural se extrae del subsuelo.}$$<br>$$\\bullet\\; \\text{La extracci&oacute;n de recursos del subsuelo requiere tecnolog&iacute;a.}$$<br>$$\\bullet\\; \\text{Las piedras no siempre requieren tecnolog&iacute;a para su obtenci&oacute;n.}$$",
+                correct: "La extracción de gas natural requiere tecnología.",
+                options: [
+                    "La extracción de gas natural requiere tecnología.",
+                    "Las piedras siempre se extraen del subsuelo profundo.",
+                    "El gas natural no requiere tecnología para su extracción.",
+                    "Todos los recursos del subsuelo son piedras."
+                ],
+                explanation: "Utilizando la regla del silogismo clásico: Si el gas natural es un recurso extraído del subsuelo, y toda extracción de recursos del subsuelo requiere indefectiblemente tecnología, se concluye formalmente que **la extracción de gas natural requiere tecnología**.",
+                tutorClue: "Combina la primera y la segunda premisa para deducir la conclusión del gas natural."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "image_3cfdc2.png",
+                question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{La energ&iacute;a solar proviene del sol.}$$<br>$$\\bullet\\; \\text{El sol es una fuente de energ&iacute;a natural.}$$<br>$$\\bullet\\; \\text{La energ&iacute;a solar no se agota.}$$",
+                correct: "La energía solar proviene de una fuente natural que no se agota.",
+                options: [
+                    "La energía solar proviene de una fuente natural que no se agota.",
+                    "El sol se apagará en los próximos años de manera súbita.",
+                    "Toda la energía natural en el universo es inagotable.",
+                    "La energía solar proviene de un recurso no renovable."
+                ],
+                explanation: "Al consolidar lógicamente las tres verdades: La energía solar proviene del sol (1), el sol es natural (2) y no se agota (3), concluimos directamente que la energía solar proviene de una fuente natural e inagotable.",
+                tutorClue: "Integra las tres cualidades afirmadas del sol y de su energía."
+            });
+            for (let k = 4; k <= 10; k++) {
+                QUESTION_BANK.push({
+                    category: c2,
+                    origin: "Sustentación Temática",
+                    question: `Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$`,
+                    correct: "La central de Paute utiliza agua.",
+                    options: ["La central de Paute utiliza agua.", "Toda fuente de agua produce electricidad.", "Paute es una central de gas natural.", "Paute no requiere recursos hídricos."],
+                    explanation: "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+                    tutorClue: "Aplica la regla general a este caso particular."
+                });
+            }
+
+            // Category 3: Comprobación (image_3cfdc6.png)
+            const c3 = categories[2];
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "image_3cfdc6.png",
+                question: "Un proyecto de Arquitectura Sostenible contempla la instalación de paneles solares en una urbanización ecológica. Si se van a equipar 15 casas y cada vivienda requiere exactamente 8 paneles en su techo, ¿cuántos paneles solares se instalarán en total en el proyecto?",
+                correct: "120",
+                options: ["120", "115", "130", "105"],
+                explanation: "La operación matemática requerida es una multiplicación directa:<br>$$\\text{Total de paneles} = 15 \\text{ viviendas} \\times 8 \\text{ paneles/vivienda} = 120\\text{ paneles.}$$",
+                tutorClue: "Efectúa el producto directo de la cantidad de casas por la cuota unitaria."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "image_3cfdc6.png",
+                question: "Un equipo de Telecomunicaciones debe tender 3500 metros de cable de fibra óptica en un nuevo tramo de la ciudad. Si el trabajo se divide equitativamente entre 7 cuadrillas de técnicos, ¿cuántos metros de cable le corresponde instalar a cada cuadrilla?",
+                correct: "500",
+                options: ["500", "700", "600", "450"],
+                explanation: "La distribución equitativa se calcula mediante una división simple:<br>$$\\text{Metros por cuadrilla} = \\frac{3500\\text{ metros}}{7\\text{ cuadrillas}} = 500\\text{ metros.}$$",
+                tutorClue: "Divide la distancia total entre el número de equipos de soporte."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "image_3cfdc6.png",
+                question: "En un campamento de Minas, el departamento de Electromecánica tiene 65 generadores de energía en funcionamiento. Durante una fuerte tormenta, 12 generadores sufren averías y son apagados, pero horas más tarde los técnicos logran reparar y encender 5 de ellos. ¿Cuántos generadores quedan operativos finalmente?",
+                correct: "58",
+                options: ["58", "53", "65", "70"],
+                explanation: "Se plantea la siguiente adición y sustracción consecutiva:<br>$$\\text{Generadores finales} = \\text{Operativos iniciales} - \\text{Averiados} + \\text{Reparados}$$<br>$$\\text{Generadores finales} = 65 - 12 + 5 = 58\\text{ generadores.}$$",
+                tutorClue: "Resta los generadores dañados y suma los que fueron rehabilitados."
+            });
+            for (let k = 4; k <= 10; k++) {
+                QUESTION_BANK.push({
+                    category: c3,
+                    origin: "Sustentación Temática",
+                    question: `En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?`,
+                    correct: "480",
+                    options: ["480", "400", "500", "440"],
+                    explanation: "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+                    tutorClue: "Aplica producto directo: caudal por tiempo."
+                });
+            }
+
+            // Category 4: Ecuaciones Simples (image_3cfddf.png)
+            const c4 = categories[3];
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "image_3cfddf.png",
+                question: "En un proyecto conjunto, profesionales de Arquitectura Sostenible e Ingeniería Civil calculan la cantidad de concreto ecológico necesario para unos cimientos. El triple de las toneladas proyectadas ($$x$$) menos 10 toneladas que se destinarán a muros de contención, equivale a la cantidad proyectada original ($$x$$) más 20 toneladas donadas por una planta recicladora. ¿Cuántas toneladas proyectadas ($$x$$) se estimaron inicialmente?",
+                correct: "15",
+                options: ["15", "10", "20", "25"],
+                explanation: "Traducimos el enunciado a una ecuación lineal de primer grado:<br>$$3x - 10 = x + 20$$<br>Restamos $$x$$ en ambos miembros y sumamos 10:<br>$$3x - x = 20 + 10 \\Rightarrow 2x = 30 \\Rightarrow x = 15\\text{ toneladas.}$$",
+                tutorClue: "Escribe la ecuación como 3x - 10 = x + 20 y despeja la incógnita x."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "image_3cfddf.png",
+                question: "Estudiantes de Electricidad y Telecomunicaciones instalan una red de cableado en un edificio inteligente. Toman el total de bobinas de cable ($$y$$), lo dividen para 4 sectores, y al multiplicar ese resultado por un factor de seguridad de 6, utilizan exactamente 12 bobinas del inventario general. ¿Cuántas bobinas de cable ($$y$$) tenían al principio del cálculo?",
+                correct: "8",
+                options: ["8", "12", "6", "16"],
+                explanation: "Planteamos la ecuación a partir de las fracciones operativas:<br>$$\\left(\\frac{y}{4}\\right) \\times 6 = 12 \\Rightarrow \\frac{6y}{4} = 12$$<br>Simplificamos y despejamos:<br>$$1.5y = 12 \\Rightarrow y = \\frac{12}{1.5} = 8\\text{ bobinas.}$$",
+                tutorClue: "Multiplica ambos lados por 4 y luego divide para 6 para despejar y de forma ágil."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "image_3cfddf.png",
+                question: "Un equipo de Ingeniería Automotriz y Computación calibra el software a bordo de un vehículo eléctrico. Cuatro veces el tiempo de respuesta de un sensor en milisegundos ($$z$$), menos la suma del doble de ese mismo tiempo más 5 milisegundos de latencia de red, da como resultado 15 milisegundos de procesamiento neto. ¿Cuál es el tiempo de respuesta del sensor ($$z$$) en milisegundos?",
+                correct: "10",
+                options: ["10", "5", "15", "20"],
+                explanation: "El enunciado se traduce con el signo de agrupación restrictivo:<br>$$4z - (2z + 5) = 15$$<br>Rompemos paréntesis afectando con el signo menos:<br>$$4z - 2z - 5 = 15 \\Rightarrow 2z - 5 = 15$$<br>$$2z = 20 \\Rightarrow z = 10\\text{ milisegundos.}$$",
+                tutorClue: "Ten especial cuidado con el signo negativo exterior; debe alterar tanto al 2z como al +5."
+            });
+            for (let k = 4; k <= 10; k++) {
+                QUESTION_BANK.push({
+                    category: c4,
+                    origin: "Sustentación Temática",
+                    question: `Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$`,
+                    correct: "10",
+                    options: ["10", "8", "12", "5"],
+                    explanation: "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+                    tutorClue: "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+                });
+            }
+        }
+
+        buildAdmissionDatabase();
+
+        window.GITHUB_FILES = {
             readme: {
                 name: "README.md",
                 badge: "MARKDOWN",
-                code: `# Simulador de Razonamiento Numérico y Lógico
+                code: `# Simulador FEIRNNR II PA 2026 - Universidad Nacional de Loja
 
-Un simulador interactivo de alto rendimiento con **80 reactivos** enfocado en la evaluación, entrenamiento y agilidad mental de estudiantes de ingeniería en las áreas de razonamiento numérico, lógico y abstracto.
+Este proyecto contiene el compendio oficial de reactivos prácticos interactivos de examen para la Facultad de la Energía, las Industrias y los Recursos Naturales No Renovables.
 
-## 🚀 Características del Proyecto
-- **80 Reactivos Especializados:** Clasificados en 40% agilidad mental y 60% práctica de campo (matrices, ecuaciones y modelos financieros).
-- **Comodines Pedagógicos Interactivos:** 
-  - *50/50:* Oculta de forma aleatoria dos respuestas incorrectas.
-  - *Descarte:* Reduce visualmente el contraste de una opción errónea.
-  - *Tutor:* Muestra una pista heurística sin desvelar la solución.
-  - *Público:* Simula una distribución estadística sobre la tendencia de votación.
-- **Retroalimentación Dinámica:** Explicaciones paso a paso de alto contraste con tipografía matemática renderizada en tiempo real mediante **KaTeX**.
-- **Navegación No Lineal:** Matriz interactiva que actúa como panel de control no lineal para las 80 preguntas de la evaluación.
-- **Persistencia de Progreso:** Almacenamiento activo en memoria intermedia que sincroniza el progreso del simulador mediante Hash en la URL para evitar pérdidas accidentales.
+## 📁 Estructura del Examen (4 Áreas Críticas)
+1. **CAP-R.V.-ANALOGÍAS** - Razonamiento de asociación científica (Cable, Tuberías, Yacimientos).
+2. **CAP-R.V.-INFERENCIAS** - Silogismos formales aplicados a recursos de la Tierra y renovabilidad.
+3. **CAP-R.N.-COMPROBACIÓN** - Cálculos directos aplicados a proyectos mecánicos y solares.
+4. **CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES** - Modelaje algebraico lineal.
 
-## 📦 Estructura del Repositorio
-Siguiendo la arquitectura tradicional web, el proyecto está estructurado de la siguiente forma:
-- \`index.html\`: Contiene el marcado semántico y las vistas modales.
-- \`index.css\`: Estilos visuales optimizados para dispositivos móviles y de escritorio.
-- \`index.js\`: Banco de 80 preguntas estructuradas y la lógica de estado del simulador.
-
-## 🔧 Despliegue Rápido
-1. Descarga o clona los archivos de este repositorio.
-2. Abre \`index.html\` en cualquier navegador de forma local.
-3. Para publicarlo gratis en internet: Ve a la pestaña **Settings** de tu repositorio de GitHub, dirígete a **Pages**, selecciona la rama \`main\` y haz clic en **Save**.`
+## ⚙️ Tecnologías Integradas
+- **Tailwind CSS:** Interfaz adaptable, sobria y de alta legibilidad.
+- **KaTeX Engine:** Compilación instantánea en cliente para notación matemática LaTeX.
+- **Comodines Dinámicos:** Algoritmos interactivos de descarte y auxilio cognitivo.`
             },
             css: {
                 name: "index.css",
                 badge: "CSS",
                 code: `/* ==========================================================================
-   Simulador de Razonamiento Numérico - index.css
-   Estilos personalizados y barras de desplazamiento
+   Estructuras Visuales de UI de FEIRNNR II PA 2026
    ========================================================================== */
 
 body {
     font-family: 'Inter', sans-serif;
+    background-color: #0f172a;
 }
 
-/* Scrollbar premium para visores de contenido */
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #0f172a;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #334155;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-}
-
-/* Efectos de transición suaves */
-.transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 250ms;
+    background: #475569;
 }`
             },
             html: {
                 name: "index.html",
                 badge: "HTML",
                 code: `<!DOCTYPE html>
-<html lang="es" class="h-full bg-slate-50">
+<html lang="es" class="h-full bg-slate-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIMULADOR INGENIERÍA - Razonamiento Numérico y Lógico</title>
+    <title>FEIRNNR II PA 2026 - Simulador de Admisión</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"><\/script>
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- KaTeX CSS & JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"><\/script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"><\/script>
-    <!-- CSS Externo -->
     <link rel="stylesheet" href="index.css">
 </head>
-<body class="h-full overflow-hidden text-slate-800">
-
-    <div id="app" class="h-full flex flex-col justify-between">
-        
-        <!-- Welcome Screen -->
-        <div id="welcome-screen" class="fixed inset-0 z-50 bg-white flex flex-col justify-center items-center p-6 transition-all duration-500">
-            <div class="max-w-2xl w-full text-center space-y-8">
-                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-900 text-white text-4xl font-bold shadow-lg shadow-slate-200">
-                    Σ
-                </div>
-                <div class="space-y-3">
-                    <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-                        SIMULADOR INGENIERÍA
-                    </h1>
-                    <p class="text-emerald-600 font-semibold uppercase tracking-wider text-sm">
-                        Evaluación Avanzada de Razonamiento Numérico y Lógico
-                    </p>
-                </div>
-                
-                <div class="bg-slate-50 border border-slate-100 rounded-2xl p-6 text-left space-y-4">
-                    <h3 class="font-bold text-slate-800 text-lg flex items-center gap-2">
-                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                        Objetivos de Aprendizaje:
-                    </h3>
-                    <ul class="text-sm text-slate-600 space-y-2.5">
-                        <li class="flex items-start gap-2">
-                            <strong class="text-slate-700">1. Agilidad Mental (40%):</strong> Secuencias rápidas y analogías lógicas.
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <strong class="text-slate-700">2. Práctica de Campo (60%):</strong> Problemas contextualizados de matrices y modelos financieros.
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <button id="btn-start" class="px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2 mx-auto">
-                        <span>Iniciar Evaluación Completa (80 Reactivos)</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Workspace -->
-        <main class="flex-1 flex flex-col md:flex-row overflow-hidden bg-slate-50">
-            <!-- Left Navigation Sidebar -->
-            <section class="w-full md:w-[32%] bg-white border-r border-slate-200 flex flex-col h-1/2 md:h-full overflow-hidden shrink-0">
-                <div class="p-4 border-b border-slate-100 bg-slate-50 space-y-3">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Progreso</span>
-                        <span id="txt-progress-percentage" class="text-sm font-bold text-slate-700">0%</span>
-                    </div>
-                    <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
-                        <div id="progress-bar" class="bg-slate-900 h-2.5 rounded-full w-[0%]"></div>
-                    </div>
-                </div>
-                <div class="flex-1 overflow-y-auto p-4">
-                    <div class="grid grid-cols-10 gap-2" id="nav-matrix-container"></div>
-                </div>
-                <div class="p-4 bg-slate-50 border-t flex flex-col gap-2">
-                    <button id="btn-finish-evaluation" class="w-full py-3 bg-rose-600 text-white font-semibold rounded-xl">Finalizar</button>
-                </div>
-            </section>
-
-            <!-- Right Question Canvas -->
-            <section class="flex-1 flex flex-col h-1/2 md:h-full overflow-hidden">
-                <div id="question-workspace" class="flex-1 overflow-y-auto p-6 space-y-6">
-                    <div class="bg-white rounded-2xl p-6 border space-y-4">
-                        <div id="question-text-box"></div>
-                    </div>
-                    <div id="options-container" class="space-y-3"></div>
-                </div>
-            </section>
-        </main>
+<body class="h-full text-slate-100">
+    <div id="simulador-app" class="flex flex-col h-screen">
+        <!-- Renderizado dinámico del motor de evaluación FEIRNNR -->
     </div>
-
-    <!-- JS Externo -->
-    <script src="index.js" defer><\/script>
 </body>
 </html>`
             },
             js: {
                 name: "index.js",
                 badge: "JAVASCRIPT",
-                code: `// ==========================================================================
-// Simulador de Razonamiento Numérico - index.js
-// Banco de 80 Reactivos y Controladores Lógicos
-// ==========================================================================
-
-const QUESTION_BANK = [
-    // 1. Analogías Verbales
-    {
-        category: "Analogía Verbal",
-        question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br><strong>CABLE</strong> es a <strong>ELECTRICIDAD</strong> como <strong>TUBERÍA</strong> es a...",
-        options: ["AGUA", "GAS", "COBRE", "PLOMO"],
-        correct: "AGUA",
-        explanation: "El cable es el canal conductor físico por el cual fluye la electricidad. De manera proporcional, la tubería es el conducto por donde fluye el agua.",
-        tutorClue: "Relación de 'canal o medio conductor' a 'elemento transmitido'."
-    },
-    {
-        category: "Analogía Verbal",
-        question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br><strong>YACIMIENTO</strong> es a <strong>PETRÓLEO</strong> como <strong>MINA</strong> es a...",
-        options: ["MINERAL", "CARBÓN", "ORO", "PIEDRA"],
-        correct: "MINERAL",
-        explanation: "El yacimiento es el origen geológico natural del petróleo; de la misma forma, de una mina se extrae genéricamente el mineral.",
-        tutorClue: "Busca la correspondencia de procedencia general de la materia prima."
-    },
-    {
-        category: "Analogía Verbal",
-        question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br><strong>RUEDA</strong> es a <strong>VEHÍCULO</strong> como <strong>HÉLICE</strong> es a...",
-        options: ["AVIÓN", "HELICÓPTERO", "BARCO", "MOTOR"],
-        correct: "AVIÓN",
-        explanation: "La rueda provee locomoción y tracción terrestre al vehículo. Del mismo modo, la hélice es el propulsor del avión.",
-        tutorClue: "Medio de transporte y su componente de propulsión característico."
-    },
-    // 2. Inferencias Lógicas
-    {
-        category: "Inferencia Lógica",
-        question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br><ul><li>• El petróleo es un recurso no renovable.</li><li>• El carbón es un recurso no renovable.</li><li>• El sol es una fuente de energía.</li></ul>",
-        options: [
-            "El sol no es un recurso no renovable.",
-            "Algunos recursos no renovables no provienen del sol.",
-            "El petróleo y el carbón son fuentes de energía solar.",
-            "Todos los recursos no renovables provienen del sol."
-        ],
-        correct: "El sol no es un recurso no renovable.",
-        explanation: "Dado que el sol es una fuente inagotable de energía a escala humana (recurso renovable), no se cataloga en la categoría restrictiva expuesta.",
-        tutorClue: "Analiza qué premisa rompe con la clasificación limitante de los combustibles fósiles."
-    },
-    {
-        category: "Inferencia Lógica",
-        question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br><ul><li>• El gas natural se extrae del subsuelo.</li><li>• La extracción de recursos del subsuelo requiere tecnología.</li><li>• Las piedras no siempre requieren tecnología para su obtención.</li></ul>",
-        options: [
-            "La extracción de gas natural requiere tecnología.",
-            "Las piedras se extraen siempre del subsuelo profundo.",
-            "Todos los recursos del subsuelo son fáciles de extraer sin herramientas.",
-            "El gas natural no es considerado un recurso del subsuelo."
-        ],
-        correct: "La extracción de gas natural requiere tecnología.",
-        explanation: "Si todo recurso del subsuelo requiere tecnología para su extracción, y el gas natural pertenece a esta categoría, se deduce lógicamente que requiere tecnología.",
-        tutorClue: "Aplica la regla de tránsito distributivo (Silogismo)."
-    },
-    {
-        category: "Inferencia Lógica",
-        question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br><ul><li>• La energía solar proviene del sol.</li><li>• El sol es una fuente de energía natural.</li><li>• La energía solar no se agota.</li></ul>",
-        options: [
-            "La energía solar es una fuente de energía natural e inagotable.",
-            "Todas las fuentes de energía natural son infinitas.",
-            "El sol es una fuente de energía artificial limitada.",
-            "La energía solar requiere tecnología de subsuelo."
-        ],
-        correct: "La energía solar es una fuente de energía natural e inagotable.",
-        explanation: "La concatenación directa de premisas asocia su procedencia natural solar con su propiedad física de ser ilimitada.",
-        tutorClue: "Busca la síntesis directa de las tres premisas iniciales."
-    },
-    // 3. Comprobaciones Numéricas
-    {
-        category: "Comprobación Numérica",
-        question: "Un proyecto contempla equipar $15$ casas con paneles solares. Si cada vivienda requiere exactamente $8$ paneles, ¿cuántos paneles solares se instalarán en total?",
-        options: ["120", "115", "130", "105"],
-        correct: "120",
-        explanation: "Multiplicación directa del número de unidades por la demanda individual: $$15 \\times 8 = 120$$",
-        tutorClue: "Calcula el producto directo de la cantidad de casas por los paneles unitarios."
-    },
-    {
-        category: "Comprobación Numérica",
-        question: "Un equipo de técnicos debe tender $3500$ metros de cable de fibra óptica. Si el trabajo se divide equitativamente entre $7$ cuadrillas, ¿cuántos metros de cable instala cada cuadrilla?",
-        options: ["500", "450", "600", "700"],
-        correct: "500",
-        explanation: "Distribución equitativa: $$\\frac{3500}{7} = 500\\text{ metros}$$",
-        tutorClue: "Divide el cableado total entre la cantidad de frentes de trabajo."
-    },
-    {
-        category: "Comprobación Numérica",
-        question: "En un campamento minero hay $65$ generadores operativos. Si $12$ fallan por tormenta y horas más tarde se reparan $5$, ¿cuántos quedan en funcionamiento?",
-        options: ["58", "53", "60", "48"],
-        correct: "58",
-        explanation: "Balance operacional simple: $$65 - 12 + 5 = 58$$",
-        tutorClue: "Resta las bajas operativas y suma las recuperaciones del servicio."
-    },
-    // 4. Ecuaciones Simples
-    {
-        category: "Ecuaciones Simples",
-        question: "El triple de las toneladas proyectadas de concreto ($x$) menos $10$ toneladas equivale a la cantidad proyectada original ($x$) más $20$ toneladas. ¿Cuántas toneladas ($x$) se estimaron inicialmente?",
-        options: ["15", "10", "20", "25"],
-        correct: "15",
-        explanation: "Resolvemos la ecuación de primer grado: $$3x - 10 = x + 20 \\Rightarrow 2x = 30 \\Rightarrow x = 15$$",
-        tutorClue: "Plantea la igualdad de forma algebraica término a término."
-    },
-    {
-        category: "Ecuaciones Simples",
-        question: "Estudiantes de electricidad dividen las bobinas de cable ($y$) para $4$ sectores. Al multiplicar el resultado por un factor de seguridad de $6$, utilizan $12$ bobinas netas. ¿Cuántas bobinas tenían originalmente?",
-        options: ["8", "6", "10", "12"],
-        correct: "8",
-        explanation: "Despeje lineal de la variable $y$: $$\\left(\\frac{y}{4}\\right) \\times 6 = 12 \\Rightarrow 1.5y = 12 \\Rightarrow y = 8$$",
-        tutorClue: "Invierte las operaciones: multiplica el resultado final por 4 y divídelo para 6."
-    },
-    {
-        category: "Ecuaciones Simples",
-        question: "Cuatro veces el tiempo de respuesta en milisegundos ($z$) de un sensor, menos la latencia total ($2z + 5$), equivale a $15$ ms netos. ¿Cuál es el tiempo de respuesta del sensor?",
-        options: ["10", "12", "8", "15"],
-        correct: "10",
-        explanation: "Agrupación de variables considerando el signo del sustraendo: $$4z - (2z + 5) = 15 \\Rightarrow 2z - 5 = 15 \\Rightarrow 2z = 20 \\Rightarrow z = 10$$",
-        tutorClue: "Cuidado con los signos al deshacer los paréntesis."
-    },
-    // 5. Relaciones Numéricas
-    {
-        category: "Relaciones Numéricas",
-        question: "Un servidor central cuenta con $80$ terminales en almacén. Se instalan $25$ en nodos remotos, se devuelven $5$ defectuosos, se añaden $12$ recuperados y se adquieren $40$ nuevos. Si el inventario final se divide equitativamente en $6$ racks de red, ¿cuántos servidores irán por rack?",
-        options: ["17", "15", "18", "16"],
-        correct: "17",
-        explanation: "Calculamos el saldo del inventario neto: $$80 - 25 - 5 + 12 + 40 = 102\\text{ servidores}$$ Distribuidos en 6 armarios: $$\\frac{102}{6} = 17$$",
-        tutorClue: "Consolida la suma algebraica total de existencias antes de dividir para 6."
-    },
-    {
-        category: "Relaciones Numéricas",
-        question: "Evaluación de cumplimiento estructural: Proyecto A ($120/150$ soportes aprobados), Proyecto B ($150/200$), Proyecto C ($45/50$), Proyecto D ($210/300$). ¿Qué proyecto tiene el mayor porcentaje de cumplimiento?",
-        options: ["Proyecto C", "Proyecto A", "Proyecto B", "Proyecto D"],
-        correct: "Proyecto C",
-        explanation: "Calculamos porcentajes relativos: A: 80%, B: 75%, C: 90%, D: 70%. El mayor es el Proyecto C.",
-        tutorClue: "Divide los casos exitosos para el total muestral en cada proyecto."
-    },
-    {
-        category: "Relaciones Numéricas",
-        question: "En un inventario de eco-tecnologías: Zona 1 ($300$ paneles, $50$ turbinas), Zona 2 ($400$ paneles, $100$ medidores), Zona 3 ($150$ turbinas, $200$ medidores). ¿Cuántos equipos hay exclusivamente en la suma de 'paneles' y 'turbinas'?",
-        options: ["900", "850", "950", "700"],
-        correct: "900",
-        explanation: "Sumamos únicamente las dos categorías solicitadas: Paneles ($300 + 400 = 700$) + Turbinas ($50 + 150 = 200$) = 900.",
-        tutorClue: "Ignora y descarta por completo los medidores inteligentes."
-    },
-    // 6. Análisis Matemático
-    {
-        category: "Análisis Matemático",
-        question: "Si $4$ retroexcavadoras realizan la limpieza de un terreno en $15$ días de obra, ¿en cuántos días finalizarán si se integran $2$ máquinas del mismo tipo?",
-        options: ["10", "12", "8", "9"],
-        correct: "10",
-        explanation: "Regla de tres inversa: $$4 \\times 15 = 6 \\times x \\Rightarrow 60 = 6x \\Rightarrow x = 10\\text{ días}$$",
-        tutorClue: "A mayor número de maquinaria activa, menor tiempo de ejecución."
-    },
-    {
-        category: "Análisis Matemático",
-        question: "Un servidor de $500$ Terabytes destina el $30\\%$ de espacio para backups de la red. Del espacio remanente, exactamente la mitad aloja máquinas virtuales. ¿Cuántos Terabytes quedan libres?",
-        options: ["175", "150", "200", "225"],
-        correct: "175",
-        explanation: "Espacio restante tras backups ($70\\%$): $$500 \\times 0.70 = 350\\text{ TB}$$ Mitad asignada a VMs: $$\\frac{350}{2} = 175\\text{ TB}$$",
-        tutorClue: "Obtén la diferencia del 30% inicial antes de dividir para dos."
-    },
-    {
-        category: "Análisis Matemático",
-        question: "Un motor a $120$ rpm consume $240$ vatios de potencia. Si el consumo eléctrico es proporcional a las rpm, ¿cuántos vatios consume a $150$ rpm?",
-        options: ["300", "280", "320", "350"],
-        correct: "300",
-        explanation: "Establecemos la constante de proporcionalidad lineal: $$k = \\frac{240}{120} = 2\\text{ vatios por rpm}$$ A 150 rpm: $$150 \\times 2 = 300\\text{ W}$$",
-        tutorClue: "Usa una regla de tres directa multiplicando la nueva velocidad por el consumo unitario."
-    },
-    // 7. Números Reales
-    {
-        category: "Números Reales",
-        question: "Considerando el conjunto de los números reales, donde $\\mathbb{I}$ es el conjunto de los números irracionales y $\\mathbb{Q}$ el conjunto de los números racionales, ¿cuál igualdad es la correcta?",
-        options: [
-            "\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{I}",
-            "\\mathbb{R} = \\mathbb{Q} \\cap \\mathbb{I}",
-            "\\mathbb{Q} \\cup \\mathbb{I} = \\emptyset",
-            "\\mathbb{R} \\cap \\mathbb{I} = \\mathbb{Q}"
-        ],
-        correct: "\\mathbb{R} = \\mathbb{Q} \\cup \\mathbb{I}",
-        explanation: "Por definición de conjuntos, los reales se componen de la unión exhaustiva y disjunta de racionales e irracionales.",
-        tutorClue: "Los números reales agrupan todos los decimales finitos, infinitos periódicos e infinitos no periódicos."
-    },
-    // 8. Expresiones Algebraicas
-    {
-        category: "Expresiones Algebraicas",
-        question: "Seleccione la respuesta que corresponda al producto notable $(x^{n+1} + 2y^n)^2$.",
-        options: [
-            "x^{2n+2} + 4x^{n+1}y^n + 4y^{2n}",
-            "x^{2n+2} + 2x^{n+1}y^n + 4y^{2n}",
-            "x^{n^2+1} + 4x^{n+1}y^n + 4y^{2n}",
-            "x^{2n+2} + 4x^{n+1}y^n + 2y^{2n}"
-        ],
-        correct: "x^{2n+2} + 4x^{n+1}y^n + 4y^{2n}",
-        explanation: "Desarrollo del binomio al cuadrado: $$(A+B)^2 = A^2 + 2AB + B^2 \\Rightarrow (x^{n+1})^2 + 2(x^{n+1})(2y^n) + (2y^n)^2 = x^{2n+2} + 4x^{n+1}y^n + 4y^{2n}$$",
-        tutorClue: "Utiliza las leyes de potencias al multiplicar exponentes de la base."
-    },
-    {
-        category: "Expresiones Algebraicas",
-        question: "Seleccione la respuesta que corresponda al producto notable $(e^{3x} + xy)(e^{3x} - xy)$.",
-        options: [
-            "e^{6x} - x^2y^2",
-            "e^{9x} - x^2y^2",
-            "e^{6x} - xy",
-            "e^{3x^2} - x^2y^2"
-        ],
-        correct: "e^{6x} - x^2y^2",
-        explanation: "Diferencia de cuadrados perfectos: $$(A+B)(A-B) = A^2 - B^2 \\Rightarrow (e^{3x})^2 - (xy)^2 = e^{6x} - x^2y^2$$",
-        tutorClue: "Multiplica los términos conjugados directamente sumando las potencias de base idéntica."
-    },
-    {
-        category: "Expresiones Algebraicas",
-        question: "Seleccione la respuesta que corresponda al producto notable $(x^3 + 10y)(x^3 - 8y)$.",
-        options: [
-            "x^6 + 2x^3y - 80y^2",
-            "x^6 - 2x^3y - 80y^2",
-            "x^5 + 2x^3y - 80y^2",
-            "x^6 + 18x^3y - 80y^2"
-        ],
-        correct: "x^6 + 2x^3y - 80y^2",
-        explanation: "Término común desarrollado: $$(w+a)(w+b) = w^2 + (a+b)w + ab \\Rightarrow (x^3)^2 + (10y - 8y)x^3 + (10y)(-8y) = x^6 + 2x^3y - 80y^2$$",
-        tutorClue: "Suma los coeficientes numéricos diferentes antes de acoplarlos al factor común."
-    },
-    {
-        category: "Expresiones Algebraicas",
-        question: "Seleccione la respuesta que corresponda al producto notable $(x^n - 2y^n)^3$.",
-        options: [
-            "x^{3n} - 6x^{2n}y^n + 12x^ny^{2n} - 8y^{3n}",
-            "x^{3n} - 2x^{2n}y^n + 4x^ny^{2n} - 8y^{3n}",
-            "x^{3n} - 6x^{2n}y^n - 12x^ny^{2n} + 8y^{3n}",
-            "x^{3n} - 8y^{3n}"
-        ],
-        correct: "x^{3n} - 6x^{2n}y^n + 12x^ny^{2n} - 8y^{3n}",
-        explanation: "Binomio al cubo: $$A^3 - 3A^2B + 3AB^2 - B^3 \\Rightarrow (x^n)^3 - 3(x^n)^2(2y^n) + 3(x^n)(2y^n)^2 - (2y^n)^3$$",
-        tutorClue: "Recuerda que la progresión de coeficientes del binomio de Newton es 1-3-3-1."
-    },
-    {
-        category: "Expresiones Algebraicas",
-        question: "Dado $p(x) = x^3 + y^3$ y $q(x) = x^2 - xy + y^2$. Calcular la división $p(x)/q(x)$.",
-        options: ["x+y", "x-y", "x^2+y^2", "x^2-y^2"],
-        correct: "x+y",
-        explanation: "Factorizando la suma de cubos del dividendo: $$\\frac{(x+y)(x^2-xy+y^2)}{x^2-xy+y^2} = x+y$$",
-        tutorClue: "Desarrolla el trinomio correspondiente a la descomposición de cubos perfectos."
-    },
-    {
-        category: "Expresiones Algebraicas",
-        question: "Calcule el producto indicado: $(2x^2 - a^3)(4x^4 + 2a^3 x^2 + a^6)$",
-        options: ["8x^6 - a^9", "8x^6 + a^9", "16x^6 - a^9", "4x^4 - a^6"],
-        correct: "8x^6 - a^9",
-        explanation: "Reconocimiento de la identidad de diferencia de cubos perfectos: $$(A-B)(A^2+AB+B^2) = A^3 - B^3 \\Rightarrow (2x^2)^3 - (a^3)^3 = 8x^6 - a^9$$",
-        tutorClue: "Compara los términos con la estructura de factorización de cubos."
-    },
-    // 9. Ecuaciones y Fracciones
-    {
-        category: "Ecuaciones y Fracciones",
-        question: "Calcule el valor de $x$ en la ecuación: $$\\frac{x+7}{x-1} - \\frac{x+3}{x+1} = \\frac{12}{x^2-1}$$",
-        options: ["1/3", "2/3", "1/2", "-1/3"],
-        correct: "1/3",
-        explanation: "Multiplicando por el MCD $(x-1)(x+1)$: $$(x+7)(x+1) - (x+3)(x-1) = 12 \\Rightarrow 6x + 10 = 12 \\Rightarrow 6x = 2 \\Rightarrow x = \\frac{1}{3}$$",
-        tutorClue: "Deshazte de los denominadores cruzando los productos algebraicos."
-    },
-    {
-        category: "Ecuaciones y Fracciones",
-        question: "Calcule el valor de $x$ en la ecuación: $$\\frac{2x+5}{x-2} - \\frac{x+1}{x+2} = \\frac{x^2+8x+12}{x^2-4}$$",
-        options: ["0", "1", "-1", "No tiene solución real"],
-        correct: "0",
-        explanation: "Cancelando denominadores por MCD: $$(2x+5)(x+2) - (x+1)(x-2) = x^2 + 8x + 12 \\Rightarrow x^2+10x+12 = x^2+8x+12 \\Rightarrow 2x = 0 \\Rightarrow x=0$$",
-        tutorClue: "Multiplica cada término de la ecuación por la diferencia de cuadrados perfectos $(x^2-4)$."
-    },
-    {
-        category: "Ecuaciones y Fracciones",
-        question: "Al triple de un número se le restan $8$ unidades y luego se le suman los $2/5$ del mismo. El resultado es el cuádruple de dicho número menos $14$. ¿De qué número se trata?",
-        options: ["10", "12", "15", "8"],
-        correct: "10",
-        explanation: "Planteamiento lineal: $$3x - 8 + \\frac{2}{5}x = 4x - 14 \\Rightarrow 17x - 40 = 20x - 70 \\Rightarrow 3x = 30 \\Rightarrow x = 10$$",
-        tutorClue: "Multiplica todos los sumandos por 5 para neutralizar los coeficientes fraccionarios."
-    },
-    {
-        category: "Ecuaciones y Fracciones",
-        question: "La mitad de un número, aumentada en $15$ unidades, equivale a los $3/4$ del mismo número más $9$ unidades. ¿Cuál es dicho número?",
-        options: ["24", "18", "30", "12"],
-        correct: "24",
-        explanation: "Formulación: $$\\frac{x}{2} + 15 = \\frac{3}{4}x + 9 \\Rightarrow 2x + 60 = 3x + 36 \\Rightarrow x = 24$$",
-        tutorClue: "Reduce los sumandos multiplicando la ecuación entera por el MCD de los denominadores (4)."
-    },
-    {
-        category: "Ecuaciones y Fracciones",
-        question: "Calcule el valor de $x$ que verifica la ecuación: $$\\frac{5(x-2)}{3} - 1 = x + 5$$",
-        options: ["14", "12", "10", "16"],
-        correct: "14",
-        explanation: "Distribución y simplificación: $$5(x-2) - 3 = 3(x+5) \\Rightarrow 5x - 13 = 3x + 15 \\Rightarrow 2x = 28 \\Rightarrow x = 14$$",
-        tutorClue: "Elimina la división por tres multiplicando todos los elementos de la ecuación."
-    },
-    {
-        category: "Ecuaciones y Fracciones",
-        question: "Verifique el conjunto solución de la ecuación racional: $$\\frac{2}{x-5} + \\frac{x}{x-2} = \\frac{6}{x^2-7x+10}$$",
-        options: ["-2", "5", "2", "No tiene solución real"],
-        correct: "-2",
-        explanation: "MCD es $(x-5)(x-2)$. La ecuación cuadrática resultante es $x^2-3x-10=0 \\Rightarrow (x-5)(x+2)=0$. Evaluando el dominio, $x=5$ indetermina la fracción, por lo que la única raíz válida es $x=-2$.",
-        tutorClue: "Mucho cuidado con los valores que anulan los denominadores de la expresión inicial."
-    },
-    // 10. Matrices
-    {
-        category: "Matrices",
-        question: "¿Cómo se llama una matriz cuadrada si todos los elementos por encima de la diagonal principal son nulos?",
-        options: ["Matriz triangular inferior", "Matriz triangular superior", "Matriz diagonal", "Matriz simétrica"],
-        correct: "Matriz triangular inferior",
-        explanation: "Si para todo término $a_{ij}$ con $i < j$ el valor es cero, los elementos significativos residen debajo de la diagonal, conformando una matriz triangular inferior.",
-        tutorClue: "La acumulación no nula ocurre en la mitad inferior de la cuadrícula geométrica."
-    },
-    {
-        category: "Matrices",
-        question: "¿Cómo se denomina la matriz que resulta de cambiar de signo los elementos de la matriz transpuesta?",
-        options: ["Matriz antisimétrica", "Matriz opuesta", "Matriz simétrica", "Matriz conjugada"],
-        correct: "Matriz antisimétrica",
-        explanation: "Una matriz cuadrada cumple con la propiedad $A^T = -A$ cuando los elementos simétricos cambian de signo, denominándose antisimétrica.",
-        tutorClue: "Los términos de la diagonal principal son necesariamente nulos."
-    },
-    {
-        category: "Matrices",
-        question: "Si $A$ es una matriz de dimensiones $n \\times m$ y $B$ de dimensiones $m \\times k$, el orden del producto $AB$ será:",
-        options: ["n \\times k", "m \\times m", "n \\times m", "k \\times n"],
-        correct: "n \\times k",
-        explanation: "El producto hereda el número de filas del primer factor y el número de columnas de la segunda matriz operadora.",
-        tutorClue: "Los coeficientes internos de dimensiones colapsan, resultando el contorno exterior."
-    },
-    {
-        category: "Matrices",
-        question: "Dadas las matrices $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 0 & 4 & -2 \\end{pmatrix}$ y $B = \\begin{pmatrix} 1 & 2 & -1 \\\\ 3 & -2 & 4 \\end{pmatrix}$. Calcule la operación lineal $2A + B$:",
-        options: [
-            "\\begin{pmatrix} 5 & 0 & 5 \\\\ 3 & 6 & 0 \\end{pmatrix}",
-            "\\begin{pmatrix} 3 & 1 & 2 \\\\ 3 & 2 & 2 \\end{pmatrix}",
-            "\\begin{pmatrix} 5 & 0 & 5 \\\\ 3 & 2 & 0 \\end{pmatrix}",
-            "\\begin{pmatrix} 5 & -1 & 5 \\\\ 3 & 6 & -2 \\end{pmatrix}"
-        ],
-        correct: "\\begin{pmatrix} 5 & 0 & 5 \\\\ 3 & 6 & 0 \\end{pmatrix}",
-        explanation: "Escalamos la primera matriz $2A = \\begin{pmatrix} 4 & -2 & 6 \\\\ 0 & 8 & -4 \\end{pmatrix}$ y sumamos componente a componente con los elementos correspondientes de $B$.",
-        tutorClue: "Duplica cada elemento de A antes de realizar la suma directa con B."
-    },
-    {
-        category: "Matrices",
-        question: "¿Cómo se denomina a la matriz que posee idéntica cantidad de filas que de columnas?",
-        options: ["Matriz cuadrada", "Matriz rectangular", "Matriz identidad", "Matriz fila"],
-        correct: "Matriz cuadrada",
-        explanation: "Por definición de dimensión lineal, cuando $m = n$, la matriz toma una forma geométrica de lados proporcionales de nombre matriz cuadrada.",
-        tutorClue: "Se asocia con la forma geométrica regular de lados equivalentes."
-    }
-];
-
-// Procedural questions are dynamically appended up to exactly 80 items...
-// (Please refer to the full compiled bundle in the simulator dashboard views)
-const PRESETS = [
-    { cat: "Razonamiento Numérico", q: "Calcule el siguiente término en la secuencia aritmética lineal: $3, 7, 15, 31, 63, ...$", opt: ["127", "125", "128", "130"], cor: "127", exp: "El patrón de crecimiento es multiplicativo acumulado más uno: $$x_{n} = 2x_{n-1} + 1$$ Por lo tanto: $2(63) + 1 = 127$.", cl: "Multiplica el valor anterior por 2 y súmale 1 para obtener la regla general de la serie." },
-    { cat: "Porcentajes", q: "Un panel solar de $400\\\\text{ vatios}$ pierde un $15\\\\%$ de eficiencia debido a la acumulación de polvo en su superficie. ¿Cuál es su producción de potencia neta actual?", opt: ["340 W", "350 W", "360 W", "320 W"], cor: "340 W", exp: "Calculamos el $85\\\\%$ de la potencia original: $$400 \\\\times 0.85 = 340\\\\text{ vatios}$$", cl: "Si pierde el 15%, conserva el 85%. Multiplica 400 por 0.85." },
-    { cat: "Proporciones", q: "Tres ingenieros civiles pueden realizar el levantamiento topográfico de un terreno en $6\\\\text{ horas}$. ¿Cuánto tardarán dos ingenieros en hacer el mismo trabajo?", opt: ["9 horas", "8 horas", "7 horas", "10 horas"], cor: "9 horas", exp: "Proporcionalidad inversa: $3 \\\\times 6 = 2 \\\\times t \\\\Rightarrow 18 = 2t \\\\Rightarrow t = 9\\\\text{ horas}$.", cl: "A menos ingenieros, se requerirá más tiempo. Usa regla de tres inversa." }
-];
-
-for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
-    const pr = PRESETS[idx % PRESETS.length];
-    const multiplier = Math.floor(idx / PRESETS.length) + 1;
-    let finalQ = pr.q;
-    let finalOptions = [...pr.opt];
-    let finalCor = pr.cor;
-    let finalExp = pr.exp;
-
-    if (pr.cat === "Porcentajes") {
-        const baseVal = 400 + (multiplier * 50);
-        const loss = 10 + (multiplier % 3) * 5;
-        const remainder = 100 - loss;
-        const net = Math.round(baseVal * (remainder / 100));
-        finalQ = \`Un panel solar de $S\${baseVal}\\\\text{ vatios}$ pierde un $S\${loss}\\\\% $ de eficiencia. ¿Cuál es su producción de potencia actual?\`;
-        finalCor = \`\${net} W\`;
-        finalOptions = [finalCor, \`\${net + 25} W\`, \`\${net - 40} W\`, \`\${net + 50} W\`];
-        finalExp = \`Calculamos el $S\${remainder}\\\\% $ residual: \$\$S\${baseVal} \\\\times \\\\frac{\${remainder}}{100} = \${net}\\\\text{ W}\$\$\`;
-    }
-
-    QUESTION_BANK.push({
-        category: pr.cat,
-        question: finalQ.replace(/S\\\$/g, ""),
-        options: finalOptions,
-        correct: finalCor,
-        explanation: finalExp.replace(/S\\\$/g, ""),
-        tutorClue: pr.cl
-    });
-}
-`
+                code: `// Código del motor lógico del simulador cargado exitosamente.`
             }
         };
+        var GITHUB_FILES = window.GITHUB_FILES;
 
-        // Standard Simulator State Variables
-        let simState = {
+        GITHUB_FILES.js.code = `// ==========================================================================\n` +
+            `// Motor de Simulación UNL - FEIRNNR II PA 2026 - index.js\n` +
+            `// Banco integrado de 40 Reactivos oficiales extraídos de imágenes de estudio\n` +
+            `// ==========================================================================\n\n` +
+            `const QUESTION_BANK = ${JSON.stringify(QUESTION_BANK, null, 4)};\n`;
+
+        window.simState = {
             currentIndex: 0,
             answers: {},
             comodinesUsed: { p50: false, descarte: false, tutor: false, publico: false },
             activeComodinEffects: { hiddenOptions: [], fadedOptions: [] }
         };
+        var simState = window.simState;
 
-        // Shuffled options caching helper
-        const OPT_CACHE = {};
+        window.OPT_CACHE = {};
+        var OPT_CACHE = window.OPT_CACHE;
+
         function getShuffledOptions(qIdx) {
             if (OPT_CACHE[qIdx]) return OPT_CACHE[qIdx];
             const originalOpts = QUESTION_BANK[qIdx].options;
@@ -929,7 +656,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             return shuffled;
         }
 
-        // Tab views controller logic
+        // Tab Views Controller
         const btnTabExporter = document.getElementById("btn-tab-exporter");
         const btnTabSimulator = document.getElementById("btn-tab-simulator");
         const viewExporter = document.getElementById("view-exporter");
@@ -948,11 +675,10 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             viewSimulator.classList.remove("hidden");
             viewExporter.classList.add("hidden");
             
-            // Render and initialize simulator frame
             renderSimulatorWorkspace();
         });
 
-        // Exporter File Explorer Bindings
+        // Exporter File Explorer
         let activeFileKey = "readme";
         const fileButtons = document.querySelectorAll("nav[class*='space-y-1.5'] button");
         const codeDisplay = document.getElementById("code-display");
@@ -965,7 +691,6 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             fileBadge.innerText = fileData.badge;
             fileName.innerText = fileData.name;
 
-            // Simple conditional badge styling
             if (fileData.badge === "CSS") fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-pink-600 rounded text-pink-100 uppercase tracking-wider";
             else if (fileData.badge === "HTML") fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-amber-600 rounded text-amber-100 uppercase tracking-wider";
             else if (fileData.badge === "JAVASCRIPT") fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-emerald-600 rounded text-emerald-100 uppercase tracking-wider";
@@ -974,18 +699,15 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
 
         fileButtons.forEach(btn => {
             btn.addEventListener("click", () => {
-                // Remove active classes
                 fileButtons.forEach(b => {
                     b.className = "w-full text-left p-3 rounded-xl border border-transparent hover:bg-slate-900 text-slate-400 hover:text-slate-200 text-sm flex items-center gap-3 transition-all";
                 });
-                // Set active looks on target button
                 btn.className = "w-full text-left p-3 rounded-xl border border-indigo-500/30 bg-indigo-950/40 text-indigo-200 font-medium text-sm flex items-center gap-3 transition-all";
                 activeFileKey = btn.dataset.file;
                 updateCodeViewer();
             });
         });
 
-        // Copy source code using fallback iframe document command exec
         document.getElementById("btn-copy-code").addEventListener("click", () => {
             const textarea = document.createElement("textarea");
             textarea.value = GITHUB_FILES[activeFileKey].code;
@@ -1002,23 +724,21 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
                     copyBtn.classList.replace("bg-emerald-600", "bg-indigo-600");
                 }, 1500);
             } catch (err) {
-                console.error("No se pudo copiar el código automáticamente.", err);
+                console.error("No se pudo copiar el código.", err);
             }
             document.body.removeChild(textarea);
         });
 
-        // ================= SIMULATOR RUNTIME CONTROLLER =================
+        // ================= PLAYABLE SIMULATOR CORE ENGINE =================
         function renderSimulatorWorkspace() {
             const current = QUESTION_BANK[simState.currentIndex];
             
-            // Category and progress indicators
             document.getElementById("txt-active-category").innerText = current.category;
-            document.getElementById("txt-active-index").innerText = `${simState.currentIndex + 1} / 80`;
+            document.getElementById("txt-origin-image").innerText = `Origen: ${current.origin}`;
+            document.getElementById("txt-active-index").innerText = `${simState.currentIndex + 1} / 40`;
 
-            // Question box math text
             document.getElementById("question-text-box").innerHTML = current.question;
 
-            // Stats computations
             let solvedCount = Object.keys(simState.answers).length;
             let correctCount = 0;
             let incorrectCount = 0;
@@ -1027,20 +747,19 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
                 else incorrectCount++;
             }
 
-            document.getElementById("stat-solved").innerText = `${solvedCount}/80`;
+            document.getElementById("stat-solved").innerText = `${solvedCount}/40`;
             document.getElementById("stat-correct").innerText = correctCount;
             document.getElementById("stat-incorrect").innerText = incorrectCount;
 
-            const percentage = Math.round((solvedCount / 80) * 100);
+            const percentage = Math.round((solvedCount / 40) * 100);
             document.getElementById("txt-progress-percentage").innerText = `${percentage}%`;
             document.getElementById("progress-bar").style.width = `${percentage}%`;
 
-            // Draw options & check lifelines
             renderOptionsView(current);
             updateComodinesState();
             renderFeedbackView(current);
 
-            // Re-render LaTeX mathematics formulas
+            // Trigger KaTeX rendering immediately
             if (window.renderMathInElement) {
                 window.renderMathInElement(document.getElementById("view-simulator"), {
                     delimiters: [
@@ -1051,44 +770,67 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
                 });
             }
 
-            renderMatrixGrid();
+            renderMatrixSections();
         }
 
-        // Render matrix grid dynamically (80 items)
-        function renderMatrixGrid() {
-            const container = document.getElementById("nav-matrix-container");
+        function renderMatrixSections() {
+            const container = document.getElementById("nav-matrix-sections");
             container.innerHTML = "";
 
-            for (let i = 0; i < 80; i++) {
-                const btn = document.createElement("button");
-                btn.type = "button";
-                btn.className = "w-8 h-8 rounded-lg text-xs font-bold transition-all border flex items-center justify-center ";
-                
-                const answer = simState.answers[i];
-                if (answer !== undefined) {
-                    if (answer === QUESTION_BANK[i].correct) {
-                        btn.className += "bg-emerald-500 border-emerald-600 text-white shadow-sm";
-                    } else {
-                        btn.className += "bg-rose-500 border-rose-600 text-white shadow-sm";
-                    }
-                } else {
-                    if (i === simState.currentIndex) {
-                        btn.className += "bg-slate-100 border-slate-900 text-slate-900 ring-2 ring-slate-900 ring-offset-2";
-                    } else {
-                        btn.className += "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100";
+            const categories = [
+                "CAP-R.V.-ANALOGÍAS",
+                "CAP-R.V.-INFERENCIAS",
+                "CAP-R.N.-COMPROBACIÓN",
+                "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES"
+            ];
+
+            categories.forEach(categoryName => {
+                const sectionDiv = document.createElement("div");
+                sectionDiv.className = "space-y-1.5";
+
+                const title = document.createElement("h4");
+                title.className = "text-[10px] font-bold text-slate-500 uppercase tracking-wide truncate";
+                title.innerText = categoryName;
+                sectionDiv.appendChild(title);
+
+                const grid = document.createElement("div");
+                grid.className = "grid grid-cols-10 gap-1.5";
+
+                for (let i = 0; i < 40; i++) {
+                    if (QUESTION_BANK[i].category === categoryName) {
+                        const btn = document.createElement("button");
+                        btn.type = "button";
+                        btn.className = "w-7 h-7 rounded-lg text-xs font-bold transition-all border flex items-center justify-center ";
+                        
+                        const answer = simState.answers[i];
+                        if (answer !== undefined) {
+                            if (answer === QUESTION_BANK[i].correct) {
+                                btn.className += "bg-emerald-500 border-emerald-600 text-white shadow-sm";
+                            } else {
+                                btn.className += "bg-rose-500 border-rose-600 text-white shadow-sm";
+                            }
+                        } else {
+                            if (i === simState.currentIndex) {
+                                btn.className += "bg-indigo-50 border-indigo-600 text-indigo-700 ring-2 ring-indigo-600 ring-offset-2 font-black";
+                            } else {
+                                btn.className += "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100";
+                            }
+                        }
+
+                        btn.innerText = (i + 1).toString();
+                        btn.addEventListener("click", () => {
+                            selectQuestion(i);
+                        });
+                        grid.appendChild(btn);
                     }
                 }
-
-                btn.innerText = (i + 1).toString();
-                btn.addEventListener("click", () => {
-                    selectQuestion(i);
-                });
-                container.appendChild(btn);
-            }
+                sectionDiv.appendChild(grid);
+                container.appendChild(sectionDiv);
+            });
         }
 
         function selectQuestion(idx) {
-            if (idx < 0 || idx >= 80) return;
+            if (idx < 0 || idx >= 40) return;
             simState.currentIndex = idx;
             simState.activeComodinEffects.hiddenOptions = [];
             simState.activeComodinEffects.fadedOptions = [];
@@ -1129,7 +871,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
                         btn.className += "border-slate-200 bg-white text-slate-400";
                     }
                 } else {
-                    btn.className += "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-800 active:scale-[0.99]";
+                    btn.className += "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-800 active:scale-[0.99] shadow-sm";
                     btn.addEventListener("click", () => {
                         chooseAnswer(opt.text);
                     });
@@ -1189,7 +931,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             }
         }
 
-        // Comodín 50/50 logic
+        // 50/50 lifeline
         document.getElementById("btn-comodin-50").addEventListener("click", () => {
             if (simState.comodinesUsed.p50 || simState.answers[simState.currentIndex] !== undefined) return;
             const current = QUESTION_BANK[simState.currentIndex];
@@ -1203,7 +945,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             renderSimulatorWorkspace();
         });
 
-        // Comodín Descarte logic
+        // Descarte lifeline
         document.getElementById("btn-comodin-descarte").addEventListener("click", () => {
             if (simState.comodinesUsed.descarte || simState.answers[simState.currentIndex] !== undefined) return;
             const current = QUESTION_BANK[simState.currentIndex];
@@ -1221,7 +963,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             }
         });
 
-        // Comodín Tutor logic
+        // Tutor assistance clue modal
         document.getElementById("btn-comodin-tutor").addEventListener("click", () => {
             const current = QUESTION_BANK[simState.currentIndex];
             const clueBox = document.getElementById("modal-tutor-clue-box");
@@ -1247,7 +989,6 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
         document.getElementById("btn-close-tutor").addEventListener("click", () => document.getElementById("modal-tutor").classList.add("hidden"));
         document.getElementById("btn-dismiss-tutor").addEventListener("click", () => document.getElementById("modal-tutor").classList.add("hidden"));
 
-        // Comodín Público logic
         document.getElementById("btn-comodin-publico").addEventListener("click", () => {
             if (simState.comodinesUsed.publico || simState.answers[simState.currentIndex] !== undefined) return;
             const current = QUESTION_BANK[simState.currentIndex];
@@ -1287,7 +1028,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
         document.getElementById("btn-close-public").addEventListener("click", () => document.getElementById("modal-public").classList.add("hidden"));
         document.getElementById("btn-dismiss-public").addEventListener("click", () => document.getElementById("modal-public").classList.add("hidden"));
 
-        // Feedback View render
+        // Dynamic detailed feedback panel
         function renderFeedbackView(question) {
             const chosen = simState.answers[simState.currentIndex];
             const panel = document.getElementById("feedback-panel");
@@ -1311,7 +1052,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             }
 
             text.innerHTML = `
-                <div class="p-3 bg-slate-800 rounded-lg text-slate-200 border-l-4 border-emerald-500">
+                <div class="p-3 bg-slate-800 rounded-lg text-slate-200 border-l-4 border-indigo-500">
                     <strong>Tu elección:</strong> ${chosen} <br>
                     <strong>Opción Correcta:</strong> ${question.correct}
                 </div>
@@ -1327,7 +1068,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             }, 50);
         }
 
-        // Navigation Footer Hooks
+        // Navigation Footer binds
         document.getElementById("btn-prev-question").addEventListener("click", () => {
             selectQuestion(simState.currentIndex - 1);
         });
@@ -1336,20 +1077,19 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             selectQuestion(simState.currentIndex + 1);
         });
 
-        // Finalize Evaluation Metrics Modal
         document.getElementById("btn-finish-evaluation").addEventListener("click", () => {
             let correctCount = 0;
             let incorrectCount = 0;
             let unansweredCount = 0;
 
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 40; i++) {
                 const chosen = simState.answers[i];
                 if (chosen === undefined) unansweredCount++;
                 else if (chosen === QUESTION_BANK[i].correct) correctCount++;
                 else incorrectCount++;
             }
 
-            const finalScore = parseFloat(((correctCount / 80) * 10).toFixed(1));
+            const finalScore = parseFloat(((correctCount / 40) * 10).toFixed(1));
 
             document.getElementById("results-score-primary").innerText = finalScore.toFixed(1);
             document.getElementById("results-correct-count").innerText = correctCount;
@@ -1363,17 +1103,17 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
             const recBox = document.getElementById("results-recommendation-text");
 
             if (finalScore >= 9.0) {
-                pill.innerText = "Excelente (Nivel III)";
+                pill.innerText = "Excelente (Aprobado Destacado)";
                 pill.className = "px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-emerald-500 text-white";
-                recBox.innerText = "¡Excelente rendimiento! Has consolidado una agilidad mental espectacular y habilidades analíticas muy avanzadas.";
+                recBox.innerText = "¡Excelente rendimiento! Has consolidado una agilidad mental espectacular y habilidades analíticas idóneas para ingresar con éxito a la FEIRNNR UNL.";
             } else if (finalScore >= 7.0) {
-                pill.innerText = "Aprobado (Nivel II)";
+                pill.innerText = "Aprobado (Nivel Medio-Alto)";
                 pill.className = "px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-amber-500 text-white";
-                recBox.innerText = "Nivel adecuado. Comprendes bien los conceptos lógicos, pero puedes optimizar tus tiempos en las ecuaciones complejas.";
+                recBox.innerText = "Nivel adecuado. Dominas las relaciones analógicas y silogismos. Te recomendamos practicar más velocidad en la resolución de ecuaciones algebraicas.";
             } else {
-                pill.innerText = "Insuficiente (Nivel I)";
+                pill.innerText = "Insuficiente (Requiere Refuerzo)";
                 pill.className = "px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-rose-500 text-white";
-                recBox.innerText = "Te recomendamos repasar las bases de álgebra, matrices y analogías en las explicaciones paso a paso de tus errores.";
+                recBox.innerText = "Te sugerimos repasar detenidamente cada justificación científica. Pon mayor énfasis en el modelaje de ecuaciones y en inferencias de recursos no renovables.";
             }
 
             document.getElementById("modal-results").classList.remove("hidden");
@@ -1396,6 +1136,7 @@ for (let idx = QUESTION_BANK.length; idx < 80; idx++) {
         // Run updates on DOM load
         document.addEventListener("DOMContentLoaded", () => {
             updateCodeViewer();
+            renderSimulatorWorkspace();
             setTimeout(() => {
                 if (window.renderMathInElement) {
                     window.renderMathInElement(document.body, {
