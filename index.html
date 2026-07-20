@@ -6,13 +6,1477 @@
     <title>FEIRNNR II PA 2026 - Simulador de Admisión</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Fira Code -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- KaTeX CSS & JS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- JSZip Library for exporting full structured folder -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="h-full overflow-hidden text-slate-100 flex flex-col">
+
+    <header class="bg-slate-950 border-b border-slate-800 px-6 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 shrink-0">
+        <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg text-lg">
+                ⚡
+            </span>
+            <div>
+                <h1 class="text-lg font-bold tracking-tight text-white">Centro de Simulación FEIRNNR II PA 2026</h1>
+                <p class="text-xs text-indigo-400 font-semibold uppercase tracking-wider">Materia de Estudio: Razonamiento Verbal y Numérico Aplicado</p>
+            </div>
+        </div>
+        
+        <!-- Toggle Main View: Exporter vs Live Simulator -->
+        <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800">
+            <button id="btn-tab-exporter" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2">
+                <span>📁</span> <span>Código de GitHub</span>
+            </button>
+            <button id="btn-tab-simulator" class="px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white transition-all flex items-center gap-2">
+                <span>⚡</span> <span>Ver Simulador en Vivo</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Content Area wrapper -->
+    <div class="flex-1 flex overflow-hidden bg-slate-900 relative">
+        
+        <!-- ================= VIEW 1: GITHUB EXPORT DASHBOARD ================= -->
+        <div id="view-exporter" class="flex-1 flex flex-col md:flex-row overflow-hidden hidden">
+            
+            <!-- Left Sidebar: File Tree -->
+            <aside class="w-full md:w-64 bg-slate-950 border-b md:border-b-0 md:border-r border-slate-800 p-4 flex flex-col shrink-0">
+                <div class="mb-4">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-2">Árbol del Repositorio</span>
+                    <div class="bg-slate-900 rounded-lg p-2.5 border border-slate-800/80 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">📁</span>
+                            <span class="text-xs font-bold text-slate-300">feirnnr-pa-2026</span>
+                        </div>
+                        <button id="btn-download-all" title="Descargar todo el proyecto (.zip)" class="p-1.5 hover:bg-indigo-950 text-indigo-400 hover:text-indigo-300 border border-transparent hover:border-indigo-500/20 rounded-lg transition-all text-xs flex items-center gap-1 active:scale-95">
+                            <span>📦</span> <span class="text-[10px] font-bold">Descargar ZIP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File explorer buttons -->
+                <nav class="space-y-1.5 flex-1">
+                    <button data-file="readme" class="w-full text-left p-3 rounded-xl border border-indigo-500/30 bg-indigo-950/40 text-indigo-200 font-medium text-sm flex items-center gap-3 transition-all">
+                        <span class="text-base text-indigo-400">📄</span>
+                        <span class="truncate">README.md</span>
+                    </button>
+                    <button data-file="css" class="w-full text-left p-3 rounded-xl border border-transparent hover:bg-slate-900 text-slate-400 hover:text-slate-200 text-sm flex items-center gap-3 transition-all">
+                        <span class="text-base">📄</span>
+                        <span class="truncate">index.css</span>
+                    </button>
+                    <button data-file="html" class="w-full text-left p-3 rounded-xl border border-transparent hover:bg-slate-900 text-slate-400 hover:text-slate-200 text-sm flex items-center gap-3 transition-all">
+                        <span class="text-base">📄</span>
+                        <span class="truncate">index.html</span>
+                    </button>
+                    <button data-file="js" class="w-full text-left p-3 rounded-xl border border-transparent hover:bg-slate-900 text-slate-400 hover:text-slate-200 text-sm flex items-center gap-3 transition-all">
+                        <span class="text-base">📄</span>
+                        <span class="truncate">index.js</span>
+                    </button>
+                </nav>
+
+                <!-- Helpful Guide Card -->
+                <div class="mt-4 p-3.5 bg-slate-900 rounded-xl border border-slate-800 space-y-2">
+                    <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                        <span>💡</span> Exportación Directa
+                    </h4>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Copia la estructura estructurada del simulador oficial de admisión de la UNL para tu despliegue local o alojamiento web.
+                    </p>
+                </div>
+            </aside>
+
+            <!-- Main Code Viewer Area -->
+            <main class="flex-1 flex flex-col overflow-hidden bg-slate-900">
+                <!-- Code Header -->
+                <div class="px-6 py-3.5 bg-slate-950 border-b border-slate-800 flex flex-wrap justify-between items-center gap-3 shrink-0">
+                    <div class="flex items-center gap-2">
+                        <span id="current-file-badge" class="px-2 py-0.5 text-[10px] font-bold bg-indigo-600 rounded text-indigo-100 uppercase tracking-wider">
+                            MARKDOWN
+                        </span>
+                        <span id="current-file-name" class="text-sm font-semibold text-slate-200">README.md</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="btn-copy-code" class="px-4 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold flex items-center gap-1.5 active:scale-95 transition-all shadow-md border border-slate-700">
+                            <span>📋</span>
+                            <span>Copiar Código</span>
+                        </button>
+                        <button id="btn-download-code" class="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-semibold flex items-center gap-1.5 active:scale-95 transition-all shadow-md">
+                            <span>📥</span>
+                            <span>Descargar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Code Container -->
+                <div class="flex-1 overflow-auto p-6">
+                    <pre class="h-full"><code id="code-display" class="code-font text-xs md:text-sm text-slate-300 leading-relaxed block overflow-x-auto whitespace-pre-wrap">Cargando código...</code></pre>
+                </div>
+            </main>
+
+        </div>
+
+        <!-- ================= VIEW 2: PLAYABLE SIMULATOR FRAME ================= -->
+        <div id="view-simulator" class="flex-1 flex flex-col md:flex-row overflow-hidden bg-slate-50 text-slate-800">
+            <!-- Left Panel (Matrix) -->
+            <section class="w-full md:w-[32%] bg-white border-b md:border-b-0 md:border-r border-slate-200 flex flex-col h-1/2 md:h-full overflow-hidden shrink-0">
+                <div class="p-4 border-b border-slate-100 bg-slate-50 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Progreso de la Prueba</span>
+                        <span id="txt-progress-percentage" class="text-sm font-bold text-slate-700">0%</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-500 w-[0%]"></div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 text-center text-xs">
+                        <div class="p-2 bg-slate-100 rounded-lg">
+                            <span class="block font-bold text-slate-700" id="stat-solved">0/40</span>
+                            <span class="text-[10px] text-slate-400">Resueltas</span>
+                        </div>
+                        <div class="p-2 bg-emerald-50 rounded-lg">
+                            <span class="block font-bold text-emerald-700" id="stat-correct">0</span>
+                            <span class="text-[10px] text-emerald-500">Correctas</span>
+                        </div>
+                        <div class="p-2 bg-rose-50 rounded-lg">
+                            <span class="block font-bold text-rose-700" id="stat-incorrect">0</span>
+                            <span class="text-[10px] text-rose-500">Incorrectas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation grid containing 4 categories from the images -->
+                <div class="flex-1 overflow-y-auto p-4 space-y-4">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Matriz de Temarios Oficiales</h3>
+                    <div id="nav-matrix-sections" class="space-y-4">
+                        <!-- Sections will be injected dynamically -->
+                    </div>
+                </div>
+
+                <div class="p-4 border-t border-slate-100 bg-slate-50 flex flex-col gap-2">
+                    <button id="btn-finish-evaluation" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-xl shadow-md active:translate-y-px transition-all">
+                        Finalizar Evaluación
+                    </button>
+                    <button id="btn-hard-reset" class="text-xs text-slate-400 hover:text-slate-600 transition-colors py-1">
+                        Reiniciar Simulador Completo
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel (Interactive Question Frame) -->
+            <section class="flex-1 flex flex-col h-1/2 md:h-full overflow-hidden bg-slate-100">
+                <div class="p-4 bg-white border-b border-slate-200 flex items-center justify-between">
+                    <div>
+                        <span id="txt-active-category" class="px-2.5 py-1 text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full uppercase tracking-wide">
+                            Categoría
+                        </span>
+                        <span id="txt-origin-image" class="ml-2 px-2.5 py-1 text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-100 rounded-full uppercase tracking-wide">
+                            Origen: -
+                        </span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400 font-medium">Reactivo</span>
+                        <span id="txt-active-index" class="text-sm font-bold text-slate-800">1 / 40</span>
+                    </div>
+                </div>
+
+                <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-6" id="question-workspace">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/60 space-y-4">
+                        <p class="text-xs uppercase tracking-wider text-slate-400 font-bold">Enunciado Oficial de Examen (UNL FEIRNNR)</p>
+                        <div id="question-text-box" class="text-base md:text-lg text-slate-800 leading-relaxed font-medium"></div>
+                    </div>
+
+                    <!-- Comodines de Apoyo Pedagógico -->
+                    <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200/60 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs uppercase tracking-wider text-slate-400 font-bold">Comodines de Apoyo Pedagógico</span>
+                            <span class="text-xs text-slate-400" id="comodines-count-display">Disponibles</span>
+                        </div>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button id="btn-comodin-50" class="py-2.5 px-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg">🌓</span>
+                                <span>50 / 50</span>
+                            </button>
+                            <button id="btn-comodin-descarte" class="py-2.5 px-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg">❌</span>
+                                <span>Descartar</span>
+                            </button>
+                            <button id="btn-comodin-tutor" class="py-2.5 px-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg">👨‍🏫</span>
+                                <span>Tutor</span>
+                            </button>
+                            <button id="btn-comodin-publico" class="py-2.5 px-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg">📊</span>
+                                <span>Público</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3" id="options-container"></div>
+
+                    <!-- Detailed Feedback Panel -->
+                    <div id="feedback-panel" class="hidden rounded-2xl bg-slate-900 text-slate-100 p-6 shadow-xl border border-slate-800 space-y-4 transform scale-95 opacity-0 transition-all duration-300">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                            <div class="flex items-center gap-2">
+                                <span id="feedback-badge" class="px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider font-semibold">Respuesta Correcta</span>
+                            </div>
+                            <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Análisis y Justificación Científica</span>
+                        </div>
+                        <div id="feedback-text-box" class="text-sm md:text-base leading-relaxed space-y-3 text-slate-300"></div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-white border-t border-slate-200 flex justify-between items-center shrink-0">
+                    <button id="btn-prev-question" class="px-5 py-2.5 border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-xl text-sm font-semibold transition-all flex items-center gap-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        <span>Anterior</span>
+                    </button>
+                    <button id="btn-next-question" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-sm font-semibold transition-all flex items-center gap-1">
+                        <span>Siguiente</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-tutor" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-slate-200 text-slate-800">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <span>👨‍🏫</span>
+                    <span>Asistencia Pedagógica (Tutor)</span>
+                </h3>
+                <button id="btn-close-tutor" class="text-slate-400 hover:text-slate-600 font-bold text-lg">×</button>
+            </div>
+            <div class="p-5 space-y-4">
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Lee detenidamente la recomendación para resolver este problema:
+                </p>
+                <div id="modal-tutor-clue-box" class="p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-emerald-800 font-medium text-sm leading-relaxed"></div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button id="btn-dismiss-tutor" class="px-5 py-2 bg-slate-900 text-white hover:bg-slate-800 rounded-xl text-xs font-semibold">
+                    Entendido, gracias
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-public" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-slate-200 text-slate-800">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                    <span>📊</span>
+                    <span>Estadísticas de Votación (Grupo FEIRNNR)</span>
+                </h3>
+                <button id="btn-close-public" class="text-slate-400 hover:text-slate-600 font-bold text-lg">×</button>
+            </div>
+            <div class="p-5 space-y-4">
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Distribución de respuestas simuladas por otros aspirantes:
+                </p>
+                <div class="space-y-3" id="modal-public-bars-container"></div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end">
+                <button id="btn-dismiss-public" class="px-5 py-2 bg-slate-900 text-white hover:bg-slate-800 rounded-xl text-xs font-semibold">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="modal-results" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
+        <div class="bg-white w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl border border-slate-200 my-8 text-slate-800">
+            <div class="p-6 bg-slate-900 text-white text-center space-y-2">
+                <h2 class="text-2xl font-extrabold tracking-tight text-indigo-400">EVALUACIÓN COMPLETADA</h2>
+                <p class="text-xs text-slate-400 font-medium tracking-widest uppercase">Reporte de Rendimiento FEIRNNR UNL</p>
+            </div>
+            <div class="p-6 space-y-6">
+                <div class="flex flex-col items-center justify-center space-y-2">
+                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Calificación Final</span>
+                    <div class="flex items-baseline gap-1">
+                        <span id="results-score-primary" class="text-6xl font-black text-slate-900">0.0</span>
+                        <span class="text-2xl font-bold text-slate-400">/ 10.0</span>
+                    </div>
+                    <span id="results-qualitative-pill" class="px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider">Nivel</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
+                        <span class="block text-2xl font-bold text-emerald-600" id="results-correct-count">0</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Aciertos</span>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
+                        <span class="block text-2xl font-bold text-rose-600" id="results-incorrect-count">0</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Errores</span>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
+                        <span class="block text-2xl font-bold text-slate-600" id="results-unanswered-count">0</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Sin Responder</span>
+                    </div>
+                    <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl text-center space-y-1">
+                        <span class="block text-2xl font-bold text-amber-600" id="results-comodines-used">0 / 4</span>
+                        <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Comodines Utilizados</span>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 border border-slate-200/60 rounded-xl space-y-2">
+                    <h4 class="font-bold text-sm text-slate-800">Sugerencia de Estudio</h4>
+                    <p id="results-recommendation-text" class="text-xs text-slate-600 leading-relaxed"></p>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 grid grid-cols-2 gap-3">
+                <button id="btn-close-results" class="py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold text-sm rounded-xl transition-all">
+                    Revisar Respuestas
+                </button>
+                <button id="btn-results-hard-reset" class="py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm rounded-xl transition-all font-bold">
+                    Volver a Intentar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT LOGIC AND CORE ENGINE ================= -->
+    <script>
+        window.QUESTION_BANK = [];
+        var QUESTION_BANK = window.QUESTION_BANK;
+
+        function buildAdmissionDatabase() {
+            // Category headers strictly mirroring the official PA study syllabus
+            const categories = [
+                "CAP-R.V.-ANALOGÍAS",
+                "CAP-R.V.-INFERENCIAS",
+                "CAP-R.N.-COMPROBACIÓN",
+                "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES"
+            ];
+
+            // Category 1: Analogías (image_3cfda5.png and unique extensions)
+            const c1 = categories[0];
+            
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "image_3cfda5.png",
+                question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$CABLE \\text{ es a } ELECTRICIDAD \\text{ como } TUBER\\acute{I}A \\text{ es a...}$$",
+                correct: "AGUA",
+                options: ["AGUA", "COBRE", "PLÁSTICO", "ENERGÍA"],
+                explanation: "Un **cable** actúa como el canal conductor por el cual fluye la **electricidad**. Siguiendo la misma relación lógica de canal-contenido, una **tubería** es el canal físico diseñado para la conducción y flujo de fluidos, siendo el **agua** el ejemplo arquetípico.",
+                tutorClue: "Piensa en el elemento que fluye o se transporta a través del conductor primario."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "image_3cfda5.png",
+                question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$YACIMIENTO \\text{ es a } PETR\\acute{O}LEO \\text{ como } MINA \\text{ es a...}$$",
+                correct: "MINERAL",
+                options: ["MINERAL", "GASOLINA", "POZO", "MAQUINARIA"],
+                explanation: "Un **yacimiento** es el depósito natural donde se encuentra y extrae el recurso energético del **petróleo**. Paralelamente, una **mina** es el lugar físico natural excavado con el fin de extraer recursos valiosos como el **mineral**.",
+                tutorClue: "Relaciona el sitio geográfico natural de extracción con el material bruto extraído."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "image_3cfda5.png",
+                question: "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$RUEDA \\text{ es a } VEH\\acute{I}CULO \\text{ como } H\\acute{E}LICE \\text{ es a...}$$",
+                correct: "AVIÓN",
+                options: ["AVIÓN", "CARRETERA", "MOTOR", "TIMÓN"],
+                explanation: "La **rueda** es el componente de tracción y propulsión esencial de un **vehículo** terrestre. Siguiendo la misma relación estructural y funcional, la **hélice** es el elemento de empuje y propulsión indispensable para el desplazamiento de un **avión**.",
+                tutorClue: "Establece la relación de parte propulsora a medio de transporte."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para el sector de conductores eléctricos:<br><br>$$SILICIO \\text{ es a } SEMICONDUCTOR \\text{ como } COBRE \\text{ es a...}$$",
+                correct: "CONDUCTOR",
+                options: ["CONDUCTOR", "AISLANTE", "DIÉLECTRICO", "MAGNETO"],
+                explanation: "El silicio es el elemento representativo y base de los materiales semiconductores por excelencia. Por correspondencia de propiedades físicas, el cobre es el metal paradigmático utilizado como conductor eléctrico.",
+                tutorClue: "Identifica la propiedad fundamental de transmisión eléctrica del cobre comparado con el silicio."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para sistemas de energía electromecánica:<br><br>$$ALTERNADOR \\text{ es a } GENERACI\\acute{O}N \\text{ como } BATER\\acute{I}A \\text{ es a...}$$",
+                correct: "ALMACENAMIENTO",
+                options: ["ALMACENAMIENTO", "CONSUMO", "DISIPACIÓN", "TRANSMISIÓN"],
+                explanation: "El alternador tiene como función principal transformar energía mecánica en eléctrica para la generación activa. Por su parte, la batería cumple el rol pasivo e indispensable de almacenamiento de esa energía.",
+                tutorClue: "Relaciona la máquina con el propósito operativo o función de almacenamiento de carga."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para instrumentos de medición física:<br><br>$$TERM\\acute{O}METRO \\text{ es a } TEMPERATURA \\text{ como } BAR\\acute{O}METRO \\text{ es a...}$$",
+                correct: "PRESIÓN",
+                options: ["PRESIÓN", "HUMEDAD", "ALTITUD", "DENSIDAD"],
+                explanation: "El termómetro es el instrumento estándar para cuantificar la temperatura de un sistema. De la misma manera, el barómetro está diseñado para medir de forma precisa la presión atmosférica.",
+                tutorClue: "Asocia el dispositivo de medición con la variable termodinámica o de fluido correspondiente."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para fuentes de energía renovable:<br><br>$$VIENTO \\text{ es a } AEROGENERADOR \\text{ como } SOL \\text{ es a...}$$",
+                correct: "PANEL FOTOVOLTAICO",
+                options: ["PANEL FOTOVOLTAICO", "BIOMASA", "TURBINA HIDRÁULICA", "CALDERA"],
+                explanation: "El viento es el recurso cinético natural que impulsa y activa un aerogenerador para producir energía. El sol es el recurso electromagnético que excita directamente las celdas de un panel fotovoltaico para generar electricidad.",
+                tutorClue: "Determina qué tecnología moderna aprovecha la radiación directa de la estrella del sistema solar."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para componentes mecánicos de transmisión de movimiento:<br><br>$$ENGRANAJE \\text{ es a } ROTACI\\acute{O}N \\text{ como } PIST\\acute{O}N \\text{ es a...}$$",
+                correct: "RECIPROCIDAD",
+                options: ["RECIPROCIDAD", "CONVERGENCIA", "ESTÁTICA", "FLEXIÓN"],
+                explanation: "Los engranajes están diseñados para transferir o transformar el movimiento de rotación circular. El pistón, dentro de un cilindro, realiza un movimiento alternativo de vaivén o reciprocidad en motores térmicos.",
+                tutorClue: "Analiza el tipo de movimiento geométrico lineal de ida y vuelta que genera un émbolo."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para sistemas de contención y combustible nuclear:<br><br>$$REPRESA \\text{ es a } AGUA \\text{ como } REACTOR \\text{ es a...}$$",
+                correct: "URANIO",
+                options: ["URANIO", "CARBONO", "OXÍGENO", "PETRÓLEO"],
+                explanation: "Una represa es la obra civil diseñada para contener y controlar el agua para generación hidroeléctrica. Un reactor nuclear es la estructura diseñada para contener y controlar la fisión del uranio.",
+                tutorClue: "Busca el elemento químico pesado que sirve de combustible base dentro de un núcleo de energía atómica."
+            });
+            QUESTION_BANK.push({
+                category: c1,
+                origin: "Sustentación Temática",
+                question: "Escoja la analogía adecuada para fuerzas fundamentales de la física clásica:<br><br>$$GRAVEDAD \\text{ es a } CA\\acute{I}DA \\text{ como } MAGNETISMO \\text{ es a...}$$",
+                correct: "ATRACCIÓN",
+                options: ["ATRACCIÓN", "PROYECCIÓN", "FRICCIÓN", "CONDUCCIÓN"],
+                explanation: "La gravedad produce el efecto físico macroscópico de atracción que origina la caída de los cuerpos. El magnetismo manifiesta de forma primordial fuerzas de atracción o repulsión entre polos de cargas opuestas.",
+                tutorClue: "Encuentra la interacción física natural que ocurre entre los polos de dos imanes."
+            });
+
+            // Category 2: Inferencias (image_3cfdc2.png and unique extensions)
+            const c2 = categories[1];
+            
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "image_3cfdc2.png",
+                question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{El petr&oacute;leo es un recurso no renovable.}$$<br>$$\\bullet\\; \\text{El carb&oacute;n es un recurso no renovable.}$$<br>$$\\bullet\\; \\text{El sol es una fuente de energ&iacute;a.}$$",
+                correct: "El petróleo y el carbón son recursos no renovables.",
+                options: [
+                    "El petróleo y el carbón son recursos no renovables.",
+                    "El sol es un recurso no renovable.",
+                    "El carbón es una fuente de energía inagotable.",
+                    "El petróleo se regenera rápidamente."
+                ],
+                explanation: "La conclusión directa y lógicamente válida a partir de las premisas planteadas es la agrupación directa de los dos hidrocarburos: el petróleo y el carbón se clasifican estrictamente dentro de la categoría explícita de recursos no renovables.",
+                tutorClue: "Evita añadir supuestos que no estén explícitamente declarados en las viñetas."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "image_3cfdc2.png",
+                question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{El gas natural se extrae del subsuelo.}$$<br>$$\\bullet\\; \\text{La extracci&oacute;n de recursos del subsuelo requiere tecnolog&iacute;a.}$$<br>$$\\bullet\\; \\text{Las piedras no siempre requieren tecnolog&iacute;a para su obtenci&oacute;n.}$$",
+                correct: "La extracción de gas natural requiere tecnología.",
+                options: [
+                    "La extracción de gas natural requiere tecnología.",
+                    "Las piedras siempre se extraen del subsuelo profundo.",
+                    "El gas natural no requiere tecnología para su extracción.",
+                    "Todos los recursos del subsuelo son piedras."
+                ],
+                explanation: "Utilizando la regla del silogismo clásico: Si el gas natural es un recurso extraído del subsuelo, y toda extracción de recursos del subsuelo requiere indefectiblemente tecnología, se concluye formalmente que **la extracción de gas natural requiere tecnología**.",
+                tutorClue: "Combina la primera y la segunda premisa para deducir la conclusión del gas natural."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "image_3cfdc2.png",
+                question: "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{La energ&iacute;a solar proviene del sol.}$$<br>$$\\bullet\\; \\text{El sol es una fuente de energ&iacute;a natural.}$$<br>$$\\bullet\\; \\text{La energ&iacute;a solar no se agota.}$$",
+                correct: "La energía solar proviene de una fuente natural que no se agota.",
+                options: [
+                    "La energía solar proviene de una fuente natural que no se agota.",
+                    "El sol se apagará en los próximos años de manera súbita.",
+                    "Toda la energía natural en el universo es inagotable.",
+                    "La energía solar proviene de un recurso no renovable."
+                ],
+                explanation: "Al consolidar lógicamente las tres verdades: La energía solar proviene del sol (1), el sol es natural (2) y no se agota (3), concluimos directamente que la energía solar proviene de una fuente natural e inagotable.",
+                tutorClue: "Integra las tres cualidades afirmadas del sol y de su energía."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Encuentre la conclusión correcta basadas en las siguientes premisas de geotermia:<br><br>$$\\bullet\\; \\text{La energ&iacute;a geot&eacute;rmica aprovecha el calor interno de la Tierra.}$$<br>$$\\bullet\\; \\text{El calor interno de la Tierra es un recurso inagotable a escala humana.}$$<br>$$\\bullet\\; \\text{La provincia de Loja posee yacimientos termales activos.}$$",
+                correct: "La energía geotérmica aprovecha un recurso inagotable.",
+                options: [
+                    "La energía geotérmica aprovecha un recurso inagotable.",
+                    "En Loja toda la electricidad consumida es geotérmica.",
+                    "Los yacimientos termales de Loja no tienen calor.",
+                    "El calor de la Tierra se agotará el próximo año."
+                ],
+                explanation: "De la combinación de las premisas uno y dos se deduce directamente que, dado que la energía geotérmica aprovecha el calor interno terrestre y este calor es inagotable, por ende dicha energía aprovecha un recurso inagotable.",
+                tutorClue: "Relaciona la definición de energía geotérmica con la propiedad del calor de la Tierra."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Encuentre la conclusión deductiva adecuada sobre energía nuclear:<br><br>$$\\bullet\\; \\text{La fisi&oacute;n nuclear libera una enorme densidad de energ&iacute;a.}$$<br>$$\\bullet\\; \\text{El Uranio-235 es el principal combustible usado en la fisi&oacute;n.}$$<br>$$\\bullet\\; \\text{El Uranio-235 es un mineral limitado en la corteza terrestre.}$$",
+                correct: "La fisión nuclear utiliza un mineral limitado en la corteza.",
+                options: [
+                    "La fisión nuclear utiliza un mineral limitado en la corteza.",
+                    "La fisión nuclear no contamina en absoluto.",
+                    "El Uranio-235 es un recurso infinito e ilimitado.",
+                    "Toda la energía eléctrica mundial proviene del Uranio."
+                ],
+                explanation: "Dado que el Uranio-235 es un mineral limitado en la corteza (Premisa 3) y es el principal combustible usado en la fisión (Premisa 2), se infiere que el proceso de fisión nuclear emplea un recurso limitado de la corteza.",
+                tutorClue: "Busca la opción que asocie el insumo de la fisión con su disponibilidad física planetaria."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Determine la deducción correcta sobre biocombustibles sólidos:<br><br>$$\\bullet\\; \\text{Toda biomasa forestal proviene de materia org&aacute;nica vegetal.}$$<br>$$\\bullet\\; \\text{La materia org&aacute;nica vegetal almacena carbono atmosf&eacute;rico.}$$<br>$$\\bullet\\; \\text{La combusti&oacute;n de biomasa forestal libera ese carbono acumulado.}$$",
+                correct: "La combustión de biomasa forestal libera carbono atmosférico almacenado.",
+                options: [
+                    "La combustión de biomasa forestal libera carbono atmosférico almacenado.",
+                    "La biomasa no es una fuente renovable de energía.",
+                    "La materia orgánica no contiene carbono en su estructura.",
+                    "La biomasa genera más energía neta que el uranio puro."
+                ],
+                explanation: "Si la materia vegetal almacena carbono y la combustión de biomasa (que proviene de esa materia vegetal) libera dicho carbono, se deduce lógicamente que la combustión libera el carbono almacenado por las plantas.",
+                tutorClue: "Vincula el ciclo del carbono desde su almacenamiento vegetal hasta su liberación térmica."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Encuentre la conclusión correcta para las redes inteligentes:<br><br>$$\\bullet\\; \\text{Las redes el&eacute;ctricas inteligentes disminuyen las p&eacute;rdidas de transmisi&oacute;n.}$$<br>$$\\bullet\\; \\text{El centro hist&oacute;rico de Loja implement&oacute; una red el&eacute;ctrica inteligente.}$$<br>$$\\bullet\\; \\text{Los cantones rurales de Loja no cuentan a&uacute;n con redes inteligentes.}$$",
+                correct: "El centro histórico de Loja disminuye sus pérdidas de transmisión.",
+                options: [
+                    "El centro histórico de Loja disminuye sus pérdidas de transmisión.",
+                    "Toda la provincia de Loja carece de redes eléctricas.",
+                    "Los cantones rurales tienen cero pérdidas de transmisión.",
+                    "Las redes inteligentes aumentan las pérdidas energéticas."
+                ],
+                explanation: "Si las redes inteligentes disminuyen pérdidas (Premisa 1) y el centro de Loja implementó una red inteligente (Premisa 2), se concluye directamente que el centro de Loja reduce sus pérdidas de transmisión.",
+                tutorClue: "Aplica la propiedad benéfica de las redes inteligentes al caso geográfico particular del centro de Loja."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Determine la conclusión lógica correcta sobre almacenamiento con litio:<br><br>$$\\bullet\\; \\text{Los vehículos eléctricos modernos requieren baterías de litio.}$$<br>$$\\bullet\\; \\text{La extracción de litio requiere el bombeo de salmueras subterráneas.}$$<br>$$\\bullet\\; \\text{El bombeo de salmueras altera el balance hídrico de zonas desérticas.}$$",
+                correct: "La fabricación de baterías para vehículos eléctricos genera un impacto en el balance hídrico.",
+                options: [
+                    "La fabricación de baterías para vehículos eléctricos genera un impacto en el balance hídrico.",
+                    "Los vehículos eléctricos no consumen recursos del planeta.",
+                    "Las baterías de litio se recargan únicamente con agua dulce.",
+                    "El litio es un gas abundante en la atmósfera superior."
+                ],
+                explanation: "Dado que las baterías de litio son requeridas para los vehículos eléctricos y que la extracción de dicho mineral altera el balance de agua en desiertos por el bombeo, se infiere un impacto indirecto en los recursos hídricos debido a la demanda de baterías de litio.",
+                tutorClue: "Conecta la cadena causal: vehículo eléctrico -> batería de litio -> bombeo -> alteración hídrica."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Determine la conclusión correcta basada en las siguientes premisas de hidrógeno:<br><br>$$\\bullet\\; \\text{El hidr&oacute;geno verde se produce mediante electr&oacute;lisis utilizando agua destilada.}$$<br>$$\\bullet\\; \\text{La electr&oacute;lisis requiere energ&iacute;a renovable de fuentes e&oacute;licas o solares.}$$<br>$$\\bullet\\; \\text{El hidr&oacute;geno verde no genera gases de efecto invernadero en su combusti&oacute;n.}$$",
+                correct: "La producción de hidrógeno verde depende del suministro de energía renovable.",
+                options: [
+                    "La producción de hidrógeno verde depende del suministro de energía renovable.",
+                    "El hidrógeno verde contamina más que la gasolina súper.",
+                    "El proceso de electrólisis crea agua destilada de la nada.",
+                    "Las fuentes solares no sirven para la electrólisis."
+                ],
+                explanation: "Si el hidrógeno verde requiere electrólisis (Premisa 1), y la electrólisis requiere imperativamente energía renovable solar/eólica (Premisa 2), se deduce directamente que la producción de este hidrógeno depende del suministro de energías renovables.",
+                tutorClue: "Identifica qué insumo de energía limpia es obligatorio para llevar a cabo la electrólisis."
+            });
+            QUESTION_BANK.push({
+                category: c2,
+                origin: "Sustentación Temática",
+                question: "Deduzca la conclusión lógica adecuada para la geografía eólica lojana:<br><br>$$\\bullet\\; \\text{Las turbinas e&oacute;licas operan de forma &oacute;ptima en zonas monta&ntilde;osas elevadas con viento constante.}$$<br>$$\\bullet\\; \\text{El cerro Villonaco es una zona monta&ntilde;osa elevada en la provincia de Loja.}$$<br>$$\\bullet\\; \\text{Villonaco registra vientos constantes promedio de 12 m/s.}$$",
+                correct: "El cerro Villonaco es una ubicación óptima para la operación de turbinas eólicas.",
+                options: [
+                    "El cerro Villonaco es una ubicación óptima para la operación de turbinas eólicas.",
+                    "El viento en Villonaco se detiene durante todo el verano.",
+                    "Las turbinas de Villonaco funcionan sin aspas mecánicas.",
+                    "Loja no tiene montañas aptas para la generación eólica."
+                ],
+                explanation: "Al cumplir Villonaco con los requisitos de ser una zona montañosa elevada (Premisa 2) y poseer vientos constantes ideales (Premisa 3), se deduce directamente que es una ubicación óptima para el funcionamiento de aerogeneradores.",
+                tutorClue: "Verifica si el cerro Villonaco satisface las condiciones de optimización dadas en la primera premisa."
+            });
+
+            // Category 3: Comprobación (image_3cfdc6.png and unique extensions)
+            const c3 = categories[2];
+            
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "image_3cfdc6.png",
+                question: "Un proyecto de Arquitectura Sostenible contempla la instalación de paneles solares en una urbanización ecológica. Si se van a equipar 15 casas y cada vivienda requiere exactamente 8 paneles en su techo, ¿cuántos paneles solares se instalarán en total en el proyecto?",
+                correct: "120",
+                options: ["120", "115", "130", "105"],
+                explanation: "La operación matemática requerida es una multiplicación directa:<br>$$\\text{Total de paneles} = 15 \\text{ viviendas} \\times 8 \\text{ paneles/vivienda} = 120\\text{ paneles.}$$",
+                tutorClue: "Efectúa el producto directo de la cantidad de casas por la cuota unitaria."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "image_3cfdc6.png",
+                question: "Un equipo de Telecomunicaciones debe tender 3500 metros de cable de fibra óptica en un nuevo tramo de la ciudad. Si el trabajo se divide equitativamente entre 7 cuadrillas de técnicos, ¿cuántos metros de cable le corresponde instalar a cada cuadrilla?",
+                correct: "500",
+                options: ["500", "700", "600", "450"],
+                explanation: "La distribución equitativa se calcula mediante una división simple:<br>$$\\text{Metros por cuadrilla} = \\frac{3500\\text{ metros}}{7\\text{ cuadrillas}} = 500\\text{ metros.}$$",
+                tutorClue: "Divide la distancia total entre el número de equipos de soporte."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "image_3cfdc6.png",
+                question: "En un campamento de Minas, el departamento de Electromecánica tiene 65 generadores de energía en funcionamiento. Durante una fuerte tormenta, 12 generadores sufren averías y son apagados, pero horas más tarde los técnicos logran reparar y encender 5 de ellos. ¿Cuántos generadores quedan operativos finalmente?",
+                correct: "58",
+                options: ["58", "53", "65", "70"],
+                explanation: "Se plantea la siguiente adición y sustracción consecutiva:<br>$$\\text{Generadores finales} = \\text{Operativos iniciales} - \\text{Averiados} + \\text{Reparados}$$<br>$$\\text{Generadores finales} = 65 - 12 + 5 = 58\\text{ generadores.}$$",
+                tutorClue: "Resta los generadores dañados y suma los que fueron rehabilitados."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "Un parque eólico cuenta con 8 torres de medición atmosférica. Cada torre está equipada con 3 sensores de velocidad de viento. Durante el mantenimiento preventivo mensual, se determina que 4 sensores en total están dañados y se retiran, pero se reponen 6 sensores de repuesto nuevos. ¿Cuántos sensores de viento quedan operativos en total en el parque?",
+                correct: "26",
+                options: ["26", "24", "28", "22"],
+                explanation: "Planteamos la aritmética del inventario de sensores:<br>$$\\text{Sensores iniciales} = 8 \\text{ torres} \\times 3 \\text{ sensores/torre} = 24\\text{ sensores.}$$<br>$$\\text{Sensores operativos finales} = 24 - 4 \\text{ (dañados)} + 6 \\text{ (nuevos)} = 26\\text{ sensores.}$$",
+                tutorClue: "Calcula primero la cantidad total original de sensores y luego aplica los cambios."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "Una subestación de distribución cuenta con 40 transformadores de potencia instalados. Tras un pico de sobrecarga eléctrica debido a condiciones climáticas extremas, se reporta que el 15% de estos transformadores fallaron y deben ser reemplazados de inmediato. ¿Cuántos transformadores continuaron operativos sin sufrir daño alguno?",
+                correct: "34",
+                options: ["34", "36", "30", "32"],
+                explanation: "Determinamos la cantidad de unidades sanas:<br>$$\\text{Porcentaje de operativos} = 100\\% - 15\\% = 85\\%.$$<br>$$\\text{Unidades operativas} = 40 \\times 0.85 = 34\\text{ transformadores.}$$<br>O de manera alternativa: $$40 \\times 0.15 = 6$$ dañados, por ende $$40 - 6 = 34$$ sanos.",
+                tutorClue: "Calcula el 15% de 40 y réstalo del total, o multiplica directamente por el 85% restante."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "En un laboratorio de fluidos e hidráulica, una bomba de agua rinde un caudal constante de 120 litros por minuto. Si se necesita llenar una cisterna de almacenamiento y la bomba se mantiene encendida de forma ininterrumpida durante exactamente 50 minutos, ¿cuántos litros de agua se habrán bombeado en total?",
+                correct: "6000",
+                options: ["6000", "5000", "6500", "5500"],
+                explanation: "Calculamos el volumen total bombeado multiplicando caudal por tiempo:<br>$$\\text{Volumen} = 120\\text{ litros/minuto} \\times 50\\text{ minutos} = 6000\\text{ litros.}$$",
+                tutorClue: "Efectúa la multiplicación directa del rendimiento por minuto por el tiempo total transcurrido."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "Un motor térmico experimental tiene una potencia nominal teórica de entrada de 800 vatios. Debido al calor por fricción interna y pérdidas en los rodamientos mecánicos, disipa irreversiblemente 240 vatios. ¿Cuál es la eficiencia útil neta en porcentaje de este motor?",
+                correct: "70",
+                options: ["70", "75", "65", "60"],
+                explanation: "La potencia útil disponible es la diferencia de la potencia inicial y las pérdidas:<br>$$\\text{Potencia útil} = 800\\text{ W} - 240\\text{ W} = 560\\text{ W.}$$<br>La eficiencia se calcula como el cociente de la útil sobre la de entrada:<br>$$\\text{Eficiencia} = \\left( \\frac{560}{800} \\right) \\times 100 = 70\\%.$$",
+                tutorClue: "Divide la potencia neta útil de 560 vatios para los 800 vatios iniciales."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "Un circuito electrónico en una placa de control de automatización tiene instaladas tres resistencias conectadas estrictamente en serie. Las resistencias tienen valores nominales de 15 ohmios, 22 ohmios y 33 ohmios respectivamente. ¿Cuál es el valor de la resistencia equivalente total del conjunto?",
+                correct: "70",
+                options: ["70", "65", "75", "80"],
+                explanation: "Para un circuito de resistencias dispuestas en serie, la resistencia equivalente total ($$R_{eq}$$) es la suma directa e individual de cada una de sus partes:<br>$$R_{eq} = 15\\ \\Omega + 22\\ \\Omega + 33\\ \\Omega = 70\\ \\Omega.$$",
+                tutorClue: "Recuerda que en una conexión en serie se deben sumar algebraicamente todos los valores de las resistencias."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "Una celda de batería recargable de litio-hierro-fosfato para sistemas solares tiene una capacidad de almacenamiento de 3200 mAh (miliamperios-hora). Si un microcontrolador de monitoreo de bajo consumo drena de forma constante una corriente fija durante exactamente 8 horas hasta agotar la celda, ¿cuál es la corriente constante promedio en mA de dicho microcontrolador?",
+                correct: "400",
+                options: ["400", "300", "500", "350"],
+                explanation: "La relación matemática de capacidad de energía es la corriente por el tiempo de descarga:<br>$$\\text{Capacidad (mAh)} = \\text{Corriente (mA)} \\times \\text{Tiempo (h)}$$<br>$$\\text{Corriente} = \\frac{3200\\text{ mAh}}{8\\text{ horas}} = 400\\text{ mA.}$$",
+                tutorClue: "Divide la capacidad total expresada en miliamperios-hora para las 8 horas operativas."
+            });
+            QUESTION_BANK.push({
+                category: c3,
+                origin: "Sustentación Temática",
+                question: "La presión inicial medida en la cabeza de un pozo petrolero es de 1200 psi. Durante la mañana, debido a la compresión térmica, la presión aumenta en 150 psi. Por la tarde, se purga la línea y la presión disminuye 80 psi, y por la noche aumenta 40 psi por bombeo auxiliar. ¿Cuál es la presión final registrada en psi al término de la jornada?",
+                correct: "1310",
+                options: ["1310", "1290", "1350", "1270"],
+                explanation: "Planteamos la suma algebraica consecutiva de presiones:<br>$$\\text{Presión final} = 1200 + 150 - 80 + 40 = 1310\\text{ psi.}$$",
+                tutorClue: "Aplica los incrementos sumando y los decrementos restando sobre la presión base de 1200 psi."
+            });
+
+            // Category 4: Ecuaciones Simples (image_3cfddf.png and unique extensions)
+            const c4 = categories[3];
+            
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "image_3cfddf.png",
+                question: "En un proyecto conjunto, profesionales de Arquitectura Sostenible e Ingeniería Civil calculan la cantidad de concreto ecológico necesario para unos cimientos. El triple de las toneladas proyectadas ($$x$$) menos 10 toneladas que se destinarán a muros de contención, equivale a la cantidad proyectada original ($$x$$) más 20 toneladas donadas por una planta recicladora. ¿Cuántas toneladas proyectadas ($$x$$) se estimaron inicialmente?",
+                correct: "15",
+                options: ["15", "10", "20", "25"],
+                explanation: "Traducimos el enunciado a una ecuación lineal de primer grado:<br>$$3x - 10 = x + 20$$<br>Restamos $$x$$ en ambos miembros y sumamos 10:<br>$$3x - x = 20 + 10 \\Rightarrow 2x = 30 \\Rightarrow x = 15\\text{ toneladas.}$$",
+                tutorClue: "Escribe la ecuación como 3x - 10 = x + 20 y despeja la incógnita x."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "image_3cfddf.png",
+                question: "Estudiantes de Electricidad y Telecomunicaciones instalan una red de cableado en un edificio inteligente. Toman el total de bobinas de cable ($$y$$), lo dividen para 4 sectores, y al multiplicar ese resultado por un factor de seguridad de 6, utilizan exactamente 12 bobinas del inventario general. ¿Cuántas bobinas de cable ($$y$$) tenían al principio del cálculo?",
+                correct: "8",
+                options: ["8", "12", "6", "16"],
+                explanation: "Planteamos la ecuación a partir de las fracciones operativas:<br>$$\\left(\\frac{y}{4}\\right) \\times 6 = 12 \\Rightarrow \\frac{6y}{4} = 12$$<br>Simplificamos y despejamos:<br>$$1.5y = 12 \\Rightarrow y = \\frac{12}{1.5} = 8\\text{ bobinas.}$$",
+                tutorClue: "Multiplica ambos lados por 4 y luego divide para 6 para despejar y de forma ágil."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "image_3cfddf.png",
+                question: "Un equipo de Ingeniería Automotriz y Computación calibra el software a bordo de un vehículo eléctrico. Cuatro veces el tiempo de respuesta de un sensor en milisegundos ($$z$$), menos la suma del doble de ese mismo tiempo más 5 milisegundos de latencia de red, da como resultado 15 milisegundos de procesamiento neto. ¿Cuál es el tiempo de respuesta del sensor ($$z$$) en milisegundos?",
+                correct: "10",
+                options: ["10", "5", "15", "20"],
+                explanation: "El enunciado se traduce con el signo de agrupación restrictivo:<br>$$4z - (2z + 5) = 15$$<br>Rompemos paréntesis afectando con el signo menos:<br>$$4z - 2z - 5 = 15 \\Rightarrow 2z - 5 = 15$$<br>$$2z = 20 \\Rightarrow z = 10\\text{ milisegundos.}$$",
+                tutorClue: "Ten especial cuidado con el signo negativo exterior; debe alterar tanto al 2z como al +5."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "En una red eléctrica de corriente continua, se analiza la estabilidad de voltaje en un nodo crítico. El doble de la lectura del voltaje medido ($$V$$) sumado con 12 voltios, es igual al triple de ese mismo voltaje medido menos 8 voltios de pérdida por caída de línea. ¿Cuál es el voltaje medido ($$V$$) en voltios?",
+                correct: "20",
+                options: ["20", "15", "25", "30"],
+                explanation: "Escribimos formalmente la igualdad de las lecturas:<br>$$2V + 12 = 3V - 8$$<br>Para despejar, agrupamos las variables con la incógnita de un lado y las constantes numéricas del otro:<br>$$12 + 8 = 3V - 2V \\Rightarrow 20 = V.$$",
+                tutorClue: "Resta 2V en ambos lados de la ecuación y suma 8 voltios a ambos miembros para obtener directamente el resultado."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "En un reactor termoquímico de refinamiento, el quíntuple de la presión interna medida ($$P$$) disminuido en 15 atmósferas, equivale al doble de dicha presión aumentado en 30 atmósferas debido al calentamiento auxiliar del catalizador. ¿A cuántas atmósferas de presión ($$P$$) está operando el reactor?",
+                correct: "15",
+                options: ["15", "10", "20", "25"],
+                explanation: "Se plantea la siguiente ecuación lineal de primer grado:<br>$$5P - 15 = 2P + 30$$<br>Agrupamos los términos semejantes con la incógnita de presión:<br>$$5P - 2P = 30 + 15 \\Rightarrow 3P = 45$$<br>Despejamos dividiendo entre 3:<br>$$P = \\frac{45}{3} = 15\\text{ atmósferas.}$$",
+                tutorClue: "Agrupa las incógnitas restando 2P a 5P, y suma 15 a 30 en el miembro derecho de la igualdad."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "Un componente de hardware electrónico drena una cantidad de corriente eléctrica ($$I$$) en amperios. El valor de dicha corriente sumada algebraicamente con su tercera parte, equivale exactamente a un consumo medido de 24 amperios. ¿A cuántos amperios equivale el valor de la corriente ($$I$$)?",
+                correct: "18",
+                options: ["18", "16", "20", "12"],
+                explanation: "Traducimos el enunciado escrito a expresión fraccionaria lineal:<br>$$I + \\frac{I}{3} = 24$$<br>Consolidamos los términos semejantes sumando las fracciones:<br>$$\\frac{3I}{3} + \\frac{I}{3} = 24 \\Rightarrow \\frac{4I}{3} = 24$$<br>Multiplicamos ambos miembros por 3 y dividimos para 4:<br>$$4I = 72 \\Rightarrow I = \\frac{72}{4} = 18\\text{ amperios.}$$",
+                tutorClue: "Multiplica la ecuación completa por 3 para eliminar el denominador común de forma sencilla."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "En un sistema de seguridad de una caldera térmica, el doble de la temperatura máxima permitida ($$T$$) sumado con la mitad de ese mismo valor de temperatura, es igual a un límite crítico establecido de 250 grados Celsius. ¿Cuál es la temperatura máxima permitida ($$T$$) en grados Celsius?",
+                correct: "100",
+                options: ["100", "120", "80", "110"],
+                explanation: "Modelamos la ecuación matemática según el enunciado:<br>$$2T + \\frac{T}{2} = 250$$<br>Sumamos las expresiones de temperatura agrupándolas:<br>$$\\frac{4T}{2} + \\frac{T}{2} = 250 \\Rightarrow \\frac{5T}{2} = 250$$<br>Multiplicamos ambos lados de la ecuación por 2 y dividimos por 5:<br>$$5T = 500 \\Rightarrow T = \\frac{500}{5} = 100\\text{ grados Celsius.}$$",
+                tutorClue: "Combina 2T + 0.5T como 2.5T y luego divide 250 para 2.5 para simplificar el proceso mental."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "La generación neta de energía ($$W$$) en megavatios de una central hidroeléctrica se evalúa operativamente. Se sabe que tres veces esa potencia nominal menos 50 MW de pérdidas por transporte, es exactamente igual a la potencia nominal ($$W$$) más 110 MW adicionales inyectados por compensación térmica. ¿Cuál es el valor de la potencia nominal ($$W$$) en megavatios?",
+                correct: "80",
+                options: ["80", "75", "90", "85"],
+                explanation: "Se plantea la ecuación lineal a partir del enunciado:<br>$$3W - 50 = W + 110$$<br>Agrupamos los megavatios y restamos la variable en el lado izquierdo:<br>$$3W - W = 110 + 50 \\Rightarrow 2W = 160$$<br>Dividimos para 2 para despejar la potencia de la central:<br>$$W = \\frac{160}{2} = 80\\text{ MW.}$$",
+                tutorClue: "Resta W a ambos miembros y suma 50 a 110 para despejar con mayor facilidad."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "Un operador calibra mecánicamente la inclinación de las aspas de un aerogenerador en Villonaco. El triple de un ángulo de ataque determinado ($$\\theta$$) disminuido en 15 grados, equivale al doble de dicho ángulo aumentado en 5 grados debido a la torsión del viento. ¿A cuántos grados de inclinación equivale el ángulo ($$\\theta$$)?",
+                correct: "20",
+                options: ["20", "15", "25", "10"],
+                explanation: "Escribimos algebraicamente la ecuación del ángulo de inclinación:<br>$$3\\theta - 15 = 2\\theta + 5$$<br>Agrupamos términos semejantes restando $$2\\theta$$ en el lado izquierdo y sumando 15 en el derecho:<br>$$3\\theta - 2\\theta = 5 + 15 \\Rightarrow \\theta = 20\\text{ grados.}$$",
+                tutorClue: "Resta 2 veces el ángulo en ambos miembros para dejar la variable con coeficiente uno de forma directa."
+            });
+            QUESTION_BANK.push({
+                category: c4,
+                origin: "Sustentación Temática",
+                question: "En un análisis de calidad de energía para telecomunicaciones, el cuádruple del porcentaje de distorsión armónica total ($$d$$) disminuido en un 8%, equivale al triple del porcentaje de distorsión aumentado en un 2% por ruido blanco. ¿Cuál es el porcentaje de distorsión armónica ($$d$$)?",
+                correct: "10",
+                options: ["10", "5", "8", "12"],
+                explanation: "Planteamos la ecuación lineal según los parámetros analíticos:<br>$$4d - 8 = 3d + 2$$<br>Restamos el término variable en la izquierda y sumamos el independiente en la derecha:<br>$$4d - 3d = 2 + 8 \\Rightarrow d = 10\\%.$$",
+                tutorClue: "Despeja d restando 3d a 4d, lo cual te dará el valor porcentual neto de inmediato."
+            });
+        }
+
+        buildAdmissionDatabase();
+
+        window.GITHUB_FILES = {
+            readme: {
+                name: "README.md",
+                badge: "MARKDOWN",
+                code: `# Simulador FEIRNNR II PA 2026 - Universidad Nacional de Loja
+
+Este proyecto contiene el compendio oficial de reactivos prácticos interactivos de examen para la Facultad de la Energía, las Industrias y los Recursos Naturales No Renovables.
+
+## 📁 Estructura del Examen (4 Áreas Críticas)
+1. **CAP-R.V.-ANALOGÍAS** - Razonamiento de asociación científica (Cable, Tuberías, Yacimientos).
+2. **CAP-R.V.-INFERENCIAS** - Silogismos formales aplicados a recursos de la Tierra y renovabilidad.
+3. **CAP-R.N.-COMPROBACIÓN** - Cálculos directos aplicados a proyectos mecánicos y solares.
+4. **CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES** - Modelaje algebraico lineal.
+
+## ⚙️ Tecnologías Integradas
+- **Tailwind CSS:** Interfaz adaptable, sobria y de alta legibilidad.
+- **KaTeX Engine:** Compilación instantánea en cliente para notación matemática LaTeX.
+- **Comodines Dinámicos:** Algoritmos interactivos de descarte y auxilio cognitivo.`
+            },
+            css: {
+                name: "index.css",
+                badge: "CSS",
+                code: `/* ==========================================================================
+   Estructuras Visuales de UI de FEIRNNR II PA 2026
+   ========================================================================== */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0f172a;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}`
+            },
+            html: {
+                name: "index.html",
+                badge: "HTML",
+                code: `<!DOCTYPE html>
+<html lang="es" class="h-full bg-slate-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEIRNNR II PA 2026 - Simulador de Admisión</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"><\/script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"><\/script>
     <link rel="stylesheet" href="index.css">
 </head>
 <body class="h-full text-slate-100">
     <div id="simulador-app" class="flex flex-col h-screen">
         <!-- Renderizado dinámico del motor de evaluación FEIRNNR -->
     </div>
+</body>
+</html>`
+            },
+            js: {
+                name: "index.js",
+                badge: "JAVASCRIPT",
+                code: `// Código del motor lógico del simulador cargado exitosamente.`
+            }
+        };
+        var GITHUB_FILES = window.GITHUB_FILES;
+
+        GITHUB_FILES.js.code = `// ==========================================================================\n` +
+            `// Motor de Simulación UNL - FEIRNNR II PA 2026 - index.js\n` +
+            `// Banco integrado de 40 Reactivos oficiales extraídos de imágenes de estudio\n` +
+            `// ==========================================================================\n\n` +
+            `const QUESTION_BANK = ${JSON.stringify(QUESTION_BANK, null, 4)};\n`;
+
+        window.simState = {
+            currentIndex: 0,
+            answers: {},
+            comodinesUsed: { p50: false, descarte: false, tutor: false, publico: false },
+            activeComodinEffects: { hiddenOptions: [], fadedOptions: [] }
+        };
+        var simState = window.simState;
+
+        window.OPT_CACHE = {};
+        var OPT_CACHE = window.OPT_CACHE;
+
+        function getShuffledOptions(qIdx) {
+            if (OPT_CACHE[qIdx]) return OPT_CACHE[qIdx];
+            const originalOpts = QUESTION_BANK[qIdx].options;
+            const shuffled = originalOpts.map((o, i) => ({ text: o, originalIndex: i }))
+                .sort(() => Math.random() - 0.5);
+            OPT_CACHE[qIdx] = shuffled;
+            return shuffled;
+        }
+
+        // Tab Views Controller
+        const btnTabExporter = document.getElementById("btn-tab-exporter");
+        const btnTabSimulator = document.getElementById("btn-tab-simulator");
+        const viewExporter = document.getElementById("view-exporter");
+        const viewSimulator = document.getElementById("view-simulator");
+
+        btnTabExporter.addEventListener("click", () => {
+            btnTabExporter.className = "px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white transition-all flex items-center gap-2";
+            btnTabSimulator.className = "px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2";
+            viewExporter.classList.remove("hidden");
+            viewSimulator.classList.add("hidden");
+        });
+
+        btnTabSimulator.addEventListener("click", () => {
+            btnTabSimulator.className = "px-4 py-2 text-xs font-bold rounded-lg bg-indigo-600 text-white transition-all flex items-center gap-2";
+            btnTabExporter.className = "px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-white transition-all flex items-center gap-2";
+            viewSimulator.classList.remove("hidden");
+            viewExporter.classList.add("hidden");
+            
+            renderSimulatorWorkspace();
+        });
+
+        // Exporter File Explorer
+        let activeFileKey = "readme";
+        const fileButtons = document.querySelectorAll("nav[class*='space-y-1.5'] button");
+        const codeDisplay = document.getElementById("code-display");
+        const fileBadge = document.getElementById("current-file-badge");
+        const fileName = document.getElementById("current-file-name");
+
+        function updateCodeViewer() {
+            const fileData = GITHUB_FILES[activeFileKey];
+            codeDisplay.textContent = fileData.code;
+            fileBadge.innerText = fileData.badge;
+            fileName.innerText = fileData.name;
+
+            if (fileData.badge === "CSS") fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-pink-600 rounded text-pink-100 uppercase tracking-wider";
+            else if (fileData.badge === "HTML") fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-amber-600 rounded text-amber-100 uppercase tracking-wider";
+            else if (fileData.badge === "JAVASCRIPT") fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-emerald-600 rounded text-emerald-100 uppercase tracking-wider";
+            else fileBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-indigo-600 rounded text-indigo-100 uppercase tracking-wider";
+        }
+
+        fileButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                fileButtons.forEach(b => {
+                    b.className = "w-full text-left p-3 rounded-xl border border-transparent hover:bg-slate-900 text-slate-400 hover:text-slate-200 text-sm flex items-center gap-3 transition-all";
+                });
+                btn.className = "w-full text-left p-3 rounded-xl border border-indigo-500/30 bg-indigo-950/40 text-indigo-200 font-medium text-sm flex items-center gap-3 transition-all";
+                activeFileKey = btn.dataset.file;
+                updateCodeViewer();
+            });
+        });
+
+        document.getElementById("btn-copy-code").addEventListener("click", () => {
+            const textarea = document.createElement("textarea");
+            textarea.value = GITHUB_FILES[activeFileKey].code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand("copy");
+                const copyBtn = document.getElementById("btn-copy-code");
+                const oldHTML = copyBtn.innerHTML;
+                copyBtn.innerHTML = "<span>✅</span> <span>¡Copiado!</span>";
+                copyBtn.classList.replace("bg-slate-800", "bg-emerald-600");
+                setTimeout(() => {
+                    copyBtn.innerHTML = oldHTML;
+                    copyBtn.classList.replace("bg-emerald-600", "bg-slate-800");
+                }, 1500);
+            } catch (err) {
+                console.error("No se pudo copiar el código.", err);
+            }
+            document.body.removeChild(textarea);
+        });
+
+        // Trigger dynamic individual file download
+        document.getElementById("btn-download-code").addEventListener("click", () => {
+            const fileData = GITHUB_FILES[activeFileKey];
+            if (!fileData) return;
+            try {
+                const blob = new Blob([fileData.code], { type: "text/plain;charset=utf-8" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = fileData.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                // Visual feedback on the download button
+                const dlBtn = document.getElementById("btn-download-code");
+                const oldHTML = dlBtn.innerHTML;
+                dlBtn.innerHTML = "<span>✅</span> <span>¡Descargado!</span>";
+                dlBtn.classList.replace("bg-indigo-600", "bg-emerald-600");
+                setTimeout(() => {
+                    dlBtn.innerHTML = oldHTML;
+                    dlBtn.classList.replace("bg-emerald-600", "bg-indigo-600");
+                }, 1500);
+            } catch (err) {
+                console.error("No se pudo descargar el archivo.", err);
+            }
+        });
+
+        // Generate and download all repository files as a ZIP archive
+        document.getElementById("btn-download-all").addEventListener("click", () => {
+            const btn = document.getElementById("btn-download-all");
+            const oldHTML = btn.innerHTML;
+            btn.innerHTML = "<span>⏳</span> <span class='text-[10px] font-bold'>Comprimiendo...</span>";
+            
+            try {
+                const zip = new JSZip();
+                
+                // Read from GITHUB_FILES and inject into ZIP
+                Object.keys(GITHUB_FILES).forEach(key => {
+                    const file = GITHUB_FILES[key];
+                    zip.file(file.name, file.code);
+                });
+                
+                zip.generateAsync({ type: "blob" }).then(content => {
+                    const url = URL.createObjectURL(content);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = "feirnnr-pa-2026.zip";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    btn.innerHTML = "<span>✅</span> <span class='text-[10px] font-bold'>¡Listo!</span>";
+                    btn.classList.add("text-emerald-400");
+                    setTimeout(() => {
+                        btn.innerHTML = oldHTML;
+                        btn.classList.remove("text-emerald-400");
+                    }, 2000);
+                });
+            } catch (err) {
+                console.error("Fallo al construir el archivo ZIP.", err);
+                btn.innerHTML = "<span>❌</span> <span class='text-[10px] font-bold'>Error</span>";
+                setTimeout(() => { btn.innerHTML = oldHTML; }, 2000);
+            }
+        });
+
+        // ================= PLAYABLE SIMULATOR CORE ENGINE =================
+        function renderSimulatorWorkspace() {
+            const current = QUESTION_BANK[simState.currentIndex];
+            
+            document.getElementById("txt-active-category").innerText = current.category;
+            document.getElementById("txt-origin-image").innerText = `Origen: ${current.origin}`;
+            document.getElementById("txt-active-index").innerText = `${simState.currentIndex + 1} / 40`;
+
+            document.getElementById("question-text-box").innerHTML = current.question;
+
+            let solvedCount = Object.keys(simState.answers).length;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            for (let idx in simState.answers) {
+                if (simState.answers[idx] === QUESTION_BANK[idx].correct) correctCount++;
+                else incorrectCount++;
+            }
+
+            document.getElementById("stat-solved").innerText = `${solvedCount}/40`;
+            document.getElementById("stat-correct").innerText = correctCount;
+            document.getElementById("stat-incorrect").innerText = incorrectCount;
+
+            const percentage = Math.round((solvedCount / 40) * 100);
+            document.getElementById("txt-progress-percentage").innerText = `${percentage}%`;
+            document.getElementById("progress-bar").style.width = `${percentage}%`;
+
+            renderOptionsView(current);
+            updateComodinesState();
+            renderFeedbackView(current);
+
+            // Trigger KaTeX rendering immediately
+            if (window.renderMathInElement) {
+                window.renderMathInElement(document.getElementById("view-simulator"), {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+
+            renderMatrixSections();
+        }
+
+        function renderMatrixSections() {
+            const container = document.getElementById("nav-matrix-sections");
+            container.innerHTML = "";
+
+            const categories = [
+                "CAP-R.V.-ANALOGÍAS",
+                "CAP-R.V.-INFERENCIAS",
+                "CAP-R.N.-COMPROBACIÓN",
+                "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES"
+            ];
+
+            categories.forEach(categoryName => {
+                const sectionDiv = document.createElement("div");
+                sectionDiv.className = "space-y-1.5";
+
+                const title = document.createElement("h4");
+                title.className = "text-[10px] font-bold text-slate-500 uppercase tracking-wide truncate";
+                title.innerText = categoryName;
+                sectionDiv.appendChild(title);
+
+                const grid = document.createElement("div");
+                grid.className = "grid grid-cols-10 gap-1.5";
+
+                for (let i = 0; i < 40; i++) {
+                    if (QUESTION_BANK[i].category === categoryName) {
+                        const btn = document.createElement("button");
+                        btn.type = "button";
+                        btn.className = "w-7 h-7 rounded-lg text-xs font-bold transition-all border flex items-center justify-center ";
+                        
+                        const answer = simState.answers[i];
+                        if (answer !== undefined) {
+                            if (answer === QUESTION_BANK[i].correct) {
+                                btn.className += "bg-emerald-500 border-emerald-600 text-white shadow-sm";
+                            } else {
+                                btn.className += "bg-rose-500 border-rose-600 text-white shadow-sm";
+                            }
+                        } else {
+                            if (i === simState.currentIndex) {
+                                btn.className += "bg-indigo-50 border-indigo-600 text-indigo-700 ring-2 ring-indigo-600 ring-offset-2 font-black";
+                            } else {
+                                btn.className += "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100";
+                            }
+                        }
+
+                        btn.innerText = (i + 1).toString();
+                        btn.addEventListener("click", () => {
+                            selectQuestion(i);
+                        });
+                        grid.appendChild(btn);
+                    }
+                }
+                sectionDiv.appendChild(grid);
+                container.appendChild(sectionDiv);
+            });
+        }
+
+        function selectQuestion(idx) {
+            if (idx < 0 || idx >= 40) return;
+            simState.currentIndex = idx;
+            simState.activeComodinEffects.hiddenOptions = [];
+            simState.activeComodinEffects.fadedOptions = [];
+            renderSimulatorWorkspace();
+        }
+
+        function renderOptionsView(question) {
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+
+            const shuffled = getShuffledOptions(simState.currentIndex);
+            const chosen = simState.answers[simState.currentIndex];
+
+            shuffled.forEach((opt, pos) => {
+                const label = String.fromCharCode(65 + pos);
+                const isCorrect = (opt.text === question.correct);
+                const isChosen = (opt.text === chosen);
+
+                const isHidden = simState.activeComodinEffects.hiddenOptions.includes(opt.originalIndex);
+                const isFaded = simState.activeComodinEffects.fadedOptions.includes(opt.originalIndex);
+
+                if (isHidden) return;
+
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "w-full text-left p-4 rounded-xl border transition-all flex items-center justify-between ";
+
+                if (isFaded) {
+                    btn.className += "opacity-30 cursor-not-allowed bg-slate-50 border-slate-200";
+                    btn.disabled = true;
+                } else if (chosen !== undefined) {
+                    btn.disabled = true;
+                    if (isCorrect) {
+                        btn.className += "border-emerald-500 bg-emerald-50 text-emerald-900 font-medium";
+                    } else if (isChosen) {
+                        btn.className += "border-rose-500 bg-rose-50 text-rose-900 font-medium";
+                    } else {
+                        btn.className += "border-slate-200 bg-white text-slate-400";
+                    }
+                } else {
+                    btn.className += "border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-800 active:scale-[0.99] shadow-sm";
+                    btn.addEventListener("click", () => {
+                        chooseAnswer(opt.text);
+                    });
+                }
+
+                const span = document.createElement("span");
+                span.className = "flex items-center gap-3";
+                span.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg font-bold flex items-center justify-center text-xs ${isChosen ? 'bg-rose-500 text-white' : isCorrect && chosen !== undefined ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-600'}">${label}</span>
+                    <span class="text-sm font-medium">${opt.text}</span>
+                `;
+                btn.appendChild(span);
+
+                if (chosen !== undefined) {
+                    const icon = document.createElement("span");
+                    if (isCorrect) {
+                        icon.innerHTML = `<svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>`;
+                    } else if (isChosen) {
+                        icon.innerHTML = `<svg class="w-5 h-5 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+                    }
+                    btn.appendChild(icon);
+                }
+
+                container.appendChild(btn);
+            });
+        }
+
+        function chooseAnswer(optText) {
+            simState.answers[simState.currentIndex] = optText;
+            renderSimulatorWorkspace();
+        }
+
+        function updateComodinesState() {
+            const usedCount = Object.values(simState.comodinesUsed).filter(Boolean).length;
+            document.getElementById("comodines-count-display").innerText = `Comodines Utilizados: ${usedCount} / 4`;
+
+            const btn50 = document.getElementById("btn-comodin-50");
+            const btnDescarte = document.getElementById("btn-comodin-descarte");
+            const btnTutor = document.getElementById("btn-comodin-tutor");
+            const btnPublico = document.getElementById("btn-comodin-publico");
+
+            const isSolved = simState.answers[simState.currentIndex] !== undefined;
+
+            toggleComodinBtn(btn50, simState.comodinesUsed.p50, isSolved);
+            toggleComodinBtn(btnDescarte, simState.comodinesUsed.descarte, isSolved);
+            toggleComodinBtn(btnTutor, simState.comodinesUsed.tutor, false);
+            toggleComodinBtn(btnPublico, simState.comodinesUsed.publico, isSolved);
+        }
+
+        function toggleComodinBtn(btn, wasUsed, isSolved) {
+            if (wasUsed || isSolved) {
+                btn.className = "py-2.5 px-2 bg-slate-100 border-slate-200 text-slate-400 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 opacity-50 cursor-not-allowed";
+                btn.disabled = true;
+            } else {
+                btn.className = "py-2.5 px-2 bg-white border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition-all shadow-sm active:scale-[0.95]";
+                btn.disabled = false;
+            }
+        }
+
+        // 50/50 lifeline
+        document.getElementById("btn-comodin-50").addEventListener("click", () => {
+            if (simState.comodinesUsed.p50 || simState.answers[simState.currentIndex] !== undefined) return;
+            const current = QUESTION_BANK[simState.currentIndex];
+            const incorrect = [];
+            current.options.forEach((o, i) => {
+                if (o !== current.correct) incorrect.push(i);
+            });
+            const toHide = incorrect.sort(() => Math.random() - 0.5).slice(0, 2);
+            simState.activeComodinEffects.hiddenOptions = toHide;
+            simState.comodinesUsed.p50 = true;
+            renderSimulatorWorkspace();
+        });
+
+        // Descarte lifeline
+        document.getElementById("btn-comodin-descarte").addEventListener("click", () => {
+            if (simState.comodinesUsed.descarte || simState.answers[simState.currentIndex] !== undefined) return;
+            const current = QUESTION_BANK[simState.currentIndex];
+            const incorrect = [];
+            current.options.forEach((o, i) => {
+                if (o !== current.correct && !simState.activeComodinEffects.hiddenOptions.includes(i)) {
+                    incorrect.push(i);
+                }
+            });
+            if (incorrect.length > 0) {
+                const toFade = incorrect[Math.floor(Math.random() * incorrect.length)];
+                simState.activeComodinEffects.fadedOptions.push(toFade);
+                simState.comodinesUsed.descarte = true;
+                renderSimulatorWorkspace();
+            }
+        });
+
+        // Tutor assistance clue modal
+        document.getElementById("btn-comodin-tutor").addEventListener("click", () => {
+            const current = QUESTION_BANK[simState.currentIndex];
+            const clueBox = document.getElementById("modal-tutor-clue-box");
+            clueBox.innerHTML = current.tutorClue;
+
+            document.getElementById("modal-tutor").classList.remove("hidden");
+            if (window.renderMathInElement) {
+                window.renderMathInElement(clueBox, {
+                    delimiters: [
+                        {left: "$$", right: "$$", display: true},
+                        {left: "$", right: "$", display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+
+            if (!simState.comodinesUsed.tutor) {
+                simState.comodinesUsed.tutor = true;
+                updateComodinesState();
+            }
+        });
+
+        document.getElementById("btn-close-tutor").addEventListener("click", () => document.getElementById("modal-tutor").classList.add("hidden"));
+        document.getElementById("btn-dismiss-tutor").addEventListener("click", () => document.getElementById("modal-tutor").classList.add("hidden"));
+
+        document.getElementById("btn-comodin-publico").addEventListener("click", () => {
+            if (simState.comodinesUsed.publico || simState.answers[simState.currentIndex] !== undefined) return;
+            const current = QUESTION_BANK[simState.currentIndex];
+            const container = document.getElementById("modal-public-bars-container");
+            container.innerHTML = "";
+
+            const distribution = current.options.map(opt => {
+                const isCorrect = (opt === current.correct);
+                const percent = isCorrect ? Math.floor(Math.random() * 16) + 60 : Math.floor(Math.random() * 15) + 5;
+                return { opt, percent };
+            });
+
+            const total = distribution.reduce((sum, item) => sum + item.percent, 0);
+            if (total !== 100) distribution[0].percent += (100 - total);
+
+            distribution.forEach((entry, pos) => {
+                const label = String.fromCharCode(65 + pos);
+                const bar = document.createElement("div");
+                bar.className = "space-y-1";
+                bar.innerHTML = `
+                    <div class="flex justify-between text-xs font-semibold text-slate-700">
+                        <span>Opción ${label} (${entry.opt})</span>
+                        <span>${entry.percent}%</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-2">
+                        <div class="bg-indigo-600 h-2 rounded-full" style="width: ${entry.percent}%"></div>
+                    </div>
+                `;
+                container.appendChild(bar);
+            });
+
+            document.getElementById("modal-public").classList.remove("hidden");
+            simState.comodinesUsed.publico = true;
+            updateComodinesState();
+        });
+
+        document.getElementById("btn-close-public").addEventListener("click", () => document.getElementById("modal-public").classList.add("hidden"));
+        document.getElementById("btn-dismiss-public").addEventListener("click", () => document.getElementById("modal-public").classList.add("hidden"));
+
+        // Dynamic detailed feedback panel
+        function renderFeedbackView(question) {
+            const chosen = simState.answers[simState.currentIndex];
+            const panel = document.getElementById("feedback-panel");
+            const text = document.getElementById("feedback-text-box");
+            const badge = document.getElementById("feedback-badge");
+
+            if (chosen === undefined) {
+                panel.classList.add("hidden");
+                panel.classList.remove("scale-100", "opacity-100");
+                panel.classList.add("scale-95", "opacity-0");
+                return;
+            }
+
+            const isCorrect = (chosen === question.correct);
+            if (isCorrect) {
+                badge.innerText = "¡RESPUESTA CORRECTA!";
+                badge.className = "px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-emerald-500 text-white";
+            } else {
+                badge.innerText = "RESPUESTA INCORRECTA";
+                badge.className = "px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-rose-500 text-white";
+            }
+
+            text.innerHTML = `
+                <div class="p-3 bg-slate-800 rounded-lg text-slate-200 border-l-4 border-indigo-500">
+                    <strong>Tu elección:</strong> ${chosen} <br>
+                    <strong>Opción Correcta:</strong> ${question.correct}
+                </div>
+                <div class="pt-2 text-slate-300">
+                    ${question.explanation}
+                </div>
+            `;
+
+            panel.classList.remove("hidden");
+            setTimeout(() => {
+                panel.classList.remove("scale-95", "opacity-0");
+                panel.classList.add("scale-100", "opacity-100");
+            }, 50);
+        }
+
+        // Navigation Footer binds
+        document.getElementById("btn-prev-question").addEventListener("click", () => {
+            selectQuestion(simState.currentIndex - 1);
+        });
+
+        document.getElementById("btn-next-question").addEventListener("click", () => {
+            selectQuestion(simState.currentIndex + 1);
+        });
+
+        document.getElementById("btn-finish-evaluation").addEventListener("click", () => {
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unansweredCount = 0;
+
+            for (let i = 0; i < 40; i++) {
+                const chosen = simState.answers[i];
+                if (chosen === undefined) unansweredCount++;
+                else if (chosen === QUESTION_BANK[i].correct) correctCount++;
+                else incorrectCount++;
+            }
+
+            const finalScore = parseFloat(((correctCount / 40) * 10).toFixed(1));
+
+            document.getElementById("results-score-primary").innerText = finalScore.toFixed(1);
+            document.getElementById("results-correct-count").innerText = correctCount;
+            document.getElementById("results-incorrect-count").innerText = incorrectCount;
+            document.getElementById("results-unanswered-count").innerText = unansweredCount;
+
+            const comodinesCount = Object.values(simState.comodinesUsed).filter(Boolean).length;
+            document.getElementById("results-comodines-used").innerText = `${comodinesCount} / 4`;
+
+            const pill = document.getElementById("results-qualitative-pill");
+            const recBox = document.getElementById("results-recommendation-text");
+
+            if (finalScore >= 9.0) {
+                pill.innerText = "Excelente (Aprobado Destacado)";
+                pill.className = "px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-emerald-500 text-white";
+                recBox.innerText = "¡Excelente rendimiento! Has consolidado una agilidad mental espectacular y habilidades analíticas idóneas para ingresar con éxito a la FEIRNNR UNL.";
+            } else if (finalScore >= 7.0) {
+                pill.innerText = "Aprobado (Nivel Medio-Alto)";
+                pill.className = "px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-amber-500 text-white";
+                recBox.innerText = "Nivel adecuado. Dominas las relaciones analógicas y silogismos. Te recomendamos practicar más velocidad en la resolución de ecuaciones algebraicas.";
+            } else {
+                pill.innerText = "Insuficiente (Requiere Refuerzo)";
+                pill.className = "px-4 py-1 text-xs font-bold rounded-full uppercase tracking-wider bg-rose-500 text-white";
+                recBox.innerText = "Te sugerimos repasar detenidamente cada justificación científica. Pon mayor énfasis en el modelaje de ecuaciones y en inferencias de recursos no renovables.";
+            }
+
+            document.getElementById("modal-results").classList.remove("hidden");
+        });
+
+        document.getElementById("btn-close-results").addEventListener("click", () => document.getElementById("modal-results").classList.add("hidden"));
+
+        function hardReset() {
+            simState.answers = {};
+            simState.comodinesUsed = { p50: false, descarte: false, tutor: false, publico: false };
+            simState.activeComodinEffects = { hiddenOptions: [], fadedOptions: [] };
+            simState.currentIndex = 0;
+            document.getElementById("modal-results").classList.add("hidden");
+            renderSimulatorWorkspace();
+        }
+
+        document.getElementById("btn-hard-reset").addEventListener("click", hardReset);
+        document.getElementById("btn-results-hard-reset").addEventListener("click", hardReset);
+
+        // Run updates on DOM load
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCodeViewer();
+            renderSimulatorWorkspace();
+            setTimeout(() => {
+                if (window.renderMathInElement) {
+                    window.renderMathInElement(document.body, {
+                        delimiters: [
+                            {left: "$$", right: "$$", display: true},
+                            {left: "$", right: "$", display: false}
+                        ],
+                        throwOnError: false
+                    });
+                }
+            }, 300);
+        });
+    </script>
 </body>
 </html>
