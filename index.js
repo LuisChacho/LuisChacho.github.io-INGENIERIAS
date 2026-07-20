@@ -1,267 +1,567 @@
-const TEMAS = [
-    "REDUCCIÓN DE EXPRESIONES", "PLANTEO DE ECUACIONES", "CÁLCULO DE EDADES",
-    "REGLA DE 3 COMPUESTA", "PORCENTAJES", "MEDIA ARITMÉTICA",
-    "RAZONES Y PROPORCIONES", "PERMUTACIONES", "PROPORCIONALIDAD"
+// ==========================================================================
+// Motor de Simulación UNL - FEIRNNR II PA 2026 - index.js
+// Banco integrado de 40 Reactivos oficiales extraídos de imágenes de estudio
+// ==========================================================================
+
+const QUESTION_BANK = [
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "image_3cfda5.png",
+        "question": "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$CABLE \\text{ es a } ELECTRICIDAD \\text{ como } TUBER\\acute{I}A \\text{ es a...}$$",
+        "correct": "AGUA",
+        "options": [
+            "AGUA",
+            "COBRE",
+            "PLÁSTICO",
+            "ENERGÍA"
+        ],
+        "explanation": "Un **cable** actúa como el canal conductor por el cual fluye la **electricidad**. Siguiendo la misma relación lógica de canal-contenido, una **tubería** es el canal físico diseñado para la conducción y flujo de fluidos, siendo el **agua** el ejemplo arquetípico.",
+        "tutorClue": "Piensa en el elemento que fluye o se transporta a través del conductor primario."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "image_3cfda5.png",
+        "question": "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$YACIMIENTO \\text{ es a } PETR\\acute{O}LEO \\text{ como } MINA \\text{ es a...}$$",
+        "correct": "MINERAL",
+        "options": [
+            "MINERAL",
+            "GASOLINA",
+            "POZO",
+            "MAQUINARIA"
+        ],
+        "explanation": "Un **yacimiento** es el depósito natural donde se encuentra y extrae el recurso energético del **petróleo**. Paralelamente, una **mina** es el lugar físico natural excavado con el fin de extraer recursos valiosos como el **mineral**.",
+        "tutorClue": "Relaciona el sitio geográfico natural de extracción con el material bruto extraído."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "image_3cfda5.png",
+        "question": "Lea detenidamente el enunciado y escoja la analogía adecuada.<br><br>$$RUEDA \\text{ es a } VEH\\acute{I}CULO \\text{ como } H\\acute{E}LICE \\text{ es a...}$$",
+        "correct": "AVIÓN",
+        "options": [
+            "AVIÓN",
+            "CARRETERA",
+            "MOTOR",
+            "TIMÓN"
+        ],
+        "explanation": "La **rueda** es el componente de tracción y propulsión esencial de un **vehículo** terrestre. Siguiendo la misma relación estructural y funcional, la **hélice** es el elemento de empuje y propulsión indispensable para el desplazamiento de un **avión**.",
+        "tutorClue": "Establece la relación de parte propulsora a medio de transporte."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-ANALOGÍAS",
+        "origin": "Sustentación Temática",
+        "question": "Escoja la analogía adecuada para el sector de la ingeniería:<br><br>$$BATER\\acute{I}A \\text{ es a } ALMACENAMIENTO \\text{ como } GENERADOR \\text{ es a...}$$",
+        "correct": "PRODUCCIÓN",
+        "options": [
+            "PRODUCCIÓN",
+            "CONSUMO",
+            "VOLTAJE",
+            "CABLE"
+        ],
+        "explanation": "La batería tiene como función principal el almacenamiento de energía, mientras que el generador tiene como fin su producción.",
+        "tutorClue": "Identifica la acción o función principal de cada máquina eléctrica."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "image_3cfdc2.png",
+        "question": "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{El petr&oacute;leo es un recurso no renovable.}$$<br>$$\\bullet\\; \\text{El carb&oacute;n es un recurso no renovable.}$$<br>$$\\bullet\\; \\text{El sol es una fuente de energ&iacute;a.}$$",
+        "correct": "El petróleo y el carbón son recursos no renovables.",
+        "options": [
+            "El petróleo y el carbón son recursos no renovables.",
+            "El sol es un recurso no renovable.",
+            "El carbón es una fuente de energía inagotable.",
+            "El petróleo se regenera rápidamente."
+        ],
+        "explanation": "La conclusión directa y lógicamente válida a partir de las premisas planteadas es la agrupación directa de los dos hidrocarburos: el petróleo y el carbón se clasifican estrictamente dentro de la categoría explícita de recursos no renovables.",
+        "tutorClue": "Evita añadir supuestos que no estén explícitamente declarados en las viñetas."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "image_3cfdc2.png",
+        "question": "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{El gas natural se extrae del subsuelo.}$$<br>$$\\bullet\\; \\text{La extracci&oacute;n de recursos del subsuelo requiere tecnolog&iacute;a.}$$<br>$$\\bullet\\; \\text{Las piedras no siempre requieren tecnolog&iacute;a para su obtenci&oacute;n.}$$",
+        "correct": "La extracción de gas natural requiere tecnología.",
+        "options": [
+            "La extracción de gas natural requiere tecnología.",
+            "Las piedras siempre se extraen del subsuelo profundo.",
+            "El gas natural no requiere tecnología para su extracción.",
+            "Todos los recursos del subsuelo son piedras."
+        ],
+        "explanation": "Utilizando la regla del silogismo clásico: Si el gas natural es un recurso extraído del subsuelo, y toda extracción de recursos del subsuelo requiere indefectiblemente tecnología, se concluye formalmente que **la extracción de gas natural requiere tecnología**.",
+        "tutorClue": "Combina la primera y la segunda premisa para deducir la conclusión del gas natural."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "image_3cfdc2.png",
+        "question": "Lea detenidamente el enunciado y encuentre la conclusión correcta.<br><br>$$\\bullet\\; \\text{La energ&iacute;a solar proviene del sol.}$$<br>$$\\bullet\\; \\text{El sol es una fuente de energ&iacute;a natural.}$$<br>$$\\bullet\\; \\text{La energ&iacute;a solar no se agota.}$$",
+        "correct": "La energía solar proviene de una fuente natural que no se agota.",
+        "options": [
+            "La energía solar proviene de una fuente natural que no se agota.",
+            "El sol se apagará en los próximos años de manera súbita.",
+            "Toda la energía natural en el universo es inagotable.",
+            "La energía solar proviene de un recurso no renovable."
+        ],
+        "explanation": "Al consolidar lógicamente las tres verdades: La energía solar proviene del sol (1), el sol es natural (2) y no se agota (3), concluimos directamente que la energía solar proviene de una fuente natural e inagotable.",
+        "tutorClue": "Integra las tres cualidades afirmadas del sol y de su energía."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.V.-INFERENCIAS",
+        "origin": "Sustentación Temática",
+        "question": "Encuentre la conclusión deductiva adecuada:<br><br>$$\\bullet\\; \\text{Toda planta hidroel&eacute;ctrica utiliza agua.}$$<br>$$\\bullet\\; \\text{La central de Paute es una planta hidroel&eacute;ctrica.}$$",
+        "correct": "La central de Paute utiliza agua.",
+        "options": [
+            "La central de Paute utiliza agua.",
+            "Toda fuente de agua produce electricidad.",
+            "Paute es una central de gas natural.",
+            "Paute no requiere recursos hídricos."
+        ],
+        "explanation": "La deducción es inmediata aplicando modus ponens clásico sobre la pertenencia de Paute a la categoría de hidroeléctricas.",
+        "tutorClue": "Aplica la regla general a este caso particular."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "image_3cfdc6.png",
+        "question": "Un proyecto de Arquitectura Sostenible contempla la instalación de paneles solares en una urbanización ecológica. Si se van a equipar 15 casas y cada vivienda requiere exactamente 8 paneles en su techo, ¿cuántos paneles solares se instalarán en total en el proyecto?",
+        "correct": "120",
+        "options": [
+            "120",
+            "115",
+            "130",
+            "105"
+        ],
+        "explanation": "La operación matemática requerida es una multiplicación directa:<br>$$\\text{Total de paneles} = 15 \\text{ viviendas} \\times 8 \\text{ paneles/vivienda} = 120\\text{ paneles.}$$",
+        "tutorClue": "Efectúa el producto directo de la cantidad de casas por la cuota unitaria."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "image_3cfdc6.png",
+        "question": "Un equipo de Telecomunicaciones debe tender 3500 metros de cable de fibra óptica en un nuevo tramo de la ciudad. Si el trabajo se divide equitativamente entre 7 cuadrillas de técnicos, ¿cuántos metros de cable le corresponde instalar a cada cuadrilla?",
+        "correct": "500",
+        "options": [
+            "500",
+            "700",
+            "600",
+            "450"
+        ],
+        "explanation": "La distribución equitativa se calcula mediante una división simple:<br>$$\\text{Metros por cuadrilla} = \\frac{3500\\text{ metros}}{7\\text{ cuadrillas}} = 500\\text{ metros.}$$",
+        "tutorClue": "Divide la distancia total entre el número de equipos de soporte."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "image_3cfdc6.png",
+        "question": "En un campamento de Minas, el departamento de Electromecánica tiene 65 generadores de energía en funcionamiento. Durante una fuerte tormenta, 12 generadores sufren averías y son apagados, pero horas más tarde los técnicos logran reparar y encender 5 de ellos. ¿Cuántos generadores quedan operativos finalmente?",
+        "correct": "58",
+        "options": [
+            "58",
+            "53",
+            "65",
+            "70"
+        ],
+        "explanation": "Se plantea la siguiente adición y sustracción consecutiva:<br>$$\\text{Generadores finales} = \\text{Operativos iniciales} - \\text{Averiados} + \\text{Reparados}$$<br>$$\\text{Generadores finales} = 65 - 12 + 5 = 58\\text{ generadores.}$$",
+        "tutorClue": "Resta los generadores dañados y suma los que fueron rehabilitados."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-COMPROBACIÓN",
+        "origin": "Sustentación Temática",
+        "question": "En un laboratorio de fluidos, se bombean de forma constante 40 litros por minuto. ¿Cuántos litros se habrán bombeado transcurridos exactamente 12 minutos?",
+        "correct": "480",
+        "options": [
+            "480",
+            "400",
+            "500",
+            "440"
+        ],
+        "explanation": "Multiplicamos el caudal constante por el intervalo de tiempo:<br>$$40\\text{ L/min} \\times 12\\text{ min} = 480\\text{ litros.}$$",
+        "tutorClue": "Aplica producto directo: caudal por tiempo."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "image_3cfddf.png",
+        "question": "En un proyecto conjunto, profesionales de Arquitectura Sostenible e Ingeniería Civil calculan la cantidad de concreto ecológico necesario para unos cimientos. El triple de las toneladas proyectadas ($$x$$) menos 10 toneladas que se destinarán a muros de contención, equivale a la cantidad proyectada original ($$x$$) más 20 toneladas donadas por una planta recicladora. ¿Cuántas toneladas proyectadas ($$x$$) se estimaron inicialmente?",
+        "correct": "15",
+        "options": [
+            "15",
+            "10",
+            "20",
+            "25"
+        ],
+        "explanation": "Traducimos el enunciado a una ecuación lineal de primer grado:<br>$$3x - 10 = x + 20$$<br>Restamos $$x$$ en ambos miembros y sumamos 10:<br>$$3x - x = 20 + 10 \\Rightarrow 2x = 30 \\Rightarrow x = 15\\text{ toneladas.}$$",
+        "tutorClue": "Escribe la ecuación como 3x - 10 = x + 20 y despeja la incógnita x."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "image_3cfddf.png",
+        "question": "Estudiantes de Electricidad y Telecomunicaciones instalan una red de cableado en un edificio inteligente. Toman el total de bobinas de cable ($$y$$), lo dividen para 4 sectores, y al multiplicar ese resultado por un factor de seguridad de 6, utilizan exactamente 12 bobinas del inventario general. ¿Cuántas bobinas de cable ($$y$$) tenían al principio del cálculo?",
+        "correct": "8",
+        "options": [
+            "8",
+            "12",
+            "6",
+            "16"
+        ],
+        "explanation": "Planteamos la ecuación a partir de las fracciones operativas:<br>$$\\left(\\frac{y}{4}\\right) \\times 6 = 12 \\Rightarrow \\frac{6y}{4} = 12$$<br>Simplificamos y despejamos:<br>$$1.5y = 12 \\Rightarrow y = \\frac{12}{1.5} = 8\\text{ bobinas.}$$",
+        "tutorClue": "Multiplica ambos lados por 4 y luego divide para 6 para despejar y de forma ágil."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "image_3cfddf.png",
+        "question": "Un equipo de Ingeniería Automotriz y Computación calibra el software a bordo de un vehículo eléctrico. Cuatro veces el tiempo de respuesta de un sensor en milisegundos ($$z$$), menos la suma del doble de ese mismo tiempo más 5 milisegundos de latencia de red, da como resultado 15 milisegundos de procesamiento neto. ¿Cuál es el tiempo de respuesta del sensor ($$z$$) en milisegundos?",
+        "correct": "10",
+        "options": [
+            "10",
+            "5",
+            "15",
+            "20"
+        ],
+        "explanation": "El enunciado se traduce con el signo de agrupación restrictivo:<br>$$4z - (2z + 5) = 15$$<br>Rompemos paréntesis afectando con el signo menos:<br>$$4z - 2z - 5 = 15 \\Rightarrow 2z - 5 = 15$$<br>$$2z = 20 \\Rightarrow z = 10\\text{ milisegundos.}$$",
+        "tutorClue": "Ten especial cuidado con el signo negativo exterior; debe alterar tanto al 2z como al +5."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    },
+    {
+        "category": "CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES",
+        "origin": "Sustentación Temática",
+        "question": "Determine el valor de la incógnita en la siguiente ecuación de control industrial:<br><br>$$5u - 8 = 3u + 12$$",
+        "correct": "10",
+        "options": [
+            "10",
+            "8",
+            "12",
+            "5"
+        ],
+        "explanation": "Ecuación: $$5u - 3u = 12 + 8 \\Rightarrow 2u = 20 \\Rightarrow u = 10$$.",
+        "tutorClue": "Agrupa las incógnitas a la izquierda y las constantes a la derecha."
+    }
 ];
-
-let bancoPreguntas = [];
-let progresoExamen = {};
-let trackingComodines = {};
-let idPreguntaActiva = 1;
-
-function generarBanco100Ejercicios() {
-    for (let i = 1; i <= 100; i++) {
-        let tema = TEMAS[(i - 1) % TEMAS.length];
-        let preg = "", corr = "", inc = [], just = "", pist = "";
-
-        // Variables con variaciones numéricas controladas sin duplicados estructurales
-        let varA = i * 2 + 3;
-        let varB = i + 4;
-
-        switch (tema) {
-            case "REDUCCIÓN DE EXPRESIONES":
-                // Se calibró para el nivel exacto solicitado de leyes de exponentes con bases x, y, w
-                let expX = (i % 3) + 2; 
-                let expW = (i % 2) + 4;
-                preg = `Simplifique la siguiente expresión aplicando las leyes de los exponentes para el reactivo nº ${i}:<br><br>$$\\frac{x^{e} y^{-1/3} w^{-3}}{x^{-${expX}} w^{-${expW}} y^{-1/2}}$$ donde el exponente entero de x arriba es $e = ${expX}$.`;
-                
-                // Resultado teórico simplificado para esa estructura exacta
-                corr = `$x^{${expX * 2}} y^{1/6} w^{${expW - 3}}$`;
-                inc = [
-                    `$x^{0} y^{-5/6} w^{${expW + 3}}$`,
-                    `$x^{${expX}} y^{1/2} w^{-6}$`,
-                    `$x^{${expX * 2}} y^{-1/6} w^{1}$`
-                ];
-                just = `Para simplificar, restamos los exponentes del numerador menos el denominador: <br> Para $x$: $${expX} - (-${expX}) = ${expX * 2}$.<br> Para $y$: $-\\frac{1}{3} - (-\\frac{1}{2}) = \\frac{1}{6}$.<br> Para $w$: $-3 - (-${expW}) = ${expW - 3}$. Resultado: $x^{${expX * 2}} y^{1/6} w^{${expW - 3}}$.`;
-                pist = "Recuerde aplicar la propiedad de la división de potencias de igual base: $\\frac{a^m}{a^n} = a^{m-n}$.";
-                break;
-
-            case "PLANTEO DE ECUACIONES":
-                let totalSacos = varA * 7;
-                preg = `En un almacén de distribución automatizado, el contenedor beta contiene el doble de sacos que el contenedor alfa, y el contenedor gamma almacena el cuádruple del contenedor beta. Si la auditoría registra un inventario neto de $${totalSacos}$ sacos entre los tres sectores, ¿cuántos sacos almacena específicamente el contenedor alfa?`;
-                corr = `$${varA}$ sacos`;
-                inc = [`$${varA * 2}$ sacos`, `$${varA * 4}$ sacos`, `$${Math.floor(totalSacos / 3)}$ sacos`];
-                just = `Definiendo el contenedor alfa como $x$, el modelo lineal es: $x + 2x + 8x = ${totalSacos} \\Rightarrow 11x = ${totalSacos} \\Rightarrow x = ${varA}$.`;
-                pist = "Plantee la ecuación sumando las proporciones relativas: $x + 2x + 8x = Total$.";
-                break;
-
-            case "CÁLCULO DE EDADES":
-                let factorEdad = i + 5;
-                let edadAnalista = factorEdad + 15;
-                let edadDirector = edadAnalista * 2;
-                let sumaComprobacion = (edadDirector - factorEdad) + (edadAnalista - factorEdad);
-                preg = `La edad de un astrofísico es actualmente el doble de la de su asistente de campo. Si hace $${factorEdad}$ años la suma de sus respectivas edades era de $${sumaComprobacion}$ años, determine la edad actual del asistente.`;
-                corr = `$${edadAnalista}$ años`;
-                inc = [`$${edadAnalista - 5}$ años`, `$${edadAnalista + 5}$ años`, `$${factorEdad * 2}$ años`];
-                just = `Estableciendo la ecuación en el pasado: $(2x - ${factorEdad}) + (x - ${factorEdad}) = ${sumaComprobacion} \\Rightarrow 3x - ${factorEdad * 2} = ${sumaComprobacion} \\Rightarrow 3x = ${sumaComprobacion + factorEdad * 2} \\Rightarrow x = ${edadAnalista}$.`;
-                pist = "Reste la cantidad de años transcurridos a ambas variables individuales antes de realizar la suma.";
-                break;
-
-            case "REGLA DE 3 COMPUESTA":
-                let operarios = varB;
-                let horas = 6 + (i % 4);
-                let eficienciaBase = 100 + (i * 5);
-                preg = `Un equipo de $${operarios}$ técnicos trabajando $${horas}$ horas diarias logran calibrar un lote de servidores con un rendimiento indexado de $${eficienciaBase}$ unidades. ¿Cuántas unidades calibrarán $${operarios * 2}$ técnicos si optimizan su jornada a $${horas + 2}$ horas diarias bajo las mismas condiciones de entorno?`;
-                let prodFinal = Math.floor((eficienciaBase * (operarios * 2) * (horas + 2)) / (operarios * horas));
-                corr = `$${prodFinal}$ unidades`;
-                inc = [`$${prodFinal - varB}$ unidades`, `$${prodFinal * 2}$ unidades`, `$${Math.floor(prodFinal / 2)}$ unidades`];
-                just = `Aplicando la proporcionalidad compuesta: $\\frac{O_1 \\cdot H_1}{P_1} = \\frac{O_2 \\cdot H_2}{P_2}$. Despejando la incógnita de producción resulta en un total exacto de $${prodFinal}$ unidades.`;
-                pist = "Las variables operarios y horas mantienen una relación directamente proporcional con la producción.";
-                break;
-
-            case "PORCENTAJES":
-                let costoInicial = 250 + (i * 15);
-                let dsc = 10 + (i % 3) * 5;
-                let IVA = 12;
-                let despuesDsc = costoInicial * (1 - dsc/100);
-                let netoFinal = despuesDsc * (1 + IVA/100);
-                preg = `El presupuesto base para el desarrollo de un componente de software especializado es de $$\\$${costoInicial}$$. Si se otorga un descuento comercial de contingencia del $${dsc}\\%$ pero posteriormente se indexa un recargo fiscal obligatorio del $${IVA}\\%$, ¿cuál es el costo neto final de la transacción?`;
-                corr = `$\\$${netoFinal.toFixed(2)}$`;
-                inc = [`$\\$${(costoInicial * 0.95).toFixed(2)}$`, `$\\$${costoInicial.toFixed(2)}$`, `$\\$${(costoInicial * (1 - (dsc-IVA)/100)).toFixed(2)}$`];
-                just = `Cálculo geométrico encadenado: $${costoInicial} \\cdot (1 - 0.${dsc}) \\cdot (1 + 0.${IVA}) = ${netoFinal.toFixed(2)}$.`;
-                pist = "Aplique los factores multiplicativos de forma sucesiva; evite sumar o restar los porcentajes directamente.";
-                break;
-
-            case "MEDIA ARITMÉTICA":
-                let n1 = 10 + i;
-                let n2 = 15 + i * 2;
-                let n3 = 20 + i * 3;
-                let promDeseado = n3 + 5;
-                let sumaTres = n1 + n2 + n3;
-                let n4 = (promDeseado * 4) - sumaTres;
-                preg = `Los valores de conductividad registrados en tres celdas electroquímicas son $${n1}\\text{ mS}$, $${n2}\\text{ mS}$ y $${n3}\\text{ mS}$. Al añadir una cuarta celda testigo, la media aritmética global se eleva exactamente a $${promDeseado}\\text{ mS}$. Calcule la magnitud de la cuarta muestra.`;
-                corr = `$${n4}\\text{ mS}$`;
-                inc = [`$${n4 - 5}\\text{ mS}$`, `$${n4 + 10}\\text{ mS}$`, `$${promDeseado}\\text{ mS}$`];
-                just = `La suma acumulada de los tres primeros elementos es $${sumaTres}$. Para que el promedio de 4 elementos sea $${promDeseado}$, la sumatoria total obligatoria debe ser $4 \\cdot ${promDeseado} = ${promDeseado * 4}$. Por sustracción: $${promDeseado * 4} - ${sumaTres} = ${n4}$.`;
-                pist = "Multiplique la nueva media por el número total de muestras (4) para deducir la masa del dato faltante.";
-                break;
-
-            case "RAZONES Y PROPORCIONES":
-                let pA = 3 + (i % 3);
-                let pB = 5 + (i % 2);
-                let factorVol = i + 4;
-                let volTotal = (pA + pB) * factorVol;
-                preg = `La relación de volumen entre el reactivo reactante ácido y el destilado base dentro de una solución química balanceada responde a la razón geométrica de $$\\frac{${pA}}{${pB}}$$ Si el volumen neto de la mezcla homogénea final en el reactor alcanza los $${volTotal}\\text{ mL}$, ¿cuántos mililitros componen la sustancia de mayor volumen?`;
-                corr = `$${pB * factorVol}\\text{ mL}$`;
-                inc = [`$${pA * factorVol}\\text{ mL}$`, `$${volTotal}\\text{ mL}$`, `$${factorVol}\\text{ mL}$`];
-                just = `Planteamiento de la constante de proporcionalidad $k$: $${pA}k + ${pB}k = ${volTotal} \\Rightarrow ${pA + pB}k = ${volTotal} \\Rightarrow k = ${factorVol}$. El componente mayoritario es $${pB}k = ${pB} \\cdot ${factorVol} = ${pB * factorVol}$.`;
-                pist = "Determine la constante $k$ dividiendo el volumen absoluto entre la suma de las partes de la razón.";
-                break;
-
-            case "PERMUTACIONES":
-                let elementos = 5 + (i % 6);
-                preg = `¿De cuántas formas distintas, lineales y secuenciales se pueden ordenar e instalar $${elementos}$ módulos de memoria RAM de arquitecturas de procesamiento independientes en los slots maestros correlativos de un servidor de alta gama?`;
-                let factorial = 1;
-                for(let f=1; f<=elementos; f++) factorial *= f;
-                corr = `$${factorial}$ formas`;
-                inc = [`$${elementos * 2}$ formas`, `$${factorial - 24}$ formas`, `$${elementos}$ formas`];
-                just = `Dado que se deben ordenar la totalidad de los elementos en posiciones relativas diferenciadas, se aplica una permutación ordinaria: $P_{${elementos}} = ${elementos}! = ${factorial}$.`;
-                pist = "Cuando intervienen todos los elementos del conjunto y el orden posicional es un factor diferenciador, aplique factoriales.";
-                break;
-
-            default: 
-                let distBase = 30 + i;
-                let tiempoBase = 2;
-                let nuevaDist = distBase * 3;
-                preg = `Un vehículo de prueba no tripulado se desplaza con velocidad constante y uniforme, cubriendo una distancia de $${distBase}\\text{ km}$ en un intervalo temporal controlado de $${tiempoBase}\\text{ horas}$. Manteniendo exactamente las mismas constantes cinemáticas, ¿en cuánto tiempo completará una trayectoria extendida de $${nuevaDist}\\text{ km}$?`;
-                corr = `$6\\text{ horas}$`;
-                inc = [`$4\\text{ horas}$`, `$8\\text{ horas}$`, `$5\\text{ horas}$`];
-                just = `La relación espacio-tiempo a velocidad constante es lineal y directamente proporcional: $\\frac{d_1}{t_1} = \\frac{d_2}{t_2} \\Rightarrow \\frac{${distBase}}{2} = \\frac{${nuevaDist}}{t_2}$. Al triplicarse la distancia, el tiempo escalar se triplica proporcionalmente.`;
-                pist = "Establezca una relación de proporcionalidad directa (una regla de tres simple lineal).";
-        }
-        bancoPreguntas.push({ id: i, cat: tema, preg: preg, corr: corr, inc: inc, just: just, pist: pist });
-    }
-}
-
-function mezclarArreglo(arr) {
-    let copia = [...arr];
-    for (let i = copia.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copia[i], copia[j]] = [copia[j], copia[i]];
-    }
-    return copia;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    generarBanco100Ejercicios();
-    renderizarMatrizNavegacion();
-    cargarPregunta(1);
-});
-
-function renderizarMatrizNavegacion() {
-    const grid = document.getElementById("matrixGrid");
-    grid.innerHTML = "";
-    for (let i = 1; i <= 100; i++) {
-        const item = document.createElement("div");
-        item.className = "matrix-item";
-        item.id = `node-${i}`;
-        item.innerText = i.toString().padStart(2, '0');
-        item.onclick = () => cargarPregunta(i);
-        grid.appendChild(item);
-    }
-}
-
-function cargarPregunta(id) {
-    idPreguntaActiva = id;
-    const q = bancoPreguntas.find(p => p.id === id);
-    
-    document.querySelectorAll(".matrix-item").forEach(n => n.classList.remove("focused-node"));
-    document.getElementById(`node-${id}`).classList.add("focused-node");
-    document.getElementById("wildcardOutput").classList.add("hidden");
-
-    document.getElementById("questionIdLabel").innerText = `Reactivo #${id.toString().padStart(3, '0')}`;
-    document.getElementById("questionCategory").innerText = q.cat;
-    document.getElementById("questionText").innerHTML = q.preg;
-
-    if (!trackingComodines[id]) trackingComodines[id] = { usado5050: false, usadoTutor: false };
-    document.getElementById("btn5050").disabled = trackingComodines[id].usado5050 || progresoExamen[id];
-    document.getElementById("btnTutor").disabled = trackingComodines[id].usadoTutor || progresoExamen[id];
-
-    const container = document.getElementById("optionsContainer");
-    container.innerHTML = "";
-
-    if (!q.opcionesMuestreo) {
-        let opts = [{ t: q.corr, c: true }, ...q.inc.map(txt => ({ t: txt, c: false }))];
-        q.opcionesMuestreo = mezclarArreglo(opts);
-    }
-
-    q.opcionesMuestreo.forEach((opt, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "option-node";
-        btn.innerHTML = `<strong>${String.fromCharCode(65 + idx)}</strong> &nbsp;&nbsp; ${opt.t}`;
-        btn.dataset.isCorrect = opt.c;
-        btn.dataset.idx = idx;
-        btn.onclick = () => verificarRespuesta(btn, opt.c, id);
-        container.appendChild(btn);
-    });
-
-    if (progresoExamen[id]) {
-        mostrarResultadoBloqueado(id);
-    } else {
-        document.getElementById("feedbackPanel").classList.add("hidden");
-    }
-
-    if (window.MathJax && window.MathJax.typeset) {
-        MathJax.typeset();
-    }
-}
-
-function verificarRespuesta(btn, esCorrecto, id) {
-    if (progresoExamen[id]) return;
-    progresoExamen[id] = { idxSeleccionado: btn.dataset.idx, estado: esCorrecto ? "OK" : "ERR" };
-    document.getElementById(`node-${id}`).className = esCorrecto ? "matrix-item node-correct" : "matrix-item node-incorrect";
-    
-    let correctas = Object.values(progresoExamen).filter(v => v.estado === "OK").length;
-    let incorrectas = Object.values(progresoExamen).filter(v => v.estado === "ERR").length;
-    document.getElementById("globalCorrect").innerText = correctas;
-    document.getElementById("globalIncorrect").innerText = incorrectas;
-
-    mostrarResultadoBloqueado(id);
-}
-
-function mostrarResultadoBloqueado(id) {
-    const r = progresoExamen[id];
-    const q = bancoPreguntas.find(p => p.id === id);
-    const botones = document.querySelectorAll("#optionsContainer .option-node");
-
-    botones.forEach(b => {
-        b.disabled = true;
-        if (b.dataset.isCorrect === "true") b.classList.add("state-correct");
-        if (b.dataset.idx === r.idxSeleccionado && b.dataset.isCorrect === "false") b.classList.add("state-incorrect");
-    });
-
-    document.getElementById("feedbackPanel").classList.remove("hidden");
-    document.getElementById("feedbackText").innerHTML = q.just;
-    document.getElementById("btn5050").disabled = true;
-    document.getElementById("btnTutor").disabled = true;
-
-    if (window.MathJax && window.MathJax.typeset) {
-        MathJax.typeset();
-    }
-}
-
-function ejecutarComodina5050() {
-    trackingComodines[idPreguntaActiva].usado5050 = true;
-    document.getElementById("btn5050").disabled = true;
-    const btns = document.querySelectorAll("#optionsContainer .option-node");
-    let removidos = 0;
-    btns.forEach(b => {
-        if (b.dataset.isCorrect === "false" && removidos < 2) {
-            b.classList.add("state-hidden");
-            removidos++;
-        }
-    });
-}
-
-function ejecutarComodinarTutor() {
-    trackingComodines[idPreguntaActiva].usadoTutor = true;
-    document.getElementById("btnTutor").disabled = true;
-    const q = bancoPreguntas.find(p => p.id === idPreguntaActiva);
-    const panel = document.getElementById("wildcardOutput");
-    panel.classList.remove("hidden");
-    panel.innerHTML = `💡 <strong>Pista del Tutor:</strong> ${q.pist}`;
-    
-    if (window.MathJax && window.MathJax.typeset) {
-        MathJax.typeset();
-    }
-}
