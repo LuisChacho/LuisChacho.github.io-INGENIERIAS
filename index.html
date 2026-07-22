@@ -3,39 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Completo 80 Ejercicios - FEIRNNR II PA 2026</title>
+    <title>Simulador de Evaluación Académica - FEIRNNR II PA 2026</title>
     <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="app-header">
-        <h1>Simulador Académico (80 Preguntas)</h1>
-        <p>FEIRNNR II PA 2026 – Razonamiento Verbal, Numérico, Álgebra y Matrices</p>
+    <header class="navbar">
+        <div class="logo-area">
+            <span class="badge">PRO</span>
+            <h2>Simulador FEIRNNR II PA 2026</h2>
+        </div>
+        <div class="stats-area">
+            <div class="stat-box">
+                <span class="stat-label">Progreso</span>
+                <span id="progress-text" class="stat-value">0 / 80</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Puntaje</span>
+                <span id="score-text" class="stat-value">0 pts</span>
+            </div>
+            <button id="reset-btn" class="btn-danger" title="Reiniciar todo el examen">Reiniciar Examen</button>
+        </div>
     </header>
 
-    <main class="main-container">
+    <div class="main-layout">
+        <!-- Panel Lateral con Cuadrícula de Preguntas -->
         <aside class="sidebar">
-            <h3>Filtrar por Tema</h3>
-            <ul id="category-list">
-                <li class="active" data-cat="all">Todos (80 Ejercicios)</li>
-                <li data-cat="rv_analogias">RV - Analogías (15)</li>
-                <li data-cat="rv_inferencias">RV - Inferencias (15)</li>
-                <li data-cat="rn_comprobacion">RN - Comprobación (15)</li>
-                <li data-cat="rn_relaciones">RN - Relaciones (15)</li>
-                <li data-cat="mat_expresiones">MAT - Expresiones (10)</li>
-                <li data-cat="mat_matrices">MAT - Matrices y Funciones (10)</li>
-            </ul>
-            <div class="score-card">
-                <h4>Puntaje Obtenido</h4>
-                <p id="score-display">0 / 80</p>
-                <button id="reset-btn">Reiniciar Simulador</button>
+            <div class="sidebar-header">
+                <h3>Navegación (80 Preguntas)</h3>
+                <p>Haz clic en cualquier número para ir directamente al ejercicio.</p>
+            </div>
+            
+            <div class="filter-box">
+                <label for="category-filter">Filtrar por Tema:</label>
+                <select id="category-filter">
+                    <option value="all">Todos los temas (80)</option>
+                    <option value="rv_analogias">1. RV - Analogías (10)</option>
+                    <option value="rv_inferencias">2. RV - Inferencias (10)</option>
+                    <option value="rn_comprobacion">3. RN - Comprobación (10)</option>
+                    <option value="rn_relaciones">4. RN - Relaciones Numéricas (10)</option>
+                    <option value="rn_problemas">5. RN - Análisis de Problemas (10)</option>
+                    <option value="mat_reales">6. MAT - Números Reales (10)</option>
+                    <option value="mat_algebra">7. MAT - Expresiones Algebraicas (10)</option>
+                    <option value="mat_matrices">8. MAT - Matrices y Funciones (10)</option>
+                </select>
+            </div>
+
+            <!-- Grilla visual de accesos directos -->
+            <div class="question-grid" id="question-grid">
+                <!-- Se llena dinámicamente con los botones 1 al 80 -->
+            </div>
+
+            <div class="legend">
+                <div class="legend-item"><span class="dot current"></span> Actual</div>
+                <div class="legend-item"><span class="dot answered"></span> Respondida</div>
+                <div class="legend-item"><span class="dot pending"></span> Pendiente</div>
             </div>
         </aside>
 
-        <section class="quiz-container" id="quiz-container">
-            <!-- Ejercicios cargados dinámicamente -->
-        </section>
-    </main>
+        <!-- Área Principal de Pregunta -->
+        <main class="content-area">
+            <div class="card" id="question-card">
+                <div class="card-header">
+                    <span id="topic-badge" class="topic-badge">Cargando...</span>
+                    <span id="question-number" class="q-number">Pregunta 1 de 80</span>
+                </div>
+                
+                <div class="card-body">
+                    <div id="question-prompt" class="prompt"></div>
+                    <div id="options-container" class="options-container"></div>
+                </div>
+
+                <div id="feedback-box" class="feedback-box hidden">
+                    <div id="feedback-status" class="feedback-status"></div>
+                    <div id="feedback-explanation" class="feedback-explanation"></div>
+                </div>
+
+                <div class="card-footer">
+                    <button id="prev-btn" class="btn-secondary">&larr; Anterior</button>
+                    <button id="next-btn" class="btn-primary">Siguiente &rarr;</button>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <script src="index.js"></script>
 </body>
