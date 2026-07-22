@@ -1,14 +1,16 @@
-# Simulador FEIRNNR II PA 2026 - Universidad Nacional de Loja
+# Proyecto de Ejercicios JavaScript
 
-Este proyecto contiene el compendio oficial de reactivos prácticos interactivos de examen para la Facultad de la Energía, las Industrias y los Recursos Naturales No Renovables.
+Este repositorio contiene la solución a los ejercicios propuestos en JavaScript, HTML y CSS.
 
-## 📁 Estructura del Examen (4 Áreas Críticas)
-1. **CAP-R.V.-ANALOGÍAS** - Razonamiento de asociación científica (Cable, Tuberías, Yacimientos).
-2. **CAP-R.V.-INFERENCIAS** - Silogismos formales aplicados a recursos de la Tierra y renovabilidad.
-3. **CAP-R.N.-COMPROBACIÓN** - Cálculos directos aplicados a proyectos mecánicos y solares.
-4. **CAP-R.N.-RAZONAMIENTO NUMÉRICO APLICADO A ECUACIONES SIMPLES** - Modelaje algebraico lineal.
+## 📁 Estructura del Proyecto
 
-## ⚙️ Tecnologías Integradas
-- **Tailwind CSS:** Interfaz adaptable, sobria y de alta legibilidad.
-- **KaTeX Engine:** Compilación instantánea en cliente para notación matemática LaTeX.
-- **Comodines Dinámicos:** Algoritmos interactivos de descarte y auxilio cognitivo.
+* `index.html` - Estructura principal de la aplicación.
+* `index.css` - Estilos globales e interfaz.
+* `index.js` - Lógica y resolución de ejercicios.
+* `README.md` - Documentación del proyecto.
+
+## 🚀 Cómo ejecutarlo
+
+1. Clona o descarga este repositorio.
+2. Abre `index.html` en tu navegador.
+3. Abre la **Consola de Desarrollador** (`F12` o `Ctrl + Shift + I`) para ver los resultados de las funciones.
