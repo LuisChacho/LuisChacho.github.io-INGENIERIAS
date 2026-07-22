@@ -1,4 +1,4 @@
-# Simulador Académico Profesional FEIRNNR II PA 2026
+# Simulador Ingeniería 2026
 
 Simulador interactivo web de 80 ejercicios únicos sin repeticiones, divididos proporcionalmente en 8 temas principales del examen.
 
