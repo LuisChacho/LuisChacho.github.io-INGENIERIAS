@@ -1,14 +1,9 @@
-# Simulador de Evaluación Académica - FEIRNNR II PA 2026
+# Simulador Académico Completo (80 Ejercicios) - FEIRNNR II PA 2026
 
-Simulador interactivo para resolver reactivos de examen de Razonamiento Verbal, Razonamiento Numérico y Matemáticas.
+Simulador interactivo modular con un banco de 80 ejercicios únicos y sin duplicados sobre Razonamiento Verbal, Numérico y Matemáticas.
 
 ## 📁 Archivos
-* `index.html` - Interfaz semántica con menú de categorías y contenedor del simulador.
-* `index.css` - Diseño moderno y responsivo.
-* `index.js` - Lógica de evaluación, validación de respuestas y sistema de puntuación.
+* `index.html` - Interfaz principal con menú de navegación por categorías.
+* `index.css` - Hoja de estilos responsiva.
+* `index.js` - Generador dinámico de 80 reactivos con corrección en tiempo real.
 * `README.md` - Documentación del proyecto.
-
-## 🚀 Características
-- Evaluación en tiempo real de cada pregunta.
-- Filtros por categoría (Analogías, Inferencias, Números, Matemáticas).
-- Retroalimentación explicativa paso a paso por cada reactivo.

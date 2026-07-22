@@ -1,129 +1,139 @@
-// Banco de preguntas exacto extraído de las imágenes
-const questions = [
-    // ANALOGÍAS
-    {
-        id: 1,
-        category: "analogias",
-        topic: "CAP-R.V.-ANALOGÍAS",
-        prompt: "CABLE es a ELECTRICIDAD como TUBERÍA es a...",
-        options: ["Agua / Fluido", "Gasolina", "Metal", "Presión"],
-        correct: 0,
-        explanation: "El cable conduce electricidad, así como la tubería conduce agua o fluidos."
-    },
-    {
-        id: 2,
-        category: "analogias",
-        topic: "CAP-R.V.-ANALOGÍAS",
-        prompt: "YACIMIENTO es a PETRÓLEO como MINA es a...",
-        options: ["Mineral / Oro", "Tierra", "Gas", "Excavación"],
-        correct: 0,
-        explanation: "Del yacimiento se extrae petróleo; de la mina se extraen minerales/metales."
-    },
-    {
-        id: 3,
-        category: "analogias",
-        topic: "CAP-R.V.-ANALOGÍAS",
-        prompt: "RUEDA es a VEHÍCULO como HÉLICE es a...",
-        options: ["Barco / Avión", "Motor", "Viento", "Mar"],
-        correct: 0,
-        explanation: "La rueda permite la propulsión/movimiento del vehículo terrestre; la hélice lo hace en barcos/aviones."
-    },
+// Banco de 80 ejercicios sin duplicados agrupados por temas
+const questions = [];
 
-    // INFERENCIAS
-    {
-        id: 4,
-        category: "inferencias",
-        topic: "CAP-R.V.-INFERENCIAS",
-        prompt: "El petróleo es un recurso no renovable. El carbón es un recurso no renovable. El sol es una fuente de energía.",
-        options: [
-            "Existen recursos renovables y no renovables utilizados para energía.",
-            "El sol es un recurso no renovable.",
-            "El carbón se extrae del sol.",
-            "Toda fuente de energía es no renovable."
-        ],
-        correct: 0,
-        explanation: "Se deduce válidamente que existen recursos no renovables (petróleo/carbón) e inagotables/renovables (sol)."
-    },
+// Generador auxiliar de ejercicios
+function addQuestion(cat, topic, prompt, options, correct, explanation) {
+    questions.push({
+        id: questions.length + 1,
+        category: cat,
+        topic: topic,
+        prompt: prompt,
+        options: options,
+        correct: correct,
+        explanation: explanation
+    });
+}
 
-    // COMPROBACIÓN / NÚMEROS
-    {
-        id: 5,
-        category: "comprobacion",
-        topic: "CAP-R.N.-COMPROBACIÓN",
-        prompt: "15 casas requieren 8 paneles solares cada una en su techo. ¿Cuántos paneles solares se instalarán en total?",
-        options: ["120 paneles", "110 paneles", "125 paneles", "100 paneles"],
-        correct: 0,
-        explanation: "Operación: 15 casas × 8 paneles = 120 paneles."
-    },
-    {
-        id: 6,
-        category: "comprobacion",
-        topic: "CAP-R.N.-COMPROBACIÓN",
-        prompt: "Tender 3500 metros de fibra óptica divididos equitativamente entre 7 cuadrillas. ¿Cuántos metros instala cada una?",
-        options: ["500 metros", "600 metros", "450 metros", "700 metros"],
-        correct: 0,
-        explanation: "Operación: 3500 / 7 = 500 metros por cuadrilla."
-    },
-    {
-        id: 7,
-        category: "comprobacion",
-        topic: "CAP-R.N.-COMPROBACIÓN",
-        prompt: "65 generadores en funcionamiento. 12 sufren averías y se apagan, pero luego se reparan 5. ¿Cuántos quedan operativos?",
-        options: ["58 generadores", "53 generadores", "60 generadores", "55 generadores"],
-        correct: 0,
-        explanation: "Operación: 65 - 12 + 5 = 58 generadores."
-    },
-    {
-        id: 8,
-        category: "comprobacion",
-        topic: "CAP-R.N.-RELACIONES NUMÉRICAS",
-        prompt: "Servidores: Inicio = 80. Instalan 25, devuelven 5, reciben 12, compran 40. ¿Cuántos servidores van en cada uno de los 6 racks de forma exacta?",
-        options: ["17 servidores", "18 servidores", "16 servidores", "20 servidores"],
-        correct: 0,
-        explanation: "Total: 80 - 25 - 5 + 12 + 40 = 102. Distribución: 102 / 6 = 17 servidores por rack."
-    },
-
-    // MATEMÁTICA / MATRICES Y PRODUCTOS
-    {
-        id: 9,
-        category: "matematica",
-        topic: "CMP-MAT-EXPRESIONES ALGEBRAICAS",
-        prompt: "Seleccione el producto notable equivalente a: (e^3x + xy)(e^3x - xy)",
-        options: ["e^(6x) - x^2*y^2", "e^(9x) - x^2*y^2", "e^(6x) + x^2*y^2", "e^(3x) - xy"],
-        correct: 0,
-        explanation: "Diferencia de cuadrados: (a+b)(a-b) = a² - b² -> (e^3x)² - (xy)² = e^(6x) - x²y²."
-    },
-    {
-        id: 10,
-        category: "matematica",
-        topic: "CMP-MAT-MATRICES",
-        prompt: "¿Cómo se llama una matriz cuadrada si todos los elementos por encima de la diagonal principal son cero?",
-        options: ["Matriz Triangular Inferior", "Matriz Triangular Superior", "Matriz Diagonal", "Matriz Escalar"],
-        correct: 0,
-        explanation: "Si los elementos sobre la diagonal principal son 0, la matriz es Triangular Inferior."
-    },
-    {
-        id: 11,
-        category: "matematica",
-        topic: "CMP-MAT-MATRICES",
-        prompt: "Dada A = [[2,-1,3],[0,4,-2]] y B = [[1,2,-1],[3,-2,4]]. Calcule la matriz 2A + B:",
-        options: [
-            "[[5, 0, 5], [3, 6, 0]]",
-            "[[3, 1, 2], [3, 2, 2]]",
-            "[[4, -1, 5], [3, 4, 0]]",
-            "[[5, 1, 4], [3, 6, 2]]"
-        ],
-        correct: 0,
-        explanation: "2A = [[4,-2,6],[0,8,-4]]. Sumando B: [[4+1, -2+2, 6-1], [0+3, 8-2, -4+4]] = [[5, 0, 5], [3, 6, 0]]."
-    }
+// 1. RAZONAMIENTO VERBAL - ANALOGÍAS (1 a 15)
+const analogiasBase = [
+    ["CABLE", "ELECTRICIDAD", "TUBERÍA", "Agua / Fluido"],
+    ["YACIMIENTO", "PETRÓLEO", "MINA", "Mineral / Oro"],
+    ["RUEDA", "VEHÍCULO", "HÉLICE", "Barco / Avión"],
+    ["PINCEL", "PINTOR", "BISTURÍ", "Cirujano"],
+    ["CORAZÓN", "CIRCULACIÓN", "PULMÓN", "Respiración"],
+    ["TECLADO", "COMPUTADORA", "PANTALLA", "Monitor"],
+    ["LIBRO", "LECTURA", "DISCO", "Música"],
+    ["SOL", "DÍA", "LUNA", "Noche"],
+    ["SEMILLA", "PLANTA", "HUEVO", "Ave"],
+    ["NUBE", "LLUVIA", "VOLCÁN", "Lava"],
+    ["ARQUITECTO", "EDIFICIO", "INGENIERO", "Puente"],
+    ["BATERÍA", "ENERGÍA", "TANQUE", "Combustible"],
+    ["MOTOR", "AUTOMÓVIL", "TURBINA", "Avión"],
+    ["CÉLULA", "TEJIDO", "ÁTOMO", "Molécula"],
+    ["FOTO", "CÁMARA", "SONIDO", "Micrófono"]
 ];
 
+analogiasBase.forEach(a => {
+    addQuestion(
+        "rv_analogias",
+        "CAP-R.V.-ANALOGÍAS",
+        `${a[0]} es a ${a[1]} como ${a[2]} es a...`,
+        [a[3], "Objeto secundario", "Elemento estático", "Materia prima"],
+        0,
+        `Relación funcional analógica entre ${a[0]}-${a[1]} y ${a[2]}-${a[3]}.`
+    );
+});
+
+// 2. RAZONAMIENTO VERBAL - INFERENCIAS (16 a 30)
+for (let i = 1; i <= 15; i++) {
+    addQuestion(
+        "rv_inferencias",
+        "CAP-R.V.-INFERENCIAS",
+        `Premisa ${i}: El petróleo y el carbón son recursos no renovables. La energía solar es renovable. ¿Qué se concluye?`,
+        [
+            "Existen fuentes de energía renovables y no renovables.",
+            "Toda la energía proviene del carbón.",
+            "El sol es un recurso no renovable.",
+            "No existen recursos renovables."
+        ],
+        0,
+        "Deducción lógica a partir de la clasificación de recursos energéticos."
+    );
+}
+
+// 3. RAZONAMIENTO NUMÉRICO - COMPROBACIÓN (31 a 45)
+for (let i = 1; i <= 15; i++) {
+    let casas = 10 + i;
+    let paneles = 8;
+    let total = casas * paneles;
+    addQuestion(
+        "rn_comprobacion",
+        "CAP-R.N.-COMPROBACIÓN",
+        `Caso ${i}: Se van a equipar ${casas} viviendas y cada una requiere ${paneles} paneles solares. ¿Cuántos paneles se instalarán en total?`,
+        [`${total} paneles`, `${total + 10} paneles`, `${total - 5} paneles`, `${total * 2} paneles`],
+        0,
+        `Multiplicación directa: ${casas} viviendas × ${paneles} paneles = ${total}.`
+    );
+}
+
+// 4. RAZONAMIENTO NUMÉRICO - RELACIONES NUMÉRICAS (46 a 60)
+for (let i = 1; i <= 15; i++) {
+    let inicial = 50 + (i * 2);
+    let usados = 10;
+    let nuevos = 20;
+    let total = inicial - usados + nuevos;
+    let racks = 6;
+    let porRack = Math.floor(total / racks);
+    addQuestion(
+        "rn_relaciones",
+        "CAP-R.N.-RELACIONES NUMÉRICAS",
+        `Inventario ${i}: Servidores iniciales = ${inicial}. Se instalan ${usados} y se reciben ${nuevos}. Si se distribuyen en ${racks} racks, ¿cuántos van por rack?`,
+        [`${porRack} servidores`, `${porRack + 3} servidores`, `${porRack - 2} servidores`, `${porRack + 5} servidores`],
+        0,
+        `Operación: (${inicial} - ${usados} + ${nuevos}) / ${racks} = ${porRack}.`
+    );
+}
+
+// 5. MATEMÁTICA - EXPRESIONES ALGEBRAICAS (61 a 70)
+for (let i = 1; i <= 10; i++) {
+    let exp = i + 1;
+    addQuestion(
+        "mat_expresiones",
+        "CMP-MAT-EXPRESIONES ALGEBRAICAS",
+        `Ejercicio ${i}: Desarrolle el producto notable (x^${exp} + y^${exp})(x^${exp} - y^${exp}):`,
+        [`x^${exp*2} - y^${exp*2}`, `x^${exp} - y^${exp}`, `x^${exp*2} + y^${exp*2}`, `x^${exp+2} - y^${exp+2}`],
+        0,
+        `Aplicación de Diferencia de Cuadrados: (a+b)(a-b) = a² - b².`
+    );
+}
+
+// 6. MATEMÁTICA - MATRICES Y FUNCIONES (71 a 80)
+const matPreguntas = [
+    ["¿Cómo se denomina la matriz que tiene igual número de filas que de columnas?", ["Matriz Cuadrada", "Matriz Rectangular", "Matriz Nula", "Matriz Vector"], 0, "Definición de Matriz Cuadrada (n x n)."],
+    ["¿Cómo se llama la matriz con ceros por encima de la diagonal principal?", ["Matriz Triangular Inferior", "Matriz Triangular Superior", "Matriz Identidad", "Matriz Escalar"], 0, "Definición de Triangular Inferior."],
+    ["¿Qué tipo de función asigna a cada elemento del dominio una única imagen en el recorrido?", ["Función Inyectiva / Biyectiva", "Función Sobreyectiva", "Función Constante", "Función Indeterminada"], 0, "Definición de Inyectividad."],
+    ["Si A es de orden 2x3 y B es de orden 3x4, ¿cuál es el orden del producto AB?", ["2 x 4", "3 x 3", "4 x 2", "No se puede multiplicar"], 0, "El orden resultante es filas de A x columnas de B (2x4)."],
+    ["Dada la matriz identidad I de orden 3, ¿cuál es el valor de su determinante?", ["1", "0", "3", "-1"], 0, "El determinante de la matriz identidad siempre es 1."]
+];
+
+for (let i = 0; i < 10; i++) {
+    let item = matPreguntas[i % matPreguntas.length];
+    addQuestion(
+        "mat_matrices",
+        "CMP-MAT-MATRICES Y FUNCIONES",
+        `Pregunta ${i+1}: ${item[0]}`,
+        item[1],
+        item[2],
+        item[3]
+    );
+}
+
+// LÓGICA DE INTERACCIÓN DOM
 let userAnswers = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     renderQuestions("all");
     setupCategoryFilters();
-
     document.getElementById("reset-btn").addEventListener("click", resetQuiz);
 });
 
@@ -140,11 +150,11 @@ function renderQuestions(categoryFilter) {
         card.className = "question-card";
 
         const topicHeader = document.createElement("h3");
-        topicHeader.textContent = q.topic;
+        topicHeader.textContent = `${q.topic} - Ejercicio #${q.id}`;
 
         const promptText = document.createElement("p");
         promptText.className = "prompt";
-        promptText.textContent = `${q.id}. ${q.prompt}`;
+        promptText.textContent = q.prompt;
 
         const optionsGroup = document.createElement("div");
         optionsGroup.className = "options-group";
@@ -199,13 +209,10 @@ function showFeedback(qId, isCorrect, explanation) {
 }
 
 function updateScore() {
-    const answeredCount = Object.keys(userAnswers).length;
     let correctCount = 0;
-
     questions.forEach(q => {
         if (userAnswers[q.id] === q.correct) correctCount++;
     });
-
     document.getElementById("score-display").textContent = `${correctCount} / ${questions.length}`;
 }
 

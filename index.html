@@ -3,37 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Evaluación - FEIRNNR II PA 2026</title>
+    <title>Simulador Completo 80 Ejercicios - FEIRNNR II PA 2026</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
     <header class="app-header">
-        <h1>Simulador de Evaluación Académica</h1>
-        <p>FEIRNNR II PA 2026 – Razonamiento Verbal, Numérico y Matemática</p>
+        <h1>Simulador Académico (80 Preguntas)</h1>
+        <p>FEIRNNR II PA 2026 – Razonamiento Verbal, Numérico, Álgebra y Matrices</p>
     </header>
 
     <main class="main-container">
-        <!-- Panel Lateral / Categorías -->
         <aside class="sidebar">
-            <h3>Categorías</h3>
+            <h3>Filtrar por Tema</h3>
             <ul id="category-list">
-                <li class="active" data-cat="all">Todas las preguntas</li>
-                <li data-cat="analogias">Analogías</li>
-                <li data-cat="inferencias">Inferencias</li>
-                <li data-cat="comprobacion">Comprobación / Números</li>
-                <li data-cat="matematica">Matemática / Matrices</li>
+                <li class="active" data-cat="all">Todos (80 Ejercicios)</li>
+                <li data-cat="rv_analogias">RV - Analogías (15)</li>
+                <li data-cat="rv_inferencias">RV - Inferencias (15)</li>
+                <li data-cat="rn_comprobacion">RN - Comprobación (15)</li>
+                <li data-cat="rn_relaciones">RN - Relaciones (15)</li>
+                <li data-cat="mat_expresiones">MAT - Expresiones (10)</li>
+                <li data-cat="mat_matrices">MAT - Matrices y Funciones (10)</li>
             </ul>
             <div class="score-card">
-                <h4>Puntaje Actual</h4>
-                <p id="score-display">0 / 0</p>
+                <h4>Puntaje Obtenido</h4>
+                <p id="score-display">0 / 80</p>
                 <button id="reset-btn">Reiniciar Simulador</button>
             </div>
         </aside>
 
-        <!-- Contenedor de Preguntas -->
         <section class="quiz-container" id="quiz-container">
-            <!-- Las preguntas se generan dinámicamente con JS -->
+            <!-- Ejercicios cargados dinámicamente -->
         </section>
     </main>
 
