@@ -1,11 +1,14 @@
-# Simulador Financiero Interactivo
+# Simulador de Evaluación Académica - FEIRNNR II PA 2026
 
-Simulador web moderno para calcular préstamos, cuotas mensuales e intereses con visualización en tiempo real e historial.
+Simulador interactivo para resolver reactivos de examen de Razonamiento Verbal, Razonamiento Numérico y Matemáticas.
 
 ## 📁 Archivos
-* `index.html` - Estructura semántica del simulador.
-* `index.css` - Estilos responsive y diseño limpio.
-* `index.js` - Lógica de cálculo financiero e interacción DOM.
+* `index.html` - Interfaz semántica con menú de categorías y contenedor del simulador.
+* `index.css` - Diseño moderno y responsivo.
+* `index.js` - Lógica de evaluación, validación de respuestas y sistema de puntuación.
+* `README.md` - Documentación del proyecto.
 
-## 🚀 Uso
-Simplemente abre `index.html` en cualquier navegador web, ingresa el monto, interés y plazo deseado y haz clic en **Calcular Cuota**.
+## 🚀 Características
+- Evaluación en tiempo real de cada pregunta.
+- Filtros por categoría (Analogías, Inferencias, Números, Matemáticas).
+- Retroalimentación explicativa paso a paso por cada reactivo.

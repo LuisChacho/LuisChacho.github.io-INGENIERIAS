@@ -3,60 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador Financiero</title>
+    <title>Simulador de Evaluación - FEIRNNR II PA 2026</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-    <main class="container">
-        <header>
-            <h1>Simulador Financiero</h1>
-            <p>Calcula cuotas de préstamo de manera precisa e instantánea.</p>
-        </header>
+    <header class="app-header">
+        <h1>Simulador de Evaluación Académica</h1>
+        <p>FEIRNNR II PA 2026 – Razonamiento Verbal, Numérico y Matemática</p>
+    </header>
 
-        <section class="simulator-card">
-            <form id="simulator-form">
-                <div class="form-group">
-                    <label for="monto">Monto del Préstamo ($):</label>
-                    <input type="number" id="monto" placeholder="Ej: 1000" min="100" step="50" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="interes">Tasa de Interés Anual (%):</label>
-                    <input type="number" id="interes" placeholder="Ej: 12" min="1" max="100" step="0.1" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="plazo">Plazo (Meses):</label>
-                    <input type="number" id="plazo" placeholder="Ej: 12" min="1" max="120" required>
-                </div>
-
-                <button type="submit" id="btn-calcular">Calcular Cuota</button>
-            </form>
-
-            <div id="resultado" class="result-box hidden">
-                <h3>Resumen del Préstamo</h3>
-                <div class="result-item">
-                    <span>Cuota Mensual:</span>
-                    <strong id="cuota-mensual">$0.00</strong>
-                </div>
-                <div class="result-item">
-                    <span>Total a Pagar:</span>
-                    <span id="total-pagar">$0.00</span>
-                </div>
-                <div class="result-item">
-                    <span>Total Intereses:</span>
-                    <span id="total-intereses">$0.00</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Historial de cálculos -->
-        <section class="history-section">
-            <h2>Historial de Simulaciones</h2>
-            <ul id="lista-historial" class="history-list">
-                <li class="empty-msg">No hay simulaciones previas.</li>
+    <main class="main-container">
+        <!-- Panel Lateral / Categorías -->
+        <aside class="sidebar">
+            <h3>Categorías</h3>
+            <ul id="category-list">
+                <li class="active" data-cat="all">Todas las preguntas</li>
+                <li data-cat="analogias">Analogías</li>
+                <li data-cat="inferencias">Inferencias</li>
+                <li data-cat="comprobacion">Comprobación / Números</li>
+                <li data-cat="matematica">Matemática / Matrices</li>
             </ul>
+            <div class="score-card">
+                <h4>Puntaje Actual</h4>
+                <p id="score-display">0 / 0</p>
+                <button id="reset-btn">Reiniciar Simulador</button>
+            </div>
+        </aside>
+
+        <!-- Contenedor de Preguntas -->
+        <section class="quiz-container" id="quiz-container">
+            <!-- Las preguntas se generan dinámicamente con JS -->
         </section>
     </main>
 
