@@ -3,15 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto de Ejercicios</title>
+    <title>Simulador Financiero</title>
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
     <main class="container">
-        <h1>Resolución de Ejercicios</h1>
-        <p>Abre la consola del navegador (F12) para ver la salida de los ejercicios.</p>
-        <div id="app"></div>
+        <header>
+            <h1>Simulador Financiero</h1>
+            <p>Calcula cuotas de préstamo de manera precisa e instantánea.</p>
+        </header>
+
+        <section class="simulator-card">
+            <form id="simulator-form">
+                <div class="form-group">
+                    <label for="monto">Monto del Préstamo ($):</label>
+                    <input type="number" id="monto" placeholder="Ej: 1000" min="100" step="50" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="interes">Tasa de Interés Anual (%):</label>
+                    <input type="number" id="interes" placeholder="Ej: 12" min="1" max="100" step="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="plazo">Plazo (Meses):</label>
+                    <input type="number" id="plazo" placeholder="Ej: 12" min="1" max="120" required>
+                </div>
+
+                <button type="submit" id="btn-calcular">Calcular Cuota</button>
+            </form>
+
+            <div id="resultado" class="result-box hidden">
+                <h3>Resumen del Préstamo</h3>
+                <div class="result-item">
+                    <span>Cuota Mensual:</span>
+                    <strong id="cuota-mensual">$0.00</strong>
+                </div>
+                <div class="result-item">
+                    <span>Total a Pagar:</span>
+                    <span id="total-pagar">$0.00</span>
+                </div>
+                <div class="result-item">
+                    <span>Total Intereses:</span>
+                    <span id="total-intereses">$0.00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Historial de cálculos -->
+        <section class="history-section">
+            <h2>Historial de Simulaciones</h2>
+            <ul id="lista-historial" class="history-list">
+                <li class="empty-msg">No hay simulaciones previas.</li>
+            </ul>
+        </section>
     </main>
 
     <script src="index.js"></script>

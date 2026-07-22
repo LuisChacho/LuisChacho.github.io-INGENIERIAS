@@ -1,16 +1,11 @@
-# Proyecto de Ejercicios JavaScript
+# Simulador Financiero Interactivo
 
-Este repositorio contiene la solución a los ejercicios propuestos en JavaScript, HTML y CSS.
+Simulador web moderno para calcular préstamos, cuotas mensuales e intereses con visualización en tiempo real e historial.
 
-## 📁 Estructura del Proyecto
+## 📁 Archivos
+* `index.html` - Estructura semántica del simulador.
+* `index.css` - Estilos responsive y diseño limpio.
+* `index.js` - Lógica de cálculo financiero e interacción DOM.
 
-* `index.html` - Estructura principal de la aplicación.
-* `index.css` - Estilos globales e interfaz.
-* `index.js` - Lógica y resolución de ejercicios.
-* `README.md` - Documentación del proyecto.
-
-## 🚀 Cómo ejecutarlo
-
-1. Clona o descarga este repositorio.
-2. Abre `index.html` en tu navegador.
-3. Abre la **Consola de Desarrollador** (`F12` o `Ctrl + Shift + I`) para ver los resultados de las funciones.
+## 🚀 Uso
+Simplemente abre `index.html` en cualquier navegador web, ingresa el monto, interés y plazo deseado y haz clic en **Calcular Cuota**.
