@@ -1,4 +1,4 @@
-// SIMULADOR FEIRNNR PA 2026 - BANCO COMPLETO DE 150 PREGUNTAS (15 TEMAS x 10 PREGUNTAS)
+// BANCO COMPLETO DE 150 PREGUNTAS
 const questions = [
     // --- TEMA 1: CAP-R.V.-ANALOGÍAS (1-10) ---
     { id: 1, category: "rv_analogias", topic: "CAP-R.V.-ANALOGÍAS", prompt: "CABLE es a ELECTRICIDAD como TUBERÍA es a...", options: ["Gasolina", "Metal", "Agua / Fluido", "Presión"], correct: 2, explanation: "El cable conduce electricidad, así como la tubería conduce agua o fluidos." },
@@ -87,7 +87,7 @@ const questions = [
     // --- TEMA 8: CMP-MAT-FUNCIONES Y SUS GRÁFICAS (71-80) ---
     { id: 71, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "¿Qué tipo de función es aquella en la que cada elemento del recorrido es imagen de un sólo elemento del dominio?", options: ["Función inyectiva", "Función biyectiva", "Función sobreyectiva", "Función cuadrática"], correct: 0, explanation: "Definición de función uno a uno (inyectiva)." },
     { id: 72, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "¿Qué tipo de función es aquella en la que todos los elementos del codominio son imagen de al menos un elemento del dominio?", options: ["Función inyectiva", "Función biyectiva", "Función sobreyectiva", "Función cuadrática"], correct: 2, explanation: "El recorrido cubre completamente al codominio (sobreyectiva)." },
-    { id: 73, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "¿Cuándo una función es biyectiva?", options: ["Cuando es inyectiva y sobreyectiva simultáneamente", "Cuando su gráfica es lineal", "Cuando es estrictamente creciente", "Cuando su dominio son todos los reales"], correct: 0, explanation: "Debe cumplir ambas propiedades a la vez." },
+    { id: 73, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "¿Cuándo una función es biyectiva?", options: ["Cuando es inyectiva y sobreyectiva simultáneamente", "Cuando su gráfica es lineal", "Cuando es strictly creciente", "Cuando su dominio son todos los reales"], correct: 0, explanation: "Debe cumplir ambas propiedades a la vez." },
     { id: 74, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "Si f(x) = x^2 + 2, ¿cuál es el rango o recorrido de la función?", options: ["[2, +∞)", "(-∞, 2]", "[0, +∞)", "(-∞, +∞)"], correct: 0, explanation: "El valor mínimo es 2 en el vértice x=0." },
     { id: 75, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "¿Cuál es el dominio de la función f(x) = √(x - 4)?", options: ["[4, +∞)", "(4, +∞)", "(-∞, 4]", "Todos los Reales"], correct: 0, explanation: "x - 4 ≥ 0 => x ≥ 4." },
     { id: 76, category: "mat_funciones", topic: "CMP-MAT-FUNCIONES Y SUS GRÁFICAS", prompt: "Una función f es par si cumple que:", options: ["f(-x) = f(x)", "f(-x) = -f(x)", "f(x) = 1/f(x)", "f(x) = 0"], correct: 0, explanation: "Simetría respecto al eje Y." },
@@ -180,3 +180,83 @@ const questions = [
     { id: 149, category: "fis_dinamica", topic: "CMP-FIS-DINÁMICA, ENERGÍA Y TRABAJO", prompt: "Un patinador de 60 kg acelera de 4 m/s a 20 m/s en 8 s. ¿Potencia media desarrollada?", options: ["1440 W", "2880 W", "720 W", "1200 W"], correct: 0, explanation: "ΔEc = 0.5 * 60 * (20² - 4²) = 30 * 384 = 11,520 J. P = 11,520 / 8 = 1440 W." },
     { id: 150, category: "fis_dinamica", topic: "CMP-FIS-DINÁMICA, ENERGÍA Y TRABAJO", prompt: "Un ciclista de 70 kg aumenta su rapidez de 10 m/s a 18 m/s en 4 s. ¿Cuál es la potencia media desarrollada?", options: ["1960 W", "3920 W", "980 W", "1500 W"], correct: 0, explanation: "ΔEc = 0.5 * 70 * (18² - 10²) = 35 * 224 = 7,840 J. P = 7,840 / 4 = 1960 W." }
 ];
+
+// LÓGICA DE NAVEGACIÓN Y ESTADO
+let currentFilteredQuestions = [...questions];
+let currentIndex = 0;
+
+function loadQuestion() {
+    if (currentFilteredQuestions.length === 0) return;
+
+    const q = currentFilteredQuestions[currentIndex];
+    
+    document.getElementById("q-counter").innerText = `Pregunta ${currentIndex + 1} / ${currentFilteredQuestions.length}`;
+    document.getElementById("topic-tag").innerText = q.topic;
+    document.getElementById("prompt-text").innerText = `${q.id}. ${q.prompt}`;
+    
+    const optionsBox = document.getElementById("options-box");
+    optionsBox.innerHTML = "";
+    
+    q.options.forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = `${String.fromCharCode(65 + index)}) ${opt}`;
+        btn.onclick = () => selectOption(btn, index, q.correct, q.explanation);
+        optionsBox.appendChild(btn);
+    });
+
+    const expBox = document.getElementById("explanation-box");
+    expBox.style.display = "none";
+    expBox.innerHTML = "";
+}
+
+function selectOption(selectedBtn, selectedIndex, correctIndex, explanation) {
+    const buttons = document.querySelectorAll(".option-btn");
+    buttons.forEach(btn => btn.disabled = true);
+
+    if (selectedIndex === correctIndex) {
+        selectedBtn.classList.add("correct");
+    } else {
+        selectedBtn.classList.add("wrong");
+        buttons[correctIndex].classList.add("correct");
+    }
+
+    const expBox = document.getElementById("explanation-box");
+    expBox.innerHTML = `<strong>Explicación:</strong> ${explanation}`;
+    expBox.style.display = "block";
+}
+
+function nextQuestion() {
+    if (currentIndex < currentFilteredQuestions.length - 1) {
+        currentIndex++;
+        loadQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (currentIndex > 0) {
+        currentIndex--;
+        loadQuestion();
+    }
+}
+
+function filterTopic() {
+    const selectedCategory = document.getElementById("topic-select").value;
+    if (selectedCategory === "all") {
+        currentFilteredQuestions = [...questions];
+    } else {
+        currentFilteredQuestions = questions.filter(q => q.category === selectedCategory);
+    }
+    currentIndex = 0;
+    loadQuestion();
+}
+
+function resetExam() {
+    document.getElementById("topic-select").value = "all";
+    currentFilteredQuestions = [...questions];
+    currentIndex = 0;
+    loadQuestion();
+}
+
+// Inicialización
+window.onload = loadQuestion;

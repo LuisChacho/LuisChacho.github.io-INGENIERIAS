@@ -1,10 +1,21 @@
-# Simulador Académico Profesional FEIRNNR II PA 2026
+# Simulador de Examen FEIRNNR PA
 
-Simulador interactivo web de 80 ejercicios únicos sin repeticiones, divididos proporcionalmente en 8 temas principales del examen.
+Aplicación web interactiva de simulación de exámenes que contiene **150 preguntas** distribuidas en **15 asignaturas/temas académicos** clave (Razonamiento Verbal, Razonamiento Numérico, Matemática y Física Vectorial/Cinemática/Dinámica).
 
-## 🚀 Funcionalidades Clave
-1. **80 Ejercicios Únicos:** Cobertura equitativa (10 por tema) en razonamiento verbal, numérico, álgebra, matrices y funciones.
-2. **Navegación Lateral Dinámica:** Menú lateral de cuadrícula numérica (1 a 80) que permite acceder directamente a cualquier pregunta.
-3. **Sistema de Autoguardado Continuo:** Implementado con `localStorage`. Si el navegador se actualiza, el progreso de respuestas e índices no se pierde.
-4. **Retroalimentación Inmediata:** Corrección automática con explicaciones teóricas y paso a paso.
-5. **Filtrado por Asignaturas:** Posibilidad de segmentar la cuadrícula por el área de estudio seleccionada.
+## 🚀 Características
+- **15 Temas Académicos:** Evaluación filtrable por temas de 10 preguntas cada uno.
+- **Retroalimentación Inmediata:** Corrección dinámica de respuesta correcta/incorrecta con explicaciones detalladas.
+- **Navegación:** Avance, retroceso y reinicio del examen.
+- **Diseño Responsivo:** Compatible con dispositivos móviles y computadoras de escritorio.
+
+## 🛠️ Tecnologías Utilizadas
+- HTML5
+- CSS3
+- JavaScript (ES6)
+
+## 📌 Despliegue en GitHub Pages
+Para hacer que esta aplicación sea pública a través de un sitio web:
+1. Ve a los **Settings** (Configuración) de tu repositorio en GitHub.
+2. Navega a la sección **Pages** (en el menú lateral).
+3. En **Source**, selecciona la rama `main` (o `master`) y guarda (`Save`).
+4. En unos momentos GitHub generará un enlace público para usar tu simulador.

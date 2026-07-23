@@ -3,91 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Evaluación Académica - FEIRNNR II PA 2026</title>
+    <title>Simulador FEIRNNR PA - 150 Preguntas</title>
     <link rel="stylesheet" href="index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="logo-area">
-            <span class="badge">PRO</span>
-            <h2>Simulador FEIRNNR II PA 2026</h2>
+<div class="container">
+    <div class="header">
+        <h2>Simulador FEIRNNR PA</h2>
+        <div>
+            <strong id="q-counter">Pregunta 1 / 150</strong>
+            <button class="btn-reset" onclick="resetExam()">Reiniciar Examen</button>
         </div>
-        <div class="stats-area">
-            <div class="stat-box">
-                <span class="stat-label">Progreso</span>
-                <span id="progress-text" class="stat-value">0 / 80</span>
-            </div>
-            <div class="stat-box">
-                <span class="stat-label">Puntaje</span>
-                <span id="score-text" class="stat-value">0 pts</span>
-            </div>
-            <button id="reset-btn" class="btn-danger" title="Reiniciar todo el examen">Reiniciar Examen</button>
-        </div>
-    </header>
-
-    <div class="main-layout">
-        <!-- Panel Lateral con Cuadrícula de Preguntas -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h3>Navegación (80 Preguntas)</h3>
-                <p>Haz clic en cualquier número para ir directamente al ejercicio.</p>
-            </div>
-            
-            <div class="filter-box">
-                <label for="category-filter">Filtrar por Tema:</label>
-                <select id="category-filter">
-                    <option value="all">Todos los temas (80)</option>
-                    <option value="rv_analogias">1. RV - Analogías (10)</option>
-                    <option value="rv_inferencias">2. RV - Inferencias (10)</option>
-                    <option value="rn_comprobacion">3. RN - Comprobación (10)</option>
-                    <option value="rn_relaciones">4. RN - Relaciones Numéricas (10)</option>
-                    <option value="rn_problemas">5. RN - Análisis de Problemas (10)</option>
-                    <option value="mat_reales">6. MAT - Números Reales (10)</option>
-                    <option value="mat_algebra">7. MAT - Expresiones Algebraicas (10)</option>
-                    <option value="mat_matrices">8. MAT - Matrices y Funciones (10)</option>
-                </select>
-            </div>
-
-            <!-- Grilla visual de accesos directos -->
-            <div class="question-grid" id="question-grid">
-                <!-- Se llena dinámicamente con los botones 1 al 80 -->
-            </div>
-
-            <div class="legend">
-                <div class="legend-item"><span class="dot current"></span> Actual</div>
-                <div class="legend-item"><span class="dot answered"></span> Respondida</div>
-                <div class="legend-item"><span class="dot pending"></span> Pendiente</div>
-            </div>
-        </aside>
-
-        <!-- Área Principal de Pregunta -->
-        <main class="content-area">
-            <div class="card" id="question-card">
-                <div class="card-header">
-                    <span id="topic-badge" class="topic-badge">Cargando...</span>
-                    <span id="question-number" class="q-number">Pregunta 1 de 80</span>
-                </div>
-                
-                <div class="card-body">
-                    <div id="question-prompt" class="prompt"></div>
-                    <div id="options-container" class="options-container"></div>
-                </div>
-
-                <div id="feedback-box" class="feedback-box hidden">
-                    <div id="feedback-status" class="feedback-status"></div>
-                    <div id="feedback-explanation" class="feedback-explanation"></div>
-                </div>
-
-                <div class="card-footer">
-                    <button id="prev-btn" class="btn-secondary">&larr; Anterior</button>
-                    <button id="next-btn" class="btn-primary">Siguiente &rarr;</button>
-                </div>
-            </div>
-        </main>
     </div>
 
-    <script src="index.js"></script>
+    <div class="controls">
+        <label for="topic-select"><strong>Filtrar Tema:</strong></label>
+        <select id="topic-select" onchange="filterTopic()">
+            <option value="all">Todos los temas (150 Preguntas)</option>
+            <option value="rv_analogias">1. CAP-R.V.-ANALOGÍAS (10)</option>
+            <option value="rv_inferencias">2. CAP-R.V.-INFERENCIAS (10)</option>
+            <option value="rn_comprobacion">3. CAP-R.N.-COMPROBACIÓN (10)</option>
+            <option value="rn_relaciones">4. CAP-R.N.-RELACIONES NUMÉRICAS (10)</option>
+            <option value="rn_problemas">5. CAP-R.N.-ANÁLISIS DE PROBLEMAS (10)</option>
+            <option value="mat_reales">6. CMP-MAT-NÚMEROS REALES (10)</option>
+            <option value="mat_algebra">7. CMP-MAT-EXPRESIONES ALGEBRAICAS (10)</option>
+            <option value="mat_funciones">8. CMP-MAT-FUNCIONES Y SUS GRÁFICAS (10)</option>
+            <option value="mat_geometria">9. CMP-MAT-GEOMETRÍA Y ECUACIÓN DE LA RECTA (10)</option>
+            <option value="mat_trigonometria">10. CMP-MAT-TRIGONOMETRÍA (10)</option>
+            <option value="mat_sucesiones">11. CMP-MAT-SUCESIONES, SERIES Y PROBABILIDADES (10)</option>
+            <option value="mat_logica">12. CMP-MAT-LÓGICA Y CONJUNTOS (10)</option>
+            <option value="fis_vectorial">13. CMP-FIS-FÍSICA VECTORIAL Y SUS APLICACIONES (10)</option>
+            <option value="fis_cinematica">14. CMP-FIS-CINEMÁTICA (10)</option>
+            <option value="fis_dinamica">15. CMP-FIS-DINÁMICA, ENERGÍA Y TRABAJO (10)</option>
+        </select>
+    </div>
+
+    <div id="quiz-body" class="question-card">
+        <span id="topic-tag" class="topic-tag"></span>
+        <h3 id="prompt-text"></h3>
+        <div id="options-box" class="options-container"></div>
+        <div id="explanation-box" class="explanation" style="display:none;"></div>
+    </div>
+
+    <div class="controls nav-footer">
+        <button class="btn-nav" onclick="prevQuestion()">&laquo; Anterior</button>
+        <button class="btn-nav" onclick="nextQuestion()">Siguiente &raquo;</button>
+    </div>
+</div>
+
+<script src="index.js"></script>
 </body>
 </html>
