@@ -22,6 +22,29 @@ body {
     padding-bottom: 15px;
 }
 
+.progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    height: 12px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #198754;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    text-align: right;
+}
+
 .controls {
     margin: 15px 0;
     display: flex;
@@ -90,20 +113,20 @@ button.btn-nav:hover {
     transition: background 0.2s, border-color 0.2s;
 }
 
-.option-btn:hover {
+.option-btn:hover:not(:disabled) {
     background: #d0e1fd;
 }
 
 .option-btn.correct {
-    background: #d4edda;
-    border-color: #c3e6cb;
+    background: #d4edda !important;
+    border-color: #c3e6cb !important;
     color: #155724;
     font-weight: bold;
 }
 
 .option-btn.wrong {
-    background: #f8d7da;
-    border-color: #f5c6cb;
+    background: #f8d7da !important;
+    border-color: #f5c6cb !important;
     color: #721c24;
 }
 
@@ -114,4 +137,13 @@ button.btn-nav:hover {
     border-left: 4px solid #6c757d;
     border-radius: 4px;
     font-size: 14px;
+}
+
+.summary-box {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #d1e7dd;
+    border: 1px solid #badbcc;
+    border-radius: 6px;
+    text-align: center;
 }

@@ -181,12 +181,16 @@ const questions = [
     { id: 150, category: "fis_dinamica", topic: "CMP-FIS-DINÁMICA, ENERGÍA Y TRABAJO", prompt: "Un ciclista de 70 kg aumenta su rapidez de 10 m/s a 18 m/s en 4 s. ¿Cuál es la potencia media desarrollada?", options: ["1960 W", "3920 W", "980 W", "1500 W"], correct: 0, explanation: "ΔEc = 0.5 * 70 * (18² - 10²) = 35 * 224 = 7,840 J. P = 7,840 / 4 = 1960 W." }
 ];
 
-// LÓGICA DE NAVEGACIÓN Y ESTADO
+// ESTRUCTURA DE GUARDADO
+// userAnswers guardará { questionId: selectedIndex }
+let userAnswers = JSON.parse(localStorage.getItem("feirnnr_answers")) || {};
 let currentFilteredQuestions = [...questions];
 let currentIndex = 0;
 
 function loadQuestion() {
     if (currentFilteredQuestions.length === 0) return;
+
+    updateProgressBar();
 
     const q = currentFilteredQuestions[currentIndex];
     
@@ -197,20 +201,44 @@ function loadQuestion() {
     const optionsBox = document.getElementById("options-box");
     optionsBox.innerHTML = "";
     
+    const savedAnswer = userAnswers[q.id]; // Si ya fue respondida anteriormente
+
     q.options.forEach((opt, index) => {
         const btn = document.createElement("button");
         btn.className = "option-btn";
         btn.innerText = `${String.fromCharCode(65 + index)}) ${opt}`;
-        btn.onclick = () => selectOption(btn, index, q.correct, q.explanation);
+        
+        // Si ya hay respuesta guardada para esta pregunta
+        if (savedAnswer !== undefined) {
+            btn.disabled = true;
+            if (index === q.correct) {
+                btn.classList.add("correct");
+            }
+            if (index === savedAnswer && savedAnswer !== q.correct) {
+                btn.classList.add("wrong");
+            }
+        } else {
+            btn.onclick = () => selectOption(btn, index, q.id, q.correct, q.explanation);
+        }
+        
         optionsBox.appendChild(btn);
     });
 
     const expBox = document.getElementById("explanation-box");
-    expBox.style.display = "none";
-    expBox.innerHTML = "";
+    if (savedAnswer !== undefined) {
+        expBox.innerHTML = `<strong>Explicación:</strong> ${q.explanation}`;
+        expBox.style.display = "block";
+    } else {
+        expBox.style.display = "none";
+        expBox.innerHTML = "";
+    }
 }
 
-function selectOption(selectedBtn, selectedIndex, correctIndex, explanation) {
+function selectOption(selectedBtn, selectedIndex, questionId, correctIndex, explanation) {
+    // Guardar selección
+    userAnswers[questionId] = selectedIndex;
+    localStorage.setItem("feirnnr_answers", JSON.stringify(userAnswers));
+
     const buttons = document.querySelectorAll(".option-btn");
     buttons.forEach(btn => btn.disabled = true);
 
@@ -224,6 +252,33 @@ function selectOption(selectedBtn, selectedIndex, correctIndex, explanation) {
     const expBox = document.getElementById("explanation-box");
     expBox.innerHTML = `<strong>Explicación:</strong> ${explanation}`;
     expBox.style.display = "block";
+
+    updateProgressBar();
+}
+
+function updateProgressBar() {
+    const totalAnswered = Object.keys(userAnswers).length;
+    const percentage = ((totalAnswered / 150) * 100).toFixed(1);
+    
+    document.getElementById("progress-bar").style.width = `${percentage}%`;
+    document.getElementById("progress-text").innerText = `Respondidas: ${totalAnswered} / 150 (${percentage}%)`;
+
+    // Si respondió las 150 preguntas, mostramos el panel de finalización
+    if (totalAnswered === 150) {
+        showSummary();
+    }
+}
+
+function showSummary() {
+    let score = 0;
+    questions.forEach(q => {
+        if (userAnswers[q.id] === q.correct) score++;
+    });
+    
+    document.getElementById("quiz-body").style.display = "none";
+    const summaryBox = document.getElementById("completion-summary");
+    summaryBox.style.display = "block";
+    document.getElementById("final-score").innerHTML = `Obtuviste <strong>${score} / 150</strong> respuestas correctas (${((score/150)*100).toFixed(1)}%).`;
 }
 
 function nextQuestion() {
@@ -251,11 +306,27 @@ function filterTopic() {
     loadQuestion();
 }
 
-function resetExam() {
-    document.getElementById("topic-select").value = "all";
-    currentFilteredQuestions = [...questions];
-    currentIndex = 0;
-    loadQuestion();
+// LÓGICA DE REINICIO
+function confirmReset() {
+    const totalAnswered = Object.keys(userAnswers).length;
+    if (totalAnswered < 150) {
+        alert(`Has respondido ${totalAnswered} de 150 preguntas. Para reiniciar el simulador debes responder todas las preguntas primero.`);
+    } else {
+        forceReset();
+    }
+}
+
+function forceReset() {
+    if (confirm("¿Estás seguro de que deseas reiniciar todo el examen desde cero?")) {
+        localStorage.removeItem("feirnnr_answers");
+        userAnswers = {};
+        document.getElementById("quiz-body").style.display = "block";
+        document.getElementById("completion-summary").style.display = "none";
+        document.getElementById("topic-select").value = "all";
+        currentFilteredQuestions = [...questions];
+        currentIndex = 0;
+        loadQuestion();
+    }
 }
 
 // Inicialización

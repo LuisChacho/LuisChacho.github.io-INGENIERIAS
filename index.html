@@ -13,9 +13,15 @@
         <h2>Simulador FEIRNNR PA</h2>
         <div>
             <strong id="q-counter">Pregunta 1 / 150</strong>
-            <button class="btn-reset" onclick="resetExam()">Reiniciar Examen</button>
+            <button class="btn-reset" onclick="confirmReset()">Reiniciar Examen</button>
         </div>
     </div>
+
+    <!-- Barra de progreso global -->
+    <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+    </div>
+    <p id="progress-text" class="progress-text">Respondidas: 0 / 150</p>
 
     <div class="controls">
         <label for="topic-select"><strong>Filtrar Tema:</strong></label>
@@ -44,6 +50,12 @@
         <h3 id="prompt-text"></h3>
         <div id="options-box" class="options-container"></div>
         <div id="explanation-box" class="explanation" style="display:none;"></div>
+    </div>
+
+    <div id="completion-summary" class="summary-box" style="display:none;">
+        🎉 <strong>¡Felicidades! Has completado las 150 preguntas.</strong>
+        <p id="final-score"></p>
+        <button class="btn-reset" onclick="forceReset()">Reiniciar Simulador</button>
     </div>
 
     <div class="controls nav-footer">
